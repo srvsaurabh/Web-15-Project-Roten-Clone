@@ -1,0 +1,51 @@
+.nav {
+    background-color: cornsilk;
+    color: black;
+    height: 110px;
+    padding: 25px 10px 10px 20px;
+    /* border-radius: 20px; */
+    margin-bottom: 10px;
+    
+  }
+  .upper{
+      display: flex;
+      padding-bottom: 10px;
+
+  }
+  .upper>div{
+      width: 33%;
+  }
+  .center{
+      padding-left: 150px;
+  }
+  .right{
+      justify-content: space-around;
+
+  }
+  .right>div:hover{
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    border-radius: 15px;
+  }
+
+  .lower{
+      display: flex;
+      justify-content: center;
+      padding-bottom: 20px;
+      
+  }
+  .lower>div{
+      margin: 20px;
+  }
+
+  .left {
+    width: 70%;
+  }
+  .right {
+    display: flex;
+    justify-content: space-around;
+    width: 30%;
+  }
+  a {
+    text-decoration: none;
+    color: black;
+  }

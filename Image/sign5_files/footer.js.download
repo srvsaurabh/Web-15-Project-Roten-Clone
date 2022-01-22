@@ -1,0 +1,2544 @@
+	var cartCount = 0;
+	var miniCartRight = "-361px";
+	var panel = "";
+
+	var openTooltip = "";
+//	document.getElementById('miniCartDropDown').style.right = "0px";
+
+function iconCartCount() {
+
+	document.getElementById('cartIconCount').innerHTML = cartCount;
+}
+
+
+
+function cartCountAdd(input) {
+	cartCount = cartCount + input;
+	iconCartCountBubbleUp(cartCount);
+	setTimeout(function(){iconCartCountBubbleDown(cartCount)}, 300);
+}
+function cartCountSubtract(input) {
+	cartCount = cartCount - input;
+	if (cartCount < 0) {cartCount = 0; }
+	iconCartCountBubbleUp(cartCount);
+	setTimeout(function(){iconCartCountBubbleDown(cartCount)}, 300);
+}
+function cartCounter(input,type) {
+	if (type == "subtract") {
+		cartCount = cartCount - input;
+		if (cartCount < 0) {
+			cartCount = 0;
+		}
+	}
+	if (type == "add") {
+		cartCount = cartCount + input;
+	}
+	if ((type !== "add") && (type !== "subtract")) {
+		cartCount = input;
+	}
+	iconCartCountBubbleUp(cartCount);
+	setTimeout(function(){iconCartCountBubbleDown(cartCount)}, 300);
+}
+
+function iconCartSmallSize() {
+	var temp = 14
+	if (cartCount > 9) {
+		temp = 18
+	}
+	return temp;
+}
+function iconCartLargeSize() {
+	var temp = 18
+	if (cartCount > 9) {
+		temp = 22
+	}
+	return temp;
+}
+
+function iconCartCountBubbleUp(){
+	document.getElementById('cartIconCountP').style.color = "#4d4d4d";
+	document.getElementById('cartIconCount').style.backgroundColor = "#4d4d4d";
+	document.getElementById('cartIconCount').style.height = iconCartLargeSize() + "px";
+	document.getElementById('cartIconCount').style.width = iconCartLargeSize() + "px";
+	document.getElementById('cartIconCount').style.bottom = (28 - (iconCartLargeSize() / 2)) + "px";
+	document.getElementById('cartIconCount').style.right = (1 - (iconCartLargeSize() / 2)) + "px";
+}
+function iconCartCountBubbleDown(input){
+	if (document.getElementById('cartIconCountP') ){
+		if (input == 0 ){
+			document.getElementById('cartIconCountP').innerHTML = "";
+			document.getElementById('cartIconCountP').style.color = "transparent";
+			document.getElementById('cartIconCount').style.backgroundColor = "transparent"
+			document.getElementById('cartIconCount').style.height = "0px";
+			document.getElementById('cartIconCount').style.width = "0px";
+			document.getElementById('cartIconCount').style.bottom = "28px";
+			document.getElementById('cartIconCount').style.right = "1px";
+		}else{
+			document.getElementById('cartIconCountP').innerHTML = cartCount;
+			document.getElementById('cartIconCountP').style.color = "#ffffff";
+			document.getElementById('cartIconCount').style.backgroundColor = "#222222"
+			document.getElementById('cartIconCount').style.height = iconCartSmallSize() + "px";
+			document.getElementById('cartIconCount').style.width = iconCartSmallSize() + "px";
+			document.getElementById('cartIconCount').style.bottom = (28 - (iconCartSmallSize() / 2)) + "px";
+			document.getElementById('cartIconCount').style.right = (1 - (iconCartSmallSize() / 2)) + "px";
+		};
+	}
+}
+
+
+iconCartCountBubbleDown(cartCount);
+
+
+
+
+
+
+
+function miniCartToggle() {
+	return;
+	var miniCartOffset = document.getElementById('miniCartHeader').clientHeight + document.getElementById('miniCartNotice').clientHeight;
+	document.getElementById('miniCartContents').style.top = miniCartOffset + "px";	
+	var navOffset = document.getElementById('navPromo').clientHeight + document.getElementById('navHead').clientHeight;
+//	document.getElementById('miniCartDropDown').style.top = navOffset + "px";
+	var miniCartRight = document.getElementById('miniCartDropDown').style.right;
+	//alert(miniCartRight);
+//	console.log(miniCartWidth);
+return;
+if (miniCartRight == "0px")  {
+		//document.getElementById('miniCartDropDown').style.position = "fixed";
+		document.getElementById('miniCartDropDown').style.right = "-301px";
+		//document.getElementById('miniCartDropDown').style.width = "360px";
+		document.getElementById('miniCartDropDown').style.boxShadow = "0 2px 4px 0 rgba(0,0,0,.25)";
+		console.log("showing");
+
+	}else{
+		//document.getElementById('miniCartDropDown').style.position = "absolute";
+		document.getElementById('miniCartDropDown').style.right = "0px";
+		//document.getElementById('miniCartDropDown').style.width = "0px";
+		document.getElementById('miniCartDropDown').style.boxShadow = "0 0 0 0 rgba(0,0,0,0)";
+		console.log("hiding");
+}
+//	console.log("ending position: " + miniCartRight);
+}
+
+var baArray = [];
+
+
+
+
+function rfResize(){
+	console.log("resize " + Date())
+	modalPosition()
+	getScroll()
+	
+}
+
+function getScroll() {
+	
+
+//	console.log(document.getElementById('navMobileContainer').style.left)
+	if (document.getElementById('navMobileContainer')){
+		if (document.getElementById('navMobileContainer').style.left == "0px") {
+			document.getElementById('navMobileContainer').style.width = navMobileResize();
+			if (navMobileOpenCards) {
+				for (var i = 0; i < navMobileOpenCards.length; i++){
+					
+		//			console.log(navMobileOpenCards[i]);
+					document.getElementById(navMobileOpenCards[i]).style.width = navMobileResize();
+				};
+			}		
+		}else{
+			document.getElementById('navMobileContainer').style.width = navMobileResize();
+			document.getElementById('navMobileContainer').style.length = navMobileResize() * -1.5;
+		}
+	}
+	if (document.getElementById('navContainer')) {
+		w = window.innerWidth;
+		if (openTooltip !== "" ) {
+			repositionToolTip(openTooltip);
+		}
+		var scrollHeight = window.pageYOffset;
+
+		var navOffset = document.getElementById('navContainer').clientHeight
+		console.log(navOffset)
+		if (document.getElementById('toastContainer')) {
+			document.getElementById('toastContainer').style.top = navOffset + "px";	
+		}
+		
+		document.getElementById('containerMain').style.top = navOffset + "px";
+	}
+	return;
+
+	
+//	document.getElementById('miniCartDropDown').style.top = navOffset + "px";
+	//document.getElementById('searchResultsContainer').style.top = navOffset + document.getElementById('navBar').clientHeight + "px";
+	var searchOffset = 1;
+	if (window.innerWidth < 768) {var searchOffset = 0};
+
+	if ( scrollHeight >= navOffset) {
+		document.getElementById('navBar').style.position = "fixed";
+		document.getElementById('rfMiniLogo').style.opacity = "1";
+
+	return;
+		if ( scrollHeight <= 100) {
+			var navBarHeight = (58 - (scrollHeight - navOffset));
+			if (navBarHeight < 30) {navBarHeight = 30};
+			document.getElementById('navBar').style.height = navBarHeight + "px";
+		}
+	}else{
+		document.getElementById('navBar').style.position = "relative";
+		document.getElementById('navBar').style.height = 58 + "px";
+		document.getElementById('rfMiniLogo').style.opacity = "0";
+	//			document.getElementById('searchContainer').style.position = "absolute";
+	//			document.getElementById('searchContainer').style.top = navOffset + searchOffset + "px";
+	}
+}
+
+getScroll();
+
+
+function expand(input) {
+	//alert(input);
+	if (document.getElementById(input).classList.contains('expandHeaderActive')) {
+		document.getElementById(input).classList.remove('expandHeaderActive');
+	}else{
+		document.getElementById(input).classList.add('expandHeaderActive');
+	}
+}
+
+
+var w = window.innerWidth;
+
+
+function navMobileResize(input) {
+	var w = window.innerWidth;
+	var offset = 0;
+	if (input === "close") {var offset = 5;};
+	if (w <= 480){
+	return (w + offset + "px");
+	}
+	if (w > 480){
+//			console.log(w + " wide");
+	return (375 + offset + "px");
+	}
+}
+
+
+var navMobileOpenCards = [];
+
+function navMobileSlideIn(cardid) {
+	navMobileOpenCards.push(cardid);
+	console.log(navMobileOpenCards);
+	//		console.log("window Width: " + w);
+	document.getElementById(cardid).style.left = "0px";
+}
+function navMobileSlideOut(cardid) {
+	navMobileOpenCards.pop(cardid);
+	//		console.log(navMobileOpenCards);
+	//		console.log("window Width: " + w);
+	document.getElementById(cardid).style.left = navMobileResize();
+}
+function navMobileClose() {
+	document.getElementById('navMobileContainer').style.left = "-" + navMobileResize('close');
+	document.getElementById('navMobileContainer').style.boxShadow = "0 0 0 0 rgba(0,0,0,0)";
+	//		console.log(navMobileOpenCards);
+	if (navMobileOpenCards) {
+		for (var i = 0; i < navMobileOpenCards.length; i++){
+		//			console.log(navMobileOpenCards);
+		document.getElementById(navMobileOpenCards[i]).style.left = navMobileResize();
+		//			console.log("Closing " + navMobileOpenCards[i]);
+		};
+	}
+	navMobileOpenCards = [];
+	//		console.log(navMobileOpenCards);
+}
+function navMobileOpen() {
+document.getElementById('navMobileContainer').style.left = "0px";
+document.getElementById('navMobileContainer').style.width = navMobileResize();
+document.getElementById('navMobileContainer').style.boxShadow = "0 0 10px 0 rgba(0,0,0,.5)";
+}
+
+
+function navMobileSignIn(){
+
+}
+
+
+function closePromo() {
+	var navOffset = 0
+	if (document.getElementById('navHead')){
+		navOffset =  document.getElementById('navHead').clientHeight
+	}
+	if (document.getElementById('navBar')){
+		navOffset += document.getElementById('navBar').clientHeight;
+	}
+	document.getElementById('navPromo').style.minHeight = "0px";
+	document.getElementById('navPromo').style.height = "0px";
+	document.getElementById('navPromo').style.top = "0px";
+	document.getElementById('containerMain').style.top = navOffset + "px";
+	var temp = document.getElementById('navHead').clientHeight;
+//		console.log("temp: " + temp);
+//		document.getElementById('miniCartDropDown').style.top = temp + "px";	
+		document.getElementById('searchContainer').style.top =  temp + "px";
+		//getScroll();
+	}
+
+
+
+
+
+	var product = "RVRGG01";
+
+	var loggedIn = false;
+
+	function passwordVisibilityToggle() {
+
+		if (document.getElementById('password').type == "password") {
+			document.getElementById('password').type = "text";
+			document.getElementById('passwordMobile').type = "text";
+			document.getElementById('passwordVisibility').classList.remove('rf-icon-view');
+			document.getElementById('passwordVisibility').classList.add('rf-icon-hide');
+		}else{
+			document.getElementById('password').type = "password";
+			document.getElementById('passwordMobile').type = "password";
+			document.getElementById('passwordVisibility').classList.remove('rf-icon-hide');
+			document.getElementById('passwordVisibility').classList.add('rf-icon-view');
+		}
+	}
+
+
+function userLogInToggle() {
+//	console.log(loggedIn);
+	var userAccountHeight = document.getElementById('userAccountDesktop').scrollHeight;
+	var userLogInHeight = document.getElementById('userLogInDesktop').scrollHeight;
+	if (loggedIn == true) {
+
+		if (document.getElementById('userAccountDesktop').clientHeight === 0) {
+			document.getElementById('userAccountDesktop').style.height = userAccountHeight + "px";
+			document.getElementById('userAccountDesktop').style.boxShadow = "0 2px 4px 0 rgba(0,0,0,.25)";
+		}else{
+			document.getElementById('userAccountDesktop').style.height = "0px";
+			document.getElementById('userAccountDesktop').style.boxShadow = "0 0 0 0 rgba(0,0,0,0)";
+		}
+	}else{
+
+		if (document.getElementById('userLogInDesktop').clientHeight === 0) {
+			document.getElementById('userLogInDesktop').style.height = userLogInHeight + "px";
+			document.getElementById('userLogInDesktop').style.boxShadow = "0 2px 4px 0 rgba(0,0,0,.25)";
+		}else{
+			document.getElementById('userLogInDesktop').style.height = "0px";
+			document.getElementById('userLogInDesktop').style.boxShadow = "0 0 0 0 rgba(0,0,0,0)";
+		}
+	}
+}
+
+function userLogInError(error) {
+	document.getElementById('userLogInErrorInner').innerHTML = "<div class=\"br16\"></div><span class=\"rf-icon rf-icon-error noPadding\"></span><p class=\"capitalize\">" + error + "</p><div class=\"br16\"></div>"
+
+	document.getElementById('userLogInErrorContainer').style.height = document.getElementById('userLogInErrorContainer').scrollHeight + "px";
+
+}
+function userLogInErrorClear() {
+	document.getElementById('userLogInErrorInner').innerHTML = ""
+	document.getElementById('userLogInErrorContainer').style.height = "0px";
+
+
+}
+var userLogInErrorState = false;
+function userLogIn() {
+
+
+
+
+	if (!userLogInErrorState) {
+		userLogInErrorState = true;
+		userLogInError("Sorry, either your e-mail or password didn't match what we have on file.  Try again?");
+		var tempHeight = document.getElementById('userLogInDesktop').scrollHeight + document.getElementById('userLogInErrorContainer').scrollHeight;
+		document.getElementById('userLogInDesktop').style.height = tempHeight + "px"
+		userType = ""
+	}else{
+		loggedIn = true;
+		userType = "consultant"
+		document.getElementById('userLogInDesktop').style.height = "0px";
+		document.getElementById('userLogInDesktop').style.boxShadow = "0 2px 4px 0 rgba(0,0,0,0)";
+		document.getElementById('userAccountDesktop').style.height = "0px";
+		document.getElementById('userAccountDesktop').style.boxShadow = "0 2px 4px 0 rgba(0,0,0,0)";
+	//	document.getElementById('user').innerHTML = "Welcome, Paul P. <img src=\"images/avatar.jpg\" class=\"avatarMini\" />";
+		document.getElementById('user').innerHTML = "Welcome, Paul";
+		document.getElementById('signInPassword').value = "";
+		document.getElementById('signInEmail').value = "";
+		document.getElementById('navMobileSignOut').innerHTML = "Sign Out";
+		document.getElementById('navMobileSignIn').innerHTML= "";
+		document.getElementById('navMobileUser').innerHTML="<img src=\"images/icons/user.svg\" />Welcome, Paul";
+		userLogInErrorState = false;
+		userLogInErrorClear()
+		containerMainOverlayToggle(false,false,true)
+	}
+	RFnavMenuConsultantToggle()
+}
+
+function userLogOut() {
+	loggedIn = false;
+	document.getElementById('userLogInDesktop').style.height = "0px";
+	document.getElementById('userLogInDesktop').style.boxShadow = "0 2px 4px 0 rgba(0,0,0,0)";
+	document.getElementById('userAccountDesktop').style.height = "0px";
+	document.getElementById('userAccountDesktop').style.boxShadow = "0 2px 4px 0 rgba(0,0,0,0)";
+	document.getElementById('user').innerHTML = "Sign In";
+
+	document.getElementById('navMobileSignOut').innerHTML = "";
+	document.getElementById('navMobileSignIn').innerHTML= "<img src=\"images/icons/user.svg\" />Sign In";
+	document.getElementById('navMobileUser').innerHTML="";
+	containerMainOverlayToggle(false,false,true)
+	RFnavMenuConsultantToggle()
+}
+
+
+
+var openTab = "";
+
+
+
+
+
+
+
+function tabIn(input) {
+//	var tab = document.getElementById('tab').scrollHeight + 2;
+	var tab = 50
+	if (w < 768) {
+		tab = 150;
+	}
+	console.log(input);
+	console.log("open tab: " + openTab)
+	if (input !== "") {
+		var tabHigh = document.getElementById("tabContent-" + input).scrollHeight;
+		console.log(tabHigh)
+		if (openTab) {
+			console.log("closing " + openTab);
+//			document.getElementById('tabContainer').style.height = (tab + 2) + "px";
+			document.getElementById( "tabHeader-" + openTab).classList.remove('tabActive');
+			document.getElementById( "tabContent-" + openTab).style.height = "0px";
+		};
+		if (openTab !== input) {
+			console.log("openTab (" + openTab + ") !== input ("+ input + ")")
+			document.getElementById( "tabContent-" + input).style.height = (tabHigh) + "px";
+			document.getElementById('tabContainer').style.height = tab + tabHigh + "px";
+			document.getElementById( "tabHeader-" + input).classList.add('tabActive');
+			openTab = input;
+		}else{
+			console.log("else")
+			
+			document.getElementById('tabContainer').style.height = tab + "px";
+			openTab = "";
+		}
+	}else{
+		console.log("closing tabContainer")
+		document.getElementById('tabContainer').style.height = tab + "px";
+	}
+}
+
+function tabOut(input) {
+	document.getElementById('tabContainer').style.height = "0px";
+	document.getElementById("tabContent-" + input).style.height = "0px";
+}
+
+
+function expand(input) {
+	//alert(input);
+	if (document.getElementById(input).classList.contains('expandHeaderActive')) {
+		document.getElementById(input).classList.remove('expandHeaderActive');
+	}else{
+		document.getElementById(input).classList.add('expandHeaderActive');
+	}
+}
+
+
+
+
+function inputLabel(id,type) {
+	document.getElementById(id).classList.remove("inputError")
+	var idValue = document.getElementById(id).value;
+	var label = id + "Label"
+	if (type == "cc"){
+		inputMaskCC(id)
+	}
+	if (type == "cvv") {
+		inputMaskCVV(id)
+	}
+	if (type == "ssn") {
+		inputMaskSSN(id)
+	}
+	if (type == "phone") {
+		inputMaskPhone(id)
+	}
+	if (type == "exp") {
+		inputMaskExp(id)
+	}
+	if (type == "mmyy") {
+		inputMaskMMYY(id)
+	}
+	if (type == "mmddyyy") {
+		inputMaskMMDDYYY(id)
+	}
+	
+	
+	if (idValue.length > 0) {
+		document.getElementById(id).classList.add('inputTextFieldActive');
+	}else{
+		document.getElementById(id).classList.remove('inputTextFieldActive');
+	}
+}
+
+function inputMaskCVV(id){
+	var temp = id.split('-CVV')
+	temp = temp[0]
+	var idValue = document.getElementById(id).value;
+	if (document.getElementById(temp)) {
+		if (document.getElementById(temp).classList.contains("ccAmex"))  {
+			var reg = new RegExp('[0-9]{4}');		
+		}else{
+			var reg = new RegExp('[0-9]{3}');
+		}
+	}
+	console.log(reg.test(Number(idValue)))
+	if (reg.test(Number(idValue))) {
+		if (document.getElementById(temp + "-EXP")) {
+			document.getElementById(temp + "-CVV").blur()
+			document.getElementById(temp + "-EXP").focus()
+		}
+	}
+}
+function inputMaskSSN(id){
+	var idValue = document.getElementById(id).value;
+	var number = idValue.replace(/[^0-9]/gi, '');
+	var tempDisplay = number
+	if (number.length >= 3) {
+		tempDisplay = (number.substring(0,3) + "-" + number.substring(3,5))
+	}
+	if (number.length >= 5) {
+		tempDisplay = (number.substring(0,3) + "-" + number.substring(3,5) + "-" + number.substring(5,9))
+	}
+	console.log(tempDisplay)
+	document.getElementById(id).value = tempDisplay
+}
+
+
+function inputMaskPhone(id){
+	var idValue = document.getElementById(id).value;
+	var number = idValue.replace(/[^0-9]/gi, '');
+	var tempDisplay = ("(" + number.substring(0,3))
+	if (number.length >= 3) {
+		tempDisplay = ("(" + number.substring(0,3) + ") " + number.substring(3,5))
+	}
+	if (number.length >= 6) {
+		tempDisplay = ("(" + number.substring(0,3) + ") " + number.substring(3,6) + "-" + number.substring(6,10))
+	}
+	console.log(tempDisplay)
+	document.getElementById(id).value = tempDisplay
+}
+
+
+
+function formatPhoneNumber(phoneNumberString) {
+  var cleaned = ('' + phoneNumberString).replace(/\D/g, '')
+  console.log(cleaned)
+  var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/)
+  console.log(match)
+  if (match) {
+    return '(' + match[1] + ') ' + match[2] + '-' + match[3]
+  }
+  return null
+}
+
+
+
+
+// 3400 000000 00009
+function inputMaskExp(id){
+
+	var temp = id.split('-EXP')
+		temp = temp[0]
+	var idValue = document.getElementById(id).value;
+//	var reg = new RegExp('([0-9]{2})')
+	
+	console.log(idValue)
+	if (idValue.substring(idValue.length - 1,idValue.length) == "/") {
+		console.log("user entered / ")
+//		document.getElementById(id).value = "0" + idValue.substring(0,idValue.length) 
+	}
+	var number = idValue.replace(/[^0-9]/gi, '');
+	if (Number(idValue.substring(0,1)) > 1) {
+		document.getElementById(id).value = "0" + idValue.substring(0,1) + "/"
+	}else{
+		if (idValue.length == 5) {
+			document.getElementById(id).value = idValue.substring(0,2) + "/" + idValue.substring(3,5)
+		}
+		if (idValue.length == 4) {
+
+
+//			document.getElementById(id).value = idValue.substring(0,2) + "#" + idValue.substring(2,4)
+		}
+	}
+	if (idValue.length == 5) {
+		console.log(Number(idValue.substring(3,5)))
+		if (Number(idValue.substring(3,5)) > getYY()) {
+			console.log("year greater")
+			console.log(Number(idValue.substring(0,2)))
+			document.getElementById(temp).classList.remove('inputError')			
+		}else{
+			
+			if (Number(idValue.substring(3,5)) == getYY()) {
+				if (Number(idValue.substring(0,2)) < getMM()) {
+					console.log("year same")
+				}
+			}else{
+				console.log("year not greater")
+				document.getElementById(temp).classList.add('inputError')
+			}
+		}
+	}
+}
+
+
+
+function luhnValidate(input){
+	Number(input)
+//	console.log(input.toString().length)
+//	console.log(input.toString())
+	console.log(input)
+	var temp = ""
+	var tempNumber = 0;
+	var total = 0
+	var tempOffset = (input.toString().length - 1)
+//	console.log(tempOffset)
+	for (var i = (tempOffset - 0); i >= 0; i--){
+		temp = "e"
+		tempNumber = Number(input.toString().substring(i,i+1))
+		if (i == (input.toString().length - 1)) {
+//			console.log("lastNumber")
+		}else{
+			if (((tempOffset - i) / 2) == (Math.floor((tempOffset - i) / 2)))   {
+				total += (tempNumber)
+			}else{
+				tempNumber = tempNumber * 2
+				temp = "double"
+				if (tempNumber > 9) {
+					tempNumber = tempNumber - 9
+				}
+				total += tempNumber
+			}	
+//			console.log(temp + " " + Number(input.toString().substring(i,i+1)) + " " + tempNumber + " : " + total)
+		}
+		
+		
+//		console.log(total)
+
+	}
+	var lastNumber = (Number(input.toString().substring(input.toString().length - 1,input.toString().length)))
+	var checkSum = (total * 9)
+	checkSum = Number(checkSum.toString().substring(checkSum.toString().length - 1),checkSum.toString().length )
+//	console.log(lastNumber + " " + checkSum)
+	if (checkSum == lastNumber  ) {
+		console.log("valid")
+		return true
+	}else{
+		console.log("invalid")
+		return false
+	}
+}
+// 3400 000000 00009
+function inputMaskCC(id){
+	console.log(document.getElementById(id).blur())
+	var inputValue = document.getElementById(id).value;
+	var ccNumber = inputValue.replace(/[^0-9]/gi, '');
+	ccNumber = Number(ccNumber)
+	var cursorPosStart = document.getElementById(id).selectionStart;
+	var cursorPosEnd = document.getElementById(id).selectionEnd;
+	var cursorStartFromEnd = inputValue.length - cursorPosStart
+	var cursorEndFromEnd = inputValue.length - cursorPosEnd
+	console.log("cursorStartFromEnd: " + cursorStartFromEnd)
+	console.log(cursorPosStart)
+	console.log(ccNumber)
+//	document.getElementById(id).selectionStart = cursorPosStart
+//	document.getElementById(id).selectionEnd = cursorPosStart
+	var cardType = "";
+	var pattern = [];
+	var expectedLength = 0;
+//	console.log(Number(inputValue))
+
+	if (document.getElementById(id).classList.contains('inputTextFieldCCvalid')) {
+		return;
+	}
+
+	if (inputValue.substring(0,1) == "4") {
+		cardType = "ccVisa"
+		expectedLength = 16;
+		pattern = [4,4,4,4]
+	}
+	if (
+		(ccNumber.toString().substring(0,2) == "34") ||
+		(ccNumber.toString().substring(0,2) == "37")
+		)
+		 {
+		cardType = "ccAmex"
+		expectedLength = 15;
+		pattern = [4,6,5]
+	}
+	if (
+		(ccNumber.toString().substring(0,4) == "6011") ||
+		(ccNumber.toString().substring(0,2) == "64") ||
+		(ccNumber.toString().substring(0,2) == "65")
+		)
+		 {
+		cardType = "ccDiscover"
+		expectedLength = 16;
+		pattern = [4,4,4,4]
+	}	
+	if (
+			(ccNumber.toString().substring(0,2) == "51") ||
+			(ccNumber.toString().substring(0,2) == "52") ||
+			(ccNumber.toString().substring(0,2) == "53") ||
+			(ccNumber.toString().substring(0,2) == "54") ||
+			(ccNumber.toString().substring(0,2) == "55") ||
+			(
+				(Number(ccNumber.toString().substring(0,6)) >= 222100 ) && (Number(ccNumber.toString().substring(0,6)) <= 272099)   
+				
+			)
+		)
+		 {
+		 	console.log(Number(ccNumber.toString().substring(0,6)))
+		cardType = "ccMastercard"
+		expectedLength = 16;
+		pattern = [4,4,4,4]
+	}	
+	if (cardType != "") {
+		document.getElementById(id).classList.add(cardType);
+	}else{
+		document.getElementById(id).classList.remove('ccVisa');
+		document.getElementById(id).classList.remove('ccAmex');
+		document.getElementById(id).classList.remove('ccDiscover');
+		document.getElementById(id).classList.remove('ccMastercard');
+	}
+	var temp = ""
+	var j = 0
+	var tempStart = 0;
+	var tempEnd = 0
+	var tempSpacer = " "
+	var tempDisplay = ""
+	var tempMaskFirst = ""
+	var tempMaskLast = ""
+	console.log("patternLength : " + pattern.length)	
+	if ( (pattern.length >= 1) ) {		
+		for (var i = 0; i <= pattern.length; i++){
+			var tempCounterStart = 0
+			var tempCounterStart = pattern[0]
+			for (var j = 0; j <= i; j++){
+
+			}
+		}
+
+		if (pattern.length >= 1){
+			tempStart = 0;
+			tempEnd = pattern[0]
+			tempDisplay = ccNumber.toString().substring(tempStart,tempEnd)
+			tempMaskFirst = ccNumber.toString().substring(0,tempEnd)
+			console.log("pattern1: " + ccNumber.toString().substring(tempStart,tempEnd)  )
+		}
+		if (pattern.length >= 2){
+			tempStart = pattern[0];
+			tempEnd = pattern[0] + pattern[1]
+			tempMaskFirst = tempDisplay
+			if (ccNumber.toString().length > tempStart) {
+				tempDisplay += tempSpacer + ccNumber.toString().substring(tempStart,tempEnd)
+
+			}
+
+			console.log("pattern2: " + ccNumber.toString().substring(tempStart + tempEnd) )
+		}
+		if (pattern.length >= 3){
+			tempStart = pattern[0] + pattern[1];
+			tempEnd = pattern[0] + pattern[1] + pattern[2]
+			tempMaskFirst = tempDisplay
+			if (ccNumber.toString().length > tempStart) {
+				tempDisplay += tempSpacer + ccNumber.toString().substring(tempStart,tempEnd)
+				tempMaskLast = ccNumber.toString().substring(tempStart,tempEnd)
+
+			}
+			console.log("pattern3: " + ccNumber.toString().substring(tempStart,tempEnd) )
+		}
+		if (pattern.length >= 4){
+			tempStart = pattern[0] + pattern[1] + pattern[2];
+			tempEnd = pattern[0] + pattern[1] + pattern[2] + pattern[3]
+			tempMaskFirst = tempDisplay
+			tempMaskLast = ""
+			if (ccNumber.toString().length > tempStart) {
+				tempDisplay += tempSpacer + ccNumber.toString().substring(tempStart,tempEnd)
+				tempMaskLast = ccNumber.toString().substring(tempStart,tempEnd)
+			}
+
+			console.log("pattern4: " + ccNumber.toString().substring(tempStart,tempEnd) )
+		}
+		console.log("maskFirst= " + tempMaskFirst)
+	}else{
+		tempDisplay = ccNumber
+	}
+	console.log("tempDisplay: " + tempDisplay)
+	console.log(luhnValidate(ccNumber))
+	console.log(ccNumber.toString().length)
+	document.getElementById(id + "-mask").innerHTML = "<div id=\"" + id + "-mask-first\">" + tempMaskFirst + "&nbsp;</div><div id=\"" + id + "-mask-last\">" + tempMaskLast + "</div>"
+	if (ccNumber !== 0 ){
+		console.log(tempDisplay)
+		
+		console.log("tempDisplay.length: " + tempDisplay.toString().length + " cursorStartFromEnd " + cursorStartFromEnd)
+		document.getElementById(id).selectionStart = tempDisplay.toString().length - cursorStartFromEnd
+		document.getElementById(id).selectionEnd = tempDisplay.toString().length - cursorEndFromEnd
+		
+		clearInputErrorStates(id)
+		
+		if (ccNumber.toString().length == expectedLength){
+			if (luhnValidate(ccNumber)){
+				document.getElementById(id).classList.add("inputTextFieldCCvalid")
+				console.log("Valid CC")
+//				document.getElementById(id).blur()
+				document.getElementById(id).blur();
+				document.getElementById(id + "-CVV").focus();
+//				document.getElementById(id).classList.add("inputSuccess")
+				document.getElementById(id + "-mask-first").style.left = (document.getElementById(id + "-mask-first").clientWidth * -1) + "px"	
+				document.getElementById(id + "-mask-last").style.left = (document.getElementById(id + "-mask-first").clientWidth * -1) + "px"	
+			}else{
+				console.log("Invalid CC")
+
+				clearInputErrorStates(id)
+				document.getElementById(id).classList.add("inputError")
+			}
+		}else{
+			document.getElementById(id).classList.remove("inputTextFieldCCvalid")
+			document.getElementById(id + "-mask-first").style.left = "0px"
+			document.getElementById(id + "-mask-last").style.left = "0px"
+			document.getElementById(id).value = tempDisplay;
+		}
+	}	
+	console.log(document.getElementById(id + '-CVV'))
+	if ((cardType == "ccAmex") && (document.getElementById(id + '-CVV'))) {
+		console.log("amex")
+		document.getElementById(id + '-CVV').placeholder = "XXXX"
+	}else{
+		document.getElementById(id + '-CVV').placeholder = "XXX"
+	}
+}
+
+
+
+
+
+function inputDropDown(id){
+	var option1 = (document.getElementById(id).getAttribute("data-option1").split(","))
+	var option2 = (document.getElementById(id).getAttribute("data-option2"))
+	if (option2) {option2 = option2.split(",")}
+	var sort = (document.getElementById(id).getAttribute("data-sort"))
+	if (!option2){
+		var option2 = option1;
+		if (sort == "true"){option1.sort()}
+	}
+	console.log(option1)
+	console.log(option2)
+	document.getElementById(id).classList.add('inputTextFieldActive');
+	document.getElementById(id + "Container").classList.add('inputTextDropDownContainerActive');
+//	console.log(option1)
+	var tempCount = 0;
+	var inputValue = document.getElementById(id).value.toUpperCase();
+	temp = "";
+	var isValid = false;
+	for (var i = 0; i < option1.length; i++) {
+		var tempString = option1[i].toUpperCase();
+//		console.log(tempString + " " + inputValue)
+		if ( (option1[i].toUpperCase().includes(inputValue) ) || (option2[i].toUpperCase().includes(inputValue) ) ) {
+			var tempBold = option1[i]
+			if (inputValue.length > 1) {
+				tempBold = tempString.split(inputValue).join("<span class=\"RFgothamMedium\">" + inputValue +"</span>")
+				if ((option2[i].toUpperCase().includes(inputValue)) ){
+					tempBold = "<span class=\"RFgothamMedium\">" + option1[i] +"</span>"
+				}
+			}
+
+//			console.log(tempBold);
+			temp += "<div class=\"inputTextDropDownItem\" onclick=\"inputDropDownSelect(\'" + id + "\',\'" + option1[i] + "\')\">" + tempBold + "</div>"
+			tempCount ++;
+			isValid = true;
+		}
+		
+	}
+	if (isValid == false) {
+		temp += "<div class=\"inputTextDropDownItem warning\">No matching terms - <span onclick=\"(clarityModalToggle({'content':'Your suggestion of " + inputValue + " has been submitted ','auto':true})) \"> SUGGEST</span></div>";
+		tempCount = 1
+	}
+	document.getElementById(id + "Container").style.height = (tempCount * 48) + "px";
+	document.getElementById(id + "Container").innerHTML = temp;
+	
+
+}
+
+
+
+
+
+
+function inputDropDownSelect(id,selection){
+	document.getElementById(id).classList.add('inputTextFieldActive');
+	console.log(id + " " + selection)
+	document.getElementById(id).value = "";
+	document.getElementById(id).value = selection;
+	inputDropDownClear(id);
+}
+
+
+
+function inputDropDownClear(id){
+	var option1 = (document.getElementById(id).getAttribute("data-option1").split(","))
+	if (document.getElementById(id).value.includes(option1)) {
+		console.log("contains");
+	}else{
+		console.log("does not contain")
+	}
+	document.getElementById(id + "Container").style.height = "0px";	
+	document.getElementById(id + "Container").classList.remove('inputTextDropDownContainerActive');
+	if (document.getElementById(id).value == "") {
+		document.getElementById(id).classList.remove('inputTextFieldActive');
+	}
+}
+
+function clearInputErrorStates(input){
+	document.getElementById(input).classList.remove('inputSuccess');
+	document.getElementById(input).classList.remove('inputInfo');
+	document.getElementById(input).classList.remove('inputWarning');
+	document.getElementById(input).classList.remove('inputError');
+}
+
+function fakeErrorState(input){
+	return;
+		var temp = (Math.floor(Math.random() * 16) / 4);
+		console.log(temp)
+		if (temp == 0) {
+			document.getElementById(input).classList.add('inputSuccess');
+		}
+		if (temp == 1) {
+			document.getElementById(input).classList.add('inputInfo');
+		}
+		if (temp == 2) {
+			document.getElementById(input).classList.add('inputWarning');
+		}
+		if (temp == 3) {
+			document.getElementById(input).classList.add('inputError');
+		}
+}
+
+
+function inputValidate(input,type){
+	return;
+	console.log(input + " blur")
+	if (document.getElementById(input).value.length > 0) {
+	clearInputErrorStates(input)
+	document.getElementById(input).classList.add('inputTextFieldValidating');
+	setTimeout(function(){
+		document.getElementById(input).classList.remove('inputTextFieldValidating');
+		document.getElementById(input).setAttribute("isvalid", "true")
+		fakeErrorState(input)
+		} , 1000);
+	}
+
+}
+
+var minValidationCharacterCount = 3;
+
+
+function inputPasswordToggle(id){
+	var gebi = document.getElementById(id);
+	if (gebi.type == "password") {
+		gebi.type = "text";
+		return;
+	}
+	if (gebi.type == "text") {
+		gebi.type = "password";
+		return;
+	}
+}
+
+
+
+
+function inputPasswordValidator(id){
+	minValidationCharacterCount = 3;
+	console.log(id)
+	var gebi = document.getElementById(id);
+	var validationPass = true;
+	if (gebi.value.length >= 0){
+		if (validateCharacters(id) === false) {validationPass = false}
+		if (validateUppers(id) === false) {validationPass = false}
+		if (validateLowers(id) === false) {validationPass = false}
+		if (validateNumbers(id) === false) {validationPass = false}
+		if (validateSymbols(id) === false) {validationPass = false}
+		if ( validationPass ){
+//			gebi.classList.add("inputSuccess")
+			return true
+		}else{
+//			gebi.classList.remove("inputSuccess")
+//			gebi.classList.add("inputInfo")
+			return false
+		}
+
+
+	}
+}
+
+
+function clearinputValidation(id,extra){
+	if (extra == undefined) {extra = ""}
+	document.getElementById(id + extra).classList.remove("success")
+	document.getElementById(id + extra).classList.remove("info")
+	document.getElementById(id + extra).classList.remove("warning")
+	document.getElementById(id + extra).classList.remove("error")
+}
+function validateCharacters(id){
+	var gebi = document.getElementById(id);
+	console.log(gebi.value.length)
+	var extra = "Characters"
+	if (document.getElementById(id + extra)) {
+		if (gebi.value.length >= minValidationCharacterCount ) {
+			var gebi2 = document.getElementById(id + extra)
+			if ((gebi.value.length >= 6)  && (gebi.value.length <= 25)) {
+				clearinputValidation(id,extra)
+				gebi2.classList.add("success")
+				return true
+			}else{
+				clearinputValidation(id,extra)
+				gebi2.classList.add("error")
+				return false
+			}
+
+		}else{
+			clearinputValidation(id,extra)
+		}
+	}
+}
+
+function validateUppers(id){
+	var gebi = document.getElementById(id);
+	console.log(gebi.value.length)
+	var reg = new RegExp('[A-Z]');
+	console.log(reg.test(gebi.value))
+	var extra = "Uppers"
+	if (document.getElementById(id + extra)) {
+		if (gebi.value.length >= minValidationCharacterCount ) {
+			var gebi2 = document.getElementById(id + extra)
+			if (reg.test(gebi.value)) {
+				clearinputValidation(id,extra)
+				gebi2.classList.add("success")
+				return true
+			}else{
+				clearinputValidation(id,extra)
+				gebi2.classList.add("error")
+				return false
+			}
+		}else{
+			clearinputValidation(id,extra)
+		}
+	}
+}
+
+function validateLowers(id){
+	var gebi = document.getElementById(id);
+	console.log(gebi.value.length)
+	var reg = new RegExp('[a-z]');
+	console.log(reg.test(gebi.value))
+	var extra = "Lowers"
+	if (document.getElementById(id + extra)) {
+		if (gebi.value.length >= minValidationCharacterCount ) {
+			var gebi2 = document.getElementById(id + extra)
+			if (reg.test(gebi.value)) {
+				clearinputValidation(id,extra)
+				gebi2.classList.add("success")
+				return true
+			}else{
+				clearinputValidation(id,extra)
+				gebi2.classList.add("error")
+				return false
+			}
+		}else{
+			clearinputValidation(id,extra)
+		}
+
+	}
+}
+function validateNumbers(id){
+	var gebi = document.getElementById(id);
+	console.log(gebi.value.length)
+	var reg = new RegExp('[0-9]');
+	console.log(reg.test(gebi.value))
+	var extra = "Numbers"
+	if (document.getElementById(id + extra)) {
+		if (gebi.value.length >= minValidationCharacterCount ) {
+			var gebi2 = document.getElementById(id + extra)
+			if (reg.test(gebi.value)) {
+				clearinputValidation(id,extra)
+				gebi2.classList.add("success")
+				return true
+			}else{
+				clearinputValidation(id,extra)
+				gebi2.classList.add("error")
+				return false
+			}
+		}else{
+			clearinputValidation(id,extra)
+		}
+	}
+}
+
+
+function validateSymbols(id){
+	var gebi = document.getElementById(id);
+	console.log(gebi.value.length)
+	var reg = new RegExp('[#]');
+	console.log(reg.test(gebi.value))
+	var extra = "Symbols"
+
+
+	if (reg.test(gebi.value)) {
+		document.getElementById(id + "ErrorMessage").innerHTML = "Password can not contain the symbol #"
+		gebi.classList.add("inputError")
+	}else{
+		document.getElementById(id + "ErrorMessage").innerHTML = ""
+		gebi.classList.remove("inputError")
+	}
+	return;
+
+	if (document.getElementById(id + extra)) {
+			if (gebi.value.length >= minValidationCharacterCount ) {
+			var gebi2 = document.getElementById(id + extra)
+			if (!reg.test(gebi.value)) {
+				clearinputValidation(id,extra)
+				gebi2.classList.add("success")
+				return true
+			}else{
+				clearinputValidation(id,extra)
+				gebi2.classList.add("error")
+				return false
+			}
+		}else{
+			clearinputValidation(id,extra)
+		}
+
+	}
+}
+
+
+
+function inputInlineIcon(id){
+	console.log(document.getElementById(id).type )
+	if (document.getElementById(id).classList.contains('inputPasswordView')){
+		document.getElementById(id).classList.remove('inputPasswordView')
+		document.getElementById(id).classList.add('inputPasswordHide')
+		document.getElementById(id).type = "password"
+	}else{
+		document.getElementById(id).classList.remove('inputPasswordHide')
+		document.getElementById(id).classList.add('inputPasswordView')
+		document.getElementById(id).type = "text"
+	}
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function searchBarAll() {
+	var gebi = document.getElementById('searchContainer')
+		console.log(gebi.scrollHeight + "px");
+		console.log(gebi.style.height)
+		// var navHeadHeight = document.getElementById('navHead').clientHeight
+		// var navPromoHeight = document.getElementById('navPromo').clientHeight
+		// console.log(navHeadHeight)
+		// console.log(navPromoHeight)
+	if ((gebi.style.height == "0px") || ((gebi.style.height == "")) ) {
+		gebi.style.height = "108px";
+//		gebi.style.top = navHeadHeight + 1 + "px";
+		gebi.style.opacity = 1;
+		gebi.style.boxShadow = "0 2px 4px 0 rgba(0,0,0,.25)";
+		setTimeout(function(){gebi.style.height = "auto";}, 300);
+		document.getElementById("searchBar").focus();
+	}else{
+		while (gebi.style.height == "auto") {
+			gebi.style.height = gebi.scrollHeight + "px";
+		}
+		gebi.style.opacity = 0;
+		gebi.style.boxShadow = "0 0 0 0 transparent";
+		document.getElementById("searchBar").blur();
+//		document.getElementById("searchBar").value = "";
+		gebi.style.height = "0px";
+	}
+}
+
+
+
+
+
+
+
+function search2(input){
+	var inputValue = document.getElementById('searchBar').value;
+	var tempLength = inputValue.length - 4;
+	if (tempLength <= 0) {
+		tempLength = 0 
+	}else{
+//		searchResults(tempLength)
+	}
+	console.log(tempLength)
+	console.log(inputValue)
+	if (inputValue.length > 4) {
+		document.getElementById('searchHeader').innerHTML = "<div><a href=\"#\" class=\"underline\">See all " + tempLength + " results found for " + inputValue + "</a> </div>";
+
+	}else{
+		if (inputValue.length) {
+			document.getElementById('searchHeader').innerHTML = "<div> No results for " + inputValue + "</div>";
+		}else{
+			document.getElementById('searchHeader').innerHTML = "<div class=\"mediumGrey\"> Search by product name, concern, or ingredient</div>";
+		}
+	}
+	searchResults(tempLength + 3)
+	
+}
+
+
+
+
+function search(input){
+	return;
+	alert("running search")
+	var inputValue = document.getElementById('searchBar').value;
+	if (inputValue.length > 0) {
+		document.getElementById('searchBar').classList.add('searchActive');
+	}else{
+		document.getElementById('searchBar').classList.remove('searchActive');
+//		document.getElementById('searchIconMobile').classList.remove('manifesto');
+	};
+	var tempLength = inputValue.length - 2;
+	var searchResultsContainerHeight = 0;
+//	document.getElementById('searchResultsInvalid').style.height = "0px";
+	document.getElementById('searchResultsContainer').style.opacity = "1";
+	if (tempLength > 0 ){
+		if (tempLength > 1) { 
+//			document.getElementById('searchResultsInvalid').classList.add('hide');	
+			document.getElementById('searchResultsValid').classList.remove('hide');	
+//			document.getElementById('searchResultsInvalid').style.height = "0px";
+			var tempResults = "See all " + (tempLength - 1) + " result" + (((tempLength - 1) == 1) ? " " : "s");
+			console.log(tempResults)
+			document.getElementById('searchCount').innerHTML = tempResults;
+			var searchResultsContainerHeight = (document.getElementById('searchResultsValid').scrollHeight + 100);
+			var searchResultsContainerHeight = 50 + ((tempLength -1) * 80) ;
+		}else{
+			document.getElementById('searchResultsValid').classList.add('hide');	
+//			document.getElementById('searchResultsInvalid').classList.remove('hide');
+			document.getElementById('searchResultsValid').style.height = "0px";
+//			document.getElementById('searchResultsInvalid').style.height = document.getElementById('searchResultsInvalid').scrollHeight + "px";
+			document.getElementById('searchTerm').innerHTML = inputValue;
+			var searchResultsContainerHeight = 140;
+			console.log(searchResultsContainerHeight);
+		}
+	}else{
+//		document.getElementById('searchTerm').innerHTML = "";
+		document.getElementById('searchResultsContainer').style.height = searchResultsContainerHeight + "px";
+		document.getElementById('searchBar').classList.remove('searchActive');	
+	}
+	searchResults(inputValue.length);
+	document.getElementById('searchResultsContainer').style.height = searchResultsContainerHeight + "px";
+//	console.log(document.getElementById('searchBar').classList);
+
+
+
+}
+
+
+
+
+
+
+
+
+function searchResults(input) {
+	var totalItems = input - 3;
+	var searchResultsVar = "";
+	var truncateLength = "";
+	if (window.innerWidth < 768) {
+		var truncateLength = "long";
+//		 console.log(truncateLength);
+	}else{
+	truncateLength = null;
+	};
+	truncateLength = "for";
+	if (totalItems > 0) {
+		if ((input - 3) >= Object.keys(sku).length) {var totalItems = Object.keys(sku).length};
+		for (var i = 0; i < (totalItems) ; i++) {
+	//		console.log(sku[Object.keys(sku)[i]].image);
+			searchResultsVar = searchResultsVar + "<div class=\"results\"><div class=\"resultsImage\"><img src=\"" + sku[Object.keys(sku)[i]].image + "\" /></div><div class=\"resultsText\"><p>" + truncate(sku[Object.keys(sku)[i]].name, truncateLength ) + "</p></div></div>";
+		}
+	}
+	document.getElementById('searchResults').innerHTML = searchResultsVar;
+	var searchResultsHeight = document.getElementById('searchResults').scrollHeight;
+	var searchTermHeight = 0
+	console.log("******* " + searchTermHeight)
+	searchTermHeight += document.getElementById('searchTerm').scrollHeight;
+	console.log("******* " + searchTermHeight)
+	var searchOffset = 0;
+	if ((searchResultsHeight + searchTermHeight) !== 0 ) {
+		searchOffset = 300;
+	};
+	searchOffset = 300;
+	document.getElementById('searchResultsContainer').style.height = searchResultsHeight + searchTermHeight + searchOffset + "px";
+}
+function searchBarMobile() {
+	if (document.getElementById('searchContainer').style.opacity < 1) {
+		searchBarMobileOpen();
+	}else{
+		searchBarMobileClose();
+	}
+}
+function searchBarMobileOpen() {	
+	return true;
+//	console.log(document.getElementById('searchContainer').style.opacity);
+	document.getElementById('searchContainer').style.opacity = "1";
+	document.getElementById('searchForm').style.height = "60px";
+	document.getElementById('searchResultsContainer').style.top = "60px";
+	document.getElementById('searchResultsContainer').style.opacity = "1";
+	document.getElementById('containerMainOverlay').style.opacity = ".5";
+	document.getElementById('containerMainOverlay').style.zIndex = "3";
+	document.getElementById("searchBar").focus();
+}
+function searchBarMobileClose(){
+	return;
+	document.getElementById("searchBar").blur();
+	document.getElementById('searchContainer').style.opacity = "0";
+	document.getElementById('searchContainer').style.height = "0px";
+	document.getElementById('searchForm').style.height = "0px";
+	document.getElementById('searchResultsContainer').style.height = "0px";
+	document.getElementById('searchResultsContainer').style.top = "0px";
+	document.getElementById('searchResultsContainer').style.opacity = "0";
+	document.getElementById('containerMainOverlay').style.opacity = "0";
+	document.getElementById('containerMainOverlay').style.zIndex = "-1";
+	document.getElementById('searchIconMobile').src = "images/icons/search.svg";
+
+}
+
+function searchClear(input) {
+	console.log("searchClear " + input)
+	if (document.getElementById(input).value.length > 0) {
+		document.getElementById(input).value = "";
+		search(input);
+	}
+}
+
+
+function tooltip(input) {
+	if ((openTooltip !== "") && (openTooltip !== input)) {
+		console.log("another tooltip is open");
+		closeTooltip(openTooltip);
+		openTooltip = "";
+	}
+	var elementPositionY = (document.getElementById(input).getBoundingClientRect().top);
+	console.log(elementPositionY);
+//	console.log((elementPositionY - (document.getElementById('navContainer').clientHeight)));
+	console.log((document.getElementById(input).clientHeight));
+	console.log((document.getElementById(input).scrollHeight));
+
+	if (document.getElementById(input).classList.contains('tooltipActive')) {
+		closeTooltip(input);
+	}else{
+		repositionToolTip(input);
+		if (document.getElementById('navContainer')) {
+
+			if ((elementPositionY - (document.getElementById('navContainer').clientHeight)) > (document.getElementById(input).scrollHeight + 16) ) {
+				console.log("Top fits");
+				document.getElementById(input).style.top = "";
+				document.getElementById(input).style.bottom = 20 + "px";			
+			}else{
+				console.log("Top doesn't fit");
+				document.getElementById(input).style.top =  20 + "px";
+				document.getElementById(input).style.bottom = "";
+			}		
+		}
+		document.getElementById(input).classList.add('tooltipActive');
+		setTimeout(function(){openTooltip = input;}, 1000);
+		//document.getElementById(input).style.height = (document.getElementById(input).scrollHeight ) + "px"; 
+	}
+}
+
+function repositionToolTip(input){
+	var w = window.innerWidth;
+	var elementPositionRight = (document.getElementById(input).getBoundingClientRect().right);
+	console.log("The screen width is " + w);
+	console.log("the tooltip right edge is " + elementPositionRight + " which is " + (w - elementPositionRight) + " pixels from the edge");
+	var elementPositionLeft = (document.getElementById(input).getBoundingClientRect().left);
+	console.log("the tooltip Left edge is " + elementPositionLeft + " pixels from the edge");
+	if ((w - elementPositionRight) < 8) {
+		console.log("tool tip is less than 8px away from right edge");
+		document.getElementById(input).style.transition = "none";
+		var tempLeft = -152 + (w - elementPositionRight) - 16;
+		document.getElementById(input).style.left = tempLeft + "px";
+	}
+	if ((elementPositionLeft) < 8) {
+		console.log("tool tip is less than 8px away from left edge");
+		document.getElementById(input).style.transition = "none";
+		var tempLeft = -152 - (elementPositionLeft) + 8;
+		document.getElementById(input).style.left = tempLeft + "px";
+	}
+	document.getElementById(input).style.width = "304px";
+	document.getElementById(input).style.transition = "all .3s ease";
+}
+function closeTooltip(input){
+	document.getElementById(input).classList.remove('tooltipActive');
+	openTooltip = "";
+}
+
+
+
+
+
+
+
+
+function editCard2(id) {
+	var temp = "<p>line1</p><p>line 2</p><p>line 3</p><p>Phone Number: 415-000-0000</p><p>Karen James</p><p>1222 Market Street Suite 600</p><p>San Francisco, CA 94607</p><p>Phone Number: 415-000-0000</p><p>Karen James</p><p>1222 Market Street Suite 600</p><p>San Francisco, CA 94607</p><p>Phone Number: 415-000-0000</p><p>Karen James</p><p>1222 Market Street Suite 600</p><p>San Francisco, CA 94607</p><p>Phone Number: 415-000-0000</p><p>Karen James</p><p>1222 Market Street Suite 600</p><p>San Francisco, CA 94607</p><p>Phone Number: 415-000-0000</p>"
+	document.getElementById("billing").innerHTML = temp;
+	document.getElementById('editBilling').style.height = document.getElementById('editBilling').scrollHeight + "px";
+	document.getElementById('editBilling').style.height = "100px";
+}
+
+
+
+function editCard(id) {
+	if (document.getElementById(id).classList.contains("cardEditing")) {
+		closeCard(id);
+	}else{
+		expandCard(id);
+	}
+}
+function expandCard(id){
+		document.getElementById(id).classList.add("cardEditing");
+		document.getElementById(id + "-edit").style.height = "auto";
+		document.getElementById(id + "-inner").style.height = document.getElementById(id + "-noedit").scrollHeight + "px";
+		document.getElementById(id + "-edit").style.height = document.getElementById(id + "-edit").scrollHeight + "px";
+		document.getElementById(id + "-inner").style.height = document.getElementById(id + "-edit").scrollHeight + "px";
+}
+
+function closeCard(id) {
+		document.getElementById(id).classList.remove("cardEditing");
+		document.getElementById(id + "-edit").scrollHeight = "0";
+		document.getElementById(id + "-edit").style.height = "0px";
+		document.getElementById(id + "-inner").style.height = document.getElementById(id + "-noedit").scrollHeight + "px";
+}
+
+
+
+
+
+
+function editShipping(){
+	document.getElementById('checkoutShipping-select').style.height = "auto";
+	document.getElementById('checkoutShipping-select').style.height = document.getElementById('checkoutShipping-select').scrollHeight + "px";
+	document.getElementById('checkoutShipping-select').style.height = "0px";
+	document.getElementById('checkoutShipping-new').style.height = document.getElementById('checkoutShipping-new').scrollHeight + "px";
+	setTimeout(function(){expandCard('checkoutShipping');}, 400);
+	
+}
+
+
+function shippingManual(){
+	document.getElementById('shippingManual-label').style.height = "auto";
+	document.getElementById('shippingManual-label').style.height = document.getElementById('shippingManual-label').scrollHeight + "px";
+	document.getElementById('shippingManual-label').style.height = "0px";
+	document.getElementById('shippingManualDiv').style.height = document.getElementById('shippingManualDiv').scrollHeight + "px";
+	setTimeout(function(){expandCard('checkoutShipping');}, 400);
+}
+
+
+function checkboxToggle(id) {
+	if (document.getElementById(id).checked){
+		document.getElementById(id + "Label").style.backgroundColor ="rgba(0,0,0,.87)";
+		document.getElementById('billingNewCCBillingAddressDiv').style.height = "0px";
+	}else{
+		document.getElementById(id + "Label").style.backgroundColor ="rgba(0,0,0,.1)";
+		document.getElementById('billingNewCCBillingAddressDiv').style.height = document.getElementById('billingNewCCBillingAddressDiv').scrollHeight + "px";
+
+	}
+}
+function toggleContentFlyout(el){
+	var content = el.parentNode.parentNode.parentNode.getElementsByClassName("toggleContent")[0];
+	if (el.checked == true){
+		el.classList.add('toggleContentFlyoutActive');
+		console.log(content.style.maxHeight)
+		if (content.style.maxHeight) {
+			content.style.height = content.style.maxHeight
+		}else{
+			content.style.height = content.scrollHeight + "px";
+		}
+		setTimeout(function(){
+			content.style.height = "auto"	
+		}, 300);
+	}else{
+		el.classList.remove('toggleContentFlyoutActive');
+		while (content.style.height == "auto"	){
+			content.style.height = content.scrollHeight + "px";
+		}
+		setTimeout(function(){
+			content.style.height = "0px";
+		}, 3);
+
+	}
+}
+
+function flyoutToggle(id){
+	var el = document.getElementById(id)
+	var elGroup = el.name
+	var group = document.getElementsByName(elGroup)
+	for (var i = 0; i < group.length; i++){
+		var list = group[i].nextElementSibling.getElementsByClassName("flyoutContent")
+
+		if (group[i].checked) {
+			list[0].style.height = list[0].scrollHeight + "px"
+		}
+		else {
+			list[0].style.height = list[0].style.height = "0px"
+		}
+		
+		
+	}
+	
+}
+
+
+
+
+
+
+function billingNewCard(){
+	document.getElementById('checkoutBilling-select').style.height = "auto";
+	document.getElementById('checkoutBilling-select').style.height = document.getElementById('checkoutBilling-select').scrollHeight + "px";
+	document.getElementById('checkoutBilling-select').style.height = "0px";
+	console.log(document.getElementById('billingCC').scrollHeight + "px");
+	document.getElementById('billingCC').style.height = document.getElementById('billingCC').scrollHeight + "px";
+	setTimeout(function(){expandCard('checkoutBilling');}, 301);
+}
+function billingManual(){
+	document.getElementById('billingManual-label').style.height = "auto";
+	document.getElementById('billingManual-label').style.height = document.getElementById('billingManual-label').scrollHeight + "px";
+	document.getElementById('billingManual-label').style.height = "0px";
+	document.getElementById('billingManualDiv').style.height = document.getElementById('billingManualDiv').scrollHeight + "px";
+	setTimeout(function(){expandCard('checkoutBilling');}, 301);
+}
+
+function consultant(){
+	document.getElementById('consultantResults').style.height = document.getElementById('consultantResults').scrollHeight + "px";
+	document.getElementById('consultantContinue').style.height = document.getElementById('consultantContinue').scrollHeight + "px";
+	setTimeout(function(){expandCard('checkoutConsultant');}, 301);
+}
+
+
+
+function undoRemoveFromCart(id){
+	document.getElementById(id).style.height = "0px";
+	while ( (document.getElementById(id + "-Removed").style.height == "auto") || (document.getElementById(id + "-Removed").style.height == "") ) {
+		document.getElementById(id + "-Removed").style.height = document.getElementById(id + "-Removed").scrollHeight + "px";
+	}
+	document.getElementById(id).style.borderTop = "1px solid rgba(0,0,0,.25)"; 
+	document.getElementById(id + "-Removed").style.opacity = "0";
+	document.getElementById(id).style.opacity = "1";
+	console.log(document.getElementById(id).style.height);
+	document.getElementById(id).style.height = document.getElementById(id).scrollHeight + "px";
+	console.log(document.getElementById(id + "-Removed").style.height);
+	setTimeout(function(){
+		document.getElementById(id).style.height = "auto";	
+		console.log(document.getElementById(id).style.height);
+		console.log(document.getElementById(id + "-Removed").style.height);		
+	}, 300);
+	document.getElementById(id + "-Removed").style.height = "0px";
+
+}
+
+function removeFromMainCart(id){
+	while ( (document.getElementById(id).style.height == "auto") || (document.getElementById(id).style.height == "") ) {
+		document.getElementById(id).style.height = document.getElementById(id).scrollHeight + "px";
+	}	
+//	document.getElementById(id).style.opacity = "0";
+//	document.getElementById(id + "-Removed").style.height = document.getElementById(id + "-Removed").scrollHeight + "px";
+//	document.getElementById(id + "-Removed").style.opacity = "1"
+//	setTimeout(function(){		document.getElementById(id + "-Removed").style.height = "auto";				}, 400);
+	setTimeout(function(){
+		document.getElementById(id).style.height = "0px"; 
+
+	}, 4);
+		setTimeout(function(){
+		document.getElementById(id).style.border = "0px"; 
+	}, 299);
+		function tempID() {
+
+		 return "function(){undoRemoveFromCart('" + id + "')}";
+		}
+		//alert(tempID);
+	newToast('You have just removed ' + id + ' item','info','yes','yes',tempID())
+}
+
+
+
+
+function addPCExtras(){
+	toScrollHeight('pcPerksFreeShipping');
+	toScrollHeight('pcPerksYouSaved');
+	autoToScrollHeight('pcPerksContainer');
+	
+	setTimeout(function(){
+		document.getElementById('pcPerksContainer').style.overflow = "hidden";
+		toZero('pcPerksContainer');
+	}, 3);
+
+	setTimeout(function(){
+		document.getElementById('pcPerksFreeShipping').style.overflow = "visible";
+		toAuto('pcPerksFreeShipping');
+		toAuto('pcPerksYouSaved');
+		document.getElementById('pcPerksYouSaved').style.height = "32px!important";
+	}, 300);
+}
+
+
+
+
+function removePCExtras(){
+	autoToScrollHeight('pcPerksYouSaved');
+	autoToScrollHeight('pcPerksFreeShipping');
+	toScrollHeight('pcPerksContainer');
+	toScrollHeight('pcPerksContainer');
+	document.getElementById('pcPerksFreeShipping').style.overflow = "hidden";
+	setTimeout(function(){
+		toZero('pcPerksFreeShipping');
+		toZero('pcPerksYouSaved');
+		document.getElementById('pcPerksYouSaved').style.marginBottom = "0px";
+	}, 3);
+
+}
+
+
+function removePC(){
+	console.log(document.getElementById('pcPerksCheckbox').checked);
+	document.getElementById('pcPerksCheckbox').checked = false;
+	addPC();
+}
+
+function addPC(){
+	if (document.getElementById('pcPerks')) {
+		console.log(document.getElementById('pcPerksCheckbox').checked);
+		if (document.getElementById('pcPerksCheckbox').checked) {
+			document.getElementById('pcPerks').style.height = document.getElementById('pcPerks').scrollHeight + "px";
+			document.getElementById('pcPerks').style.borderTop = "1px solid rgba(0,0,0,.25)";
+			document.getElementById('pcPerks').style.opacity = "1";
+			addPCExtras();
+		}else{
+			removePCExtras();
+			while ( (document.getElementById('pcPerks').style.height == "auto") || (document.getElementById('pcPerks').style.height == "") ) {
+				document.getElementById('pcPerks').style.height = document.getElementById('pcPerks').scrollHeight + "px";
+			}
+
+			document.getElementById('pcPerks').style.height = "0px";
+			document.getElementById('pcPerksFreeShipping').style.height = "0px";
+			setTimeout(function(){
+				document.getElementById('pcPerksFreeShipping').style.overflow = "hidden";
+			}, 3000);
+			
+			setTimeout(function(){
+				document.getElementById('pcPerks').style.borderTop = "0px solid rgba(0,0,0,0)";
+			}, 300);
+		}
+	}else{
+		if (document.getElementById('pcPerksCheckbox').checked) {
+			document.getElementById('cartItems').innerHTML = "<div><div class=\"cartItemContainer cartPCPerks\" id=\"pcPerks\"><div class=\"cartItemContainerInner\"><div class=\"cartItemLeftContainer\"><img src=\"images/icons/pcPerks.png\" /></div><div class=\"cartItemCenterContainer\"><div class=\"cartItemName alignLeft\">PC Perks One-time enrollment fee</div><div class=\"cartItemSKU\"><div class=\"cartCheckoutLeftAlign\">Item: ENLKP04</div><div class=\"cartCheckoutRightAlign\"><span class=\"rf-icon rf-icon-trash\" onclick=\"removePC()\"></span></div></div><div class=\"cartQtyContainer\"><div class=\"cartCheckoutRightAlign cartItemPrice\">$19.95</div></div></div></div></div></div>" + document.getElementById('cartItems').innerHTML;
+			document.getElementById('pcPerks').style.borderTop = "1px solid rgba(0,0,0,.25)";
+			setTimeout(function(){
+				document.getElementById('pcPerks').style.height = document.getElementById('pcPerks').scrollHeight + "px";
+			}, 1);
+			addPCExtras();		
+		}
+
+	}
+
+}
+
+
+var modalTimeout = "";
+var modalVariation = 1;
+
+function popupwindow(id){
+
+}
+
+
+
+function modalPosition() {
+	if (document.getElementById('containerMainModal')){
+		if (document.getElementById('containerMainModal').classList.contains('optionActive')){
+
+			document.getElementById('containerMainModalFrame').style.height = "auto";
+			document.getElementById('containerMainModalFrame').style.width = "auto";
+			document.getElementById('containerMainModalContent').style.height = "auto";
+			document.getElementById('containerMainModalContent').style.width = "auto";
+
+
+			var contentHeight = 0;
+			var modalWidth = document.getElementById('containerMainModalFrame').clientWidth;
+			var modalHeight = document.getElementById('containerMainModalFrame').clientHeight;
+			var modalContentWidth = document.getElementById('containerMainModalContent').scrollWidth;
+			var modalContentHeight = document.getElementById('containerMainModalContent').scrollHeight;
+			var tempScreenWidth = screenWidth()
+			console.log(tempScreenWidth)
+			var tempScreenHeight = screenHeight()
+			console.log("modalSize: " + modalWidth + " X " + modalHeight)
+			console.log("modalContentSize: " + modalContentWidth + " X " + modalContentHeight)
+			console.log("screenSize: " + tempScreenWidth + " X " + tempScreenHeight)
+			var tempVerticalMargin = 80;
+			if (document.getElementById('containerMainModalFooter')) {
+				tempVerticalMargin += document.getElementById('containerMainModalFooter').clientHeight
+				console.log(document.getElementById('containerMainModalFooter').clientHeight)
+			}
+			if (tempScreenWidth < 600) {
+				tempVerticalMargin -= 32
+			}
+			console.log(tempVerticalMargin)
+			if (modalContentHeight >= (tempScreenHeight - 224 - 32)) {
+				if (tempScreenWidth <= 375) {
+					document.getElementById('containerMainModalContent').style.height = tempScreenHeight + "px"
+					document.getElementById('containerMainModalFrame').style.height = tempScreenHeight + "px"
+					document.getElementById('containerMainModalFrame').style.top =  "0px"
+					document.getElementById('containerMainModalFrame').style.left = ((tempScreenWidth - modalWidth) / 2 ) + "px"
+					console.log("******  case 1 *******")
+				}else{
+					document.getElementById('containerMainModalContent').style.height = tempScreenHeight - 224 - 32 + "px"
+					document.getElementById('containerMainModalFrame').style.top = ((tempScreenHeight - modalHeight) / 2 ) + "px"
+					console.log("******  case 2 *******")
+			//		document.getElementById('containerMainModalContent').style.backgroundColor = "#00ffff"	
+				}
+			}else{
+				if (tempScreenWidth <= 375) {
+					document.getElementById('containerMainModalContent').style.height = "300px!important"
+			 //		document.getElementById('containerMainModalContent').style.backgroundColor = "#ff00ff"
+			 		console.log("******  case 3 *******")
+				}else{
+					document.getElementById('containerMainModalContent').style.height = "300px!important"
+					document.getElementById('containerMainModalFrame').style.top = ((tempScreenHeight - modalHeight) / 2 ) + "px"
+					document.getElementById('containerMainModalFrame').style.left = ((tempScreenWidth - modalWidth) / 2 ) + "px"
+			 //		document.getElementById('containerMainModalContent').style.backgroundColor = "#ff00ff"
+			 		console.log("******  case 4 *******")	
+				}
+				
+			}
+
+
+
+			return;
+			
+			console.log("******** Modal Height")
+			if (document.getElementById('containerMainModal')){
+				if (document.getElementById('containerMainModalContent')){
+					if (document.getElementById('containerMainModalContent').innerHTML != ""){
+						toAuto('containerMainModalContent')
+						console.log(document.getElementById('containerMainModalContent').scrollW)
+						contentHeight = document.getElementById('containerMainModalContent').scrollHeight
+						console.log(contentHeight)
+						console.log(screenHeight())
+						if (document.getElementById('containerMainModalContent').classList.contains('optionNoFooter')) {
+							var tempOffset = 80
+						}else{
+							var tempOffset = 0
+						}
+						if (screenWidth() > 500){
+
+							console.log("width greater than 500")
+							if (contentHeight + 224 > screenHeight()) {
+								console.log("case 1 " + contentHeight  + " " + screenHeight())
+								document.getElementById('containerMainModalContent').style.height = screenHeight() - 224  +  "px"
+								document.getElementById('containerMainModalFrame').style.height = screenHeight() - 96 - tempOffset + "px"
+							}else{
+								console.log("case 2 " + contentHeight  + " " + screenHeight())
+								document.getElementById('containerMainModalContent').style.height = contentHeight +  "px"
+								document.getElementById('containerMainModalFrame').style.height = contentHeight + 128 - tempOffset + "px"
+							}
+						}else{
+		//					document.getElementById('containerMainModalFrame').style.maxWidth = screenWidth() - 32 + "px"
+							console.log("width less than or equal to 500")
+							console.log("case 3 " + contentHeight  + " " + screenHeight())
+							document.getElementById('containerMainModalContent').style.height = screenHeight() - 128 +  "px"
+							document.getElementById('containerMainModalFrame').style.height = screenHeight() + "px"
+						}
+						console.log("temp offset = " + tempOffset)
+						
+					}
+				}
+				
+			}	
+		}
+	}
+}
+
+
+function modalToggle(allowScroll){
+	if (allowScroll != false) {allowScroll = true}
+	console.log(allowScroll)
+	if (document.getElementById('containerMainModal')){
+		if (document.getElementById('containerMainModal').classList.contains("optionActive")){		
+			document.getElementById('containerMainModal').classList.remove("optionActive")
+			document.documentElement.style.overflow = 'scroll';
+			document.body.scroll = "yes";
+		}else{
+			document.getElementById('containerMainModal').classList.add("optionActive")
+			document.documentElement.style.overflow = 'hidden';
+			if (allowScroll){
+//				document.body.scroll = "no";
+			}
+			modalPosition()
+		}
+		modalPosition()
+		setTimeout(function(){
+
+			modalPosition()
+		} , 30);
+		return;
+	}
+
+
+
+	window.clearTimeout(modalTimeout)
+	if (modalTimeout) {
+		
+	}
+	h = window.innerHeight
+	document.getElementById('containerMainModalContent').style.maxHeight = (h - 108) + "px";
+	
+	if (document.getElementById('containerMainModal').style.top !== "0%") {
+//		document.getElementById('containerMainModalInner').innerHTML = modalCopy()
+		document.getElementById('containerMainModal').style.top = "0%";
+		document.getElementById('containerMainModal').style.bottom = "0%";
+		document.getElementById('containerMainModal').style.left = "0%";
+		document.getElementById('containerMainModal').style.right = "0%";
+		document.getElementById('containerMainModal').style.opacity = "1";
+		if (document.getElementById('containerMainModalOverlay').style.WebkitBackdropFilter !== undefined){
+			document.getElementById('containerMainModalOverlay').style.WebkitBackdropFilter = "blur(3px)";
+			document.getElementById('containerMainModalOverlay').style.backgroundColor = "rgba(255,255,255,.85)";
+			document.getElementById('containerMainModalOverlay').style.backgroundColor = "rgba(64,64,64,.90)";
+		}else{
+			if (modalVariation == 0) {;
+				document.getElementById('containerMainModalOverlay').style.backgroundColor = "rgba(64,64,64,.90)";
+				modalVariation = 1;
+			}else{
+				document.getElementById('containerMainModalOverlay').style.backgroundColor = "rgba(64,64,64,.90)";
+				modalVariation = 0;
+			}
+		}
+//		modalTimeout = setTimeout(function(){			modalToggle();		}, 10000);
+	}else{
+		if (document.getElementById('containerMainModal').style.WebkitBackdropFilter !== undefined){
+			document.getElementById('containerMainModal').style.WebkitBackdropFilter = "blur(0px)";
+		}
+		document.getElementById('containerMainModal').style.backgroundColor = "rgba(255,255,255,0)";
+		document.getElementById('containerMainModal').style.opacity = "0";
+		setTimeout(function(){
+			document.getElementById('containerMainModal').style.top = "50%";
+			document.getElementById('containerMainModal').style.bottom = "50%";
+			document.getElementById('containerMainModal').style.left = "50%";
+			document.getElementById('containerMainModal').style.right = "50%";
+		}, 400);
+	}
+
+}
+function modalBlurb(){
+	var temp = ""
+	temp += "<div class=\"modalContentMedium textCenter\">\n"
+	temp += "<img src='images/groupShot.png' class=\"modalMediumImage modalImageHideSmallHeight\" />"
+	temp += "<p class=\"RFheader5 RFbodoni uppercase\">"
+	temp += "congratulations!<br><span class=\"spanBreak\">Welcome to</span> <span class=\"spanBreak\"> rodan + fields<span class=\"spanBreak\">"
+	temp += "</p>"
+	temp += "<p class=\"RFfontMedium RFgothamLight\">"
+	temp += "You are now offically on your way to becoming the CEO of You."
+	temp += "</p>"
+	temp += "<p class=\"RFfontMedium RFgothamLight\">"
+	temp += "Your Consultant ID (CID) is: 0095081936"
+	temp += "</p>"
+	temp += "<p class=\"RFfontMedium RFgothamLight\">"
+	temp += "The last step is an option to select your favorite R+F products for monthly replenishment."
+	temp += "</p>"
+	temp += "</div>\n"
+	return temp
+}
+function modalCongratulations(){
+	var temp = ""
+	temp += "<div class=\"modalContentMedium textCenter\">\n"
+	temp += "<img src='images/groupShot.png' class=\"modalMediumImage modalImageHideSmallHeight\" />"
+	temp += "<p class=\"RFheader5 RFbodoni uppercase\">"
+	temp += "congratulations!<br><span class=\"spanBreak\">Welcome to</span> <span class=\"spanBreak\"> rodan + fields<span class=\"spanBreak\">"
+	temp += "</p>"
+	temp += "<p class=\"RFfontMedium RFgothamLight\">"
+	temp += "You are now offically on your way to becoming the CEO of You."
+	temp += "</p>"
+	temp += "<p class=\"RFfontMedium RFgothamLight\">"
+	temp += "Your Consultant ID (CID) is: 0095081936"
+	temp += "</p>"
+	temp += "<p class=\"RFfontMedium RFgothamLight\">"
+	temp += "The last step is an option to select your favorite R+F products for monthly replenishment."
+	temp += "</p>"
+	temp += "</div>\n"
+	return temp
+}
+
+
+function modalCategoryFilters(){
+	var temp = ""
+	temp += "<div class=\"modalContentMedium \">\n"
+	temp += "<form id=\"modalCategoryFiltersForm\" >"
+
+
+	temp += "<div class=\"split5050 \">\n"
+	temp += "<div class=\"splitLeft RFmin320\"> "
+	temp += "<div class=\"br16\"></div><p class=\"uppercase RFfontMedium  RFgothamMedium\" >Skin Concern</p><div class=\"br16\"></div>"
+	temp += "<div class=\"checkboxContainer\"><input type=\"checkbox\" name=\"group1\" id=\"FineLinesAndWrinkles\" class=\"checkbox  \"><label class=\" br32 RFellipsis\" for=\"FineLinesAndWrinkles\" id=\"\">Fine Lines & Wrinkles (20)</label></div>"
+	temp += "<div class=\"checkboxContainer\"><input type=\"checkbox\" name=\"group1\" id=\"UnevenSkinToneAndDarkMarks\" class=\"checkbox  \"><label class=\" br32 RFellipsis\" for=\"UnevenSkinToneAndDarkMarks\" id=\"\">Uneven Skin Tone & Dark Marks (20)</label></div>"
+	temp += "<div class=\"checkboxContainer\"><input type=\"checkbox\" name=\"group1\" id=\"AcneAndBreakOut\" class=\"checkbox  \"><label class=\" br32 RFellipsis\" for=\"AcneAndBreakOut\" id=\"\">Acne & Breakout (20)</label></div>"
+	temp += "<div class=\"checkboxContainer\"><input type=\"checkbox\" name=\"group1\" id=\"Redness & Sensitive Skin\" class=\"checkbox  \"><label class=\" br32 RFellipsis\" for=\"Redness & Sensitive Skin\" id=\"\">Rednesss & Sensitive Skin (20)</label></div>"
+	temp += "<div class=\"checkboxContainer\"><input type=\"checkbox\" name=\"group1\" id=\"Lifting & Firming\" class=\"checkbox  \"><label class=\" br32 RFellipsis\" for=\"Lifting & Firming\" id=\"\">Lifting & Firming (20)</label></div>"
+	temp += "<div class=\"checkboxContainer\"><input type=\"checkbox\" name=\"group1\" id=\"Dry Skin\" class=\"checkbox  \"><label class=\" br32 RFellipsis\" for=\"Dry Skin\" id=\"\">Dry Skin (20)</label></div>"
+	temp += "<div class=\"br16\"></div><p class=\"uppercase RFfontMedium  RFgothamMedium\" >Application Area</p><div class=\"br16\"></div>"
+	temp += "<div class=\"checkboxContainer\"><input type=\"checkbox\" name=\"group1\" id=\"FineLinesAndWrinkles\" class=\"checkbox  \"><label class=\" br32 RFellipsis\" for=\"FineLinesAndWrinkles\" id=\"\">Fine Lines & Wrinkles (20)</label></div>"
+	temp += "<div class=\"checkboxContainer\"><input type=\"checkbox\" name=\"group1\" id=\"UnevenSkinToneAndDarkMarks\" class=\"checkbox  \"><label class=\" br32 RFellipsis\" for=\"UnevenSkinToneAndDarkMarks\" id=\"\">Uneven Skin Tone & Dark Marks (20)</label></div>"
+	temp += "<div class=\"checkboxContainer\"><input type=\"checkbox\" name=\"group1\" id=\"FineLinesAndWrinkles\" class=\"checkbox  \"><label class=\" br32 RFellipsis\" for=\"FineLinesAndWrinkles\" id=\"\">Fine Lines & Wrinkles (20)</label></div>"
+	temp += "<div class=\"checkboxContainer\"><input type=\"checkbox\" name=\"group1\" id=\"FineLinesAndWrinkles\" class=\"checkbox  \"><label class=\" br32 RFellipsis\" for=\"FineLinesAndWrinkles\" id=\"\">Fine Lines & Wrinkles (20)</label></div>"
+	temp += "<div class=\"checkboxContainer\"><input type=\"checkbox\" name=\"group1\" id=\"FineLinesAndWrinkles\" class=\"checkbox  \"><label class=\" br32 RFellipsis\" for=\"FineLinesAndWrinkles\" id=\"\">Fine Lines & Wrinkles (20)</label></div>"
+	temp += "<div class=\"checkboxContainer\"><input type=\"checkbox\" name=\"group1\" id=\"FineLinesAndWrinkles\" class=\"checkbox  \"><label class=\" br32 RFellipsis\" for=\"FineLinesAndWrinkles\" id=\"\">Fine Lines & Wrinkles (20)</label></div>"
+	temp += "<div class=\"checkboxContainer\"><input type=\"checkbox\" name=\"group1\" id=\"FineLinesAndWrinkles\" class=\"checkbox  \"><label class=\" br32 RFellipsis\" for=\"FineLinesAndWrinkles\" id=\"\">Fine Lines & Wrinkles (20)</label></div>"
+	temp += "</div>"
+
+	temp += "<div class=\"splitRight RFmin320\"> "
+	temp += "<div class=\"br16\"></div><p class=\"uppercase RFfontMedium  RFgothamMedium\" >Category</p><div class=\"br16\"></div>"
+	temp += "<div class=\"checkboxContainer\"><input type=\"checkbox\" name=\"group1\" id=\"FineLinesAndWrinkles\" class=\"checkbox  \"><label class=\" br32 RFellipsis\" for=\"FineLinesAndWrinkles\" id=\"\">Fine Lines & Wrinkles (20)</label></div>"
+	temp += "<div class=\"checkboxContainer\"><input type=\"checkbox\" name=\"group1\" id=\"UnevenSkinToneAndDarkMarks\" class=\"checkbox  \"><label class=\" br32 RFellipsis\" for=\"UnevenSkinToneAndDarkMarks\" id=\"\">Uneven Skin Tone & Dark Marks (20)</label></div>"
+	temp += "<div class=\"checkboxContainer\"><input type=\"checkbox\" name=\"group1\" id=\"FineLinesAndWrinkles\" class=\"checkbox  \"><label class=\" br32 RFellipsis\" for=\"FineLinesAndWrinkles\" id=\"\">Fine Lines & Wrinkles (20)</label></div>"
+	temp += "<div class=\"checkboxContainer\"><input type=\"checkbox\" name=\"group1\" id=\"FineLinesAndWrinkles\" class=\"checkbox  \"><label class=\" br32 RFellipsis\" for=\"FineLinesAndWrinkles\" id=\"\">Fine Lines & Wrinkles (20)</label></div>"
+	temp += "<div class=\"checkboxContainer\"><input type=\"checkbox\" name=\"group1\" id=\"FineLinesAndWrinkles\" class=\"checkbox  \"><label class=\" br32 RFellipsis\" for=\"FineLinesAndWrinkles\" id=\"\">Fine Lines & Wrinkles (20)</label></div>"
+	temp += "<div class=\"checkboxContainer\"><input type=\"checkbox\" name=\"group1\" id=\"FineLinesAndWrinkles\" class=\"checkbox  \"><label class=\" br32 RFellipsis\" for=\"FineLinesAndWrinkles\" id=\"\">Fine Lines & Wrinkles (20)</label></div>"
+	temp += "<div class=\"checkboxContainer\"><input type=\"checkbox\" name=\"group1\" id=\"FineLinesAndWrinkles\" class=\"checkbox  \"><label class=\" br32 RFellipsis\" for=\"FineLinesAndWrinkles\" id=\"\">Fine Lines & Wrinkles (20)</label></div>"
+	temp += "<div class=\"checkboxContainer\"><input type=\"checkbox\" name=\"group1\" id=\"FineLinesAndWrinkles\" class=\"checkbox  \"><label class=\" br32 RFellipsis\" for=\"FineLinesAndWrinkles\" id=\"\">Fine Lines & Wrinkles (20)</label></div>"
+	temp += "<div class=\"checkboxContainer\"><input type=\"checkbox\" name=\"group1\" id=\"FineLinesAndWrinkles\" class=\"checkbox  \"><label class=\" br32 RFellipsis\" for=\"FineLinesAndWrinkles\" id=\"\">Fine Lines & Wrinkles (20)</label></div>"
+	temp += "<div class=\"checkboxContainer\"><input type=\"checkbox\" name=\"group1\" id=\"FineLinesAndWrinkles\" class=\"checkbox  \"><label class=\" br32 RFellipsis\" for=\"FineLinesAndWrinkles\" id=\"\">Fine Lines & Wrinkles (20)</label></div>"
+	temp += "<div class=\"checkboxContainer\"><input type=\"checkbox\" name=\"group1\" id=\"FineLinesAndWrinkles\" class=\"checkbox  \"><label class=\" br32 RFellipsis\" for=\"FineLinesAndWrinkles\" id=\"\">Fine Lines & Wrinkles (20)</label></div>"
+	temp += "<div class=\"checkboxContainer\"><input type=\"checkbox\" name=\"group1\" id=\"FineLinesAndWrinkles\" class=\"checkbox  \"><label class=\" br32 RFellipsis\" for=\"FineLinesAndWrinkles\" id=\"\">Fine Lines & Wrinkles (20)</label></div>"
+	temp += "<div class=\"checkboxContainer\"><input type=\"checkbox\" name=\"group1\" id=\"FineLinesAndWrinkles\" class=\"checkbox  \"><label class=\" br32 RFellipsis\" for=\"FineLinesAndWrinkles\" id=\"\">Fine Lines & Wrinkles (20)</label></div>"
+	temp += "<div class=\"checkboxContainer\"><input type=\"checkbox\" name=\"group1\" id=\"FineLinesAndWrinkles\" class=\"checkbox  \"><label class=\" br32 RFellipsis\" for=\"FineLinesAndWrinkles\" id=\"\">Fine Lines & Wrinkles (20)</label></div>"
+	temp += "</div>"
+
+
+
+
+
+	
+
+	
+
+
+	temp += "</div>"
+	temp += "</form>"
+	temp += "</div>"
+
+	return temp
+}
+
+function modalCategoryFiltersFiltersClearAll(){
+//	alert("clicked")
+	var formElements = document.getElementById('modalCategoryFiltersForm').elements
+	console.log(formElements)
+	for (var i = 0; i < formElements.length; i++) {
+		if (formElements[i].type == "checkbox") {
+			formElements[i].checked = false;
+		}
+	}
+}
+
+function modalCopy(){
+	var temp = [];
+//	temp.push("<p>Hello World! This is a modal! Lots of cool stuff can happen in here and it's amazing.  yay</p><p>Hello World! This is a modal! Lots of cool stuff can happen in here and it's amazing.  yay</p><p>Hello World! This is a modal! Lots of cool stuff can happen in here and it's amazing.  yay</p><p>Hello World! This is a modal! Lots of cool stuff can happen in here and it's amazing.  yay</p><p>Hello World! This is a modal! Lots of cool stuff can happen in here and it's amazing.  yay</p><p>Hello World! This is a modal! Lots of cool stuff can happen in here and it's amazing.  yay</p><p>Hello World! This is a modal! Lots of cool stuff can happen in here and it's amazing.  yay</p><p>Hello World! This is a modal! Lots of cool stuff can happen in here and it's amazing.  yay</p><p>Hello World! This is a modal! Lots of cool stuff can happen in here and it's amazing.  yay</p>");
+//	temp.push("<p>This is a model modal that has no total.</p><p>This is a model modal that has no total.</p><p>This is a model modal that has no total.</p><p>This is a model modal that has no total.</p><p>This is a model modal that has no total.</p><p>This is a model modal that has no total.</p><p>This is a model modal that has no total.</p><p>This is a model modal that has no total.</p><p>This is a model modal that has no total.</p>");
+//	temp.push("<p>Please excuse my dear Aunt Sally, she forgot that pink elephants may dance and sing and thus got her order of operations discombobulated.</p><p>Please excuse my dear Aunt Sally, she forgot that pink elephants may dance and sing and thus got her order of operations discombobulated.</p><p>Please excuse my dear Aunt Sally, she forgot that pink elephants may dance and sing and thus got her order of operations discombobulated.</p><p>Please excuse my dear Aunt Sally, she forgot that pink elephants may dance and sing and thus got her order of operations discombobulated.</p><p>Please excuse my dear Aunt Sally, she forgot that pink elephants may dance and sing and thus got her order of operations discombobulated.</p><p>Please excuse my dear Aunt Sally, she forgot that pink elephants may dance and sing and thus got her order of operations discombobulated.</p><p>Please excuse my dear Aunt Sally, she forgot that pink elephants may dance and sing and thus got her order of operations discombobulated.</p><p>Please excuse my dear Aunt Sally, she forgot that pink elephants may dance and sing and thus got her order of operations discombobulated.</p><p>Please excuse my dear Aunt Sally, she forgot that pink elephants may dance and sing and thus got her order of operations discombobulated.</p>");
+	temp.push("<p class=\"alignRight iconLarge\"><span class=\"rf-icon rf-icon-close\" onclick=\"modalToggle()\"></span></p><p class=\"uppercase fontMedium alignLeft\">Are you sure you want to cancel your pulse pro membership?</p><p class=\"fontSmall alignLeft\">You will no longer recieve a monthly 20SV and your minimum purchase will increase to 100SV. You will be losing access to:</p><ul class=\" alignLeft\"><li>Tools that help you accelerate the growth of your business</li><li>Your Two personal websites (PWS)</li><li>Advanced reporting</li><li>The <span class=\"bank\">R+F</span> Solution Tool and more</li></ul><p class=\"textCenter\"><button class=\"btnPrimary \" onclick=\"modalToggle()\">Cancel Pulse pro</button><button class=\"btnSecondary\" onclick=\"modalToggle()\">Go back</button></p>")
+	var tempRandom = Math.floor(Math.random() * temp.length);
+	document.getElementById('containerMainModalContent').innerHTML = temp[tempRandom];
+	modalToggle();
+}
+
+function modalClose(){
+	modalToggle();
+	modalTimeout = setTimeout(function(){ document.getElementById('containerMainModalContent').innerHTML = "";	}, 3000);
+	document.getElementById('containerMainModalContent').innerHTML = "";	
+}
+
+function PWSeditPhoto() {
+	document.getElementById('containerMainModalContent').innerHTML = "<div class=\"IUwrapper \"><div class=\"IUcontainer \"  onmousemove=\"captureMove()\"><div class=\"IUoverlay\" onmousedown=\"IUposition()\" onmouseup=\"IUrelease()\" onmouseout=\"IUrelease()\"></div><div class=\"IUmaskContainer\" id=\"IUmaskContainer\"><img src=\"images/icons/circularMask.svg\" height=\"400\" width=\"400\" id=\"IUmask\" class=\"IUmask\" /></div><div class=\"IUimageBackground\"><img src=\"images/20170306_190728_042393.jpg\" id=\"IUimage\" class=\"IUimage\" onload=\"IUinit()\" /></div></div><div class=\"br32\"></div><div class=\"textCenter br24 \"><span class=\"clarityFont1024 rf-icon rf-icon-image\"></span>&nbsp;<input type=\"range\" onchange=\"IUzoom()\" oninput=\"IUzoom()\" id=\"IUzoomRange\" value=\"0\" />&nbsp;<span class=\"clarityFont1824 rf-icon rf-icon-image\"></span></div><div class=\"textCenter\"><div class=\"br16\"></div><button class=\"btnPrimary widthThird noPadding\">Save and upload image</button><div class=\"br16\"></div><button class=\"btnSecondary widthThird noPadding\" onclick=\"modalClose()\">Cancel</button></div></div>";
+	modalToggle();
+}
+
+function PWSeditContact() {
+	document.getElementById('containerMainModalContent').innerHTML = "<div class=\"PWSeditContact \"><div class=\"RFbodoni RFheader5 uppercase \">My Contact Info</div><div class=\"clarityFont1424 RFgothamLight\">These fields are not connected to your Account Details. Updates here will only reflect on your PWS screen.</div><div class=\"\"><form class=\"userLogInForm alignCenter \"><div class=\"formDiv\"><input type=\"text\" name=\"PWSeditName\" class=\"userLogInFormField input alignLeft PWSeditOffset\" id=\"PWSeditName\" oninput=\"inputLabel(this.id), validateName(this.id)\"><label for=\"PWSeditName\" id=\"PWSeditNameLabel\" class=\"userLogInLabel\">Name</label></div><div class=\"formDiv\"><input type=\"text\" name=\"PWSeditNumber\" id=\"PWSeditNumber\" class=\"userLogInFormField input alignLeft PWSeditOffset\" oninput=\"inputLabel(this.id)\" onblur=\"validatePhoneNumber(this.id)\" ><label for=\"PWSeditNumber\" id=\"PWSeditNumberLabel\" class=\"userLogInLabel\" >Number</label></div><div class=\"formDiv\"><input type=\"text\" name=\"PWSeditEmail\" id=\"PWSeditEmail\" class=\"userLogInFormField input alignLeft PWSeditOffset\" oninput=\"inputLabel(this.id)\" ><label for=\"PWSeditEmail\" id=\"PWSeditEmailLabel\" class=\"userLogInLabel\">Email</label></div><div class=\"br16\"></div><input type=\"button\" name=\"submit\" placeholder=\"Save\" value=\"Save\" class=\"btnPrimary noPadding\" onclick=\"PWSeditContactSave\"><div class=\"br16\"></div><input type=\"button\" name=\"submit\" placeholder=\"Cancel\" value=\"Cancel\" class=\"btnSecondary noPadding\" onclick=\"modalClose()\"></form></div></div>"
+	modalToggle();
+}
+
+function modalLargeImage(imagePath) {
+	document.getElementById('containerMainModalContent').innerHTML = "<img class=\"modalLargeImage\" src=\"" + imagePath + "\" />"
+	modalToggle();
+}
+
+
+
+function PWSeditMyStory() {
+	document.getElementById('containerMainModalContent').innerHTML = "<div class=\"PWSmyStoryEditorContainer\"><form class=\" \"><!-- <div class=\"formDiv  alignCenter\"><input type=\"text\" name=\"PWSeditStoryTitle\" class=\"userLogInFormField input alignLeft textCenter\" id=\"PWSeditStoryTitle\" oninput=\"inputLabel(this.id), PWSeditMyStoryTitle(this.id)\"><label for=\"PWSeditStoryTitle\" id=\"PWSeditStoryTitleLabel\" class=\"userLogInLabel\">Title (Max 30 Characters)</label></div> --> <div class=\"PWSmyStoryEditor\"><div class=\"clarityFont1648 RFgothamMedium padGutter alignLeft\">B I U L<span class=\"floatRight RFgothamLight\" id=\"PWSmyStoryCounter\">0/1000</span></div><textarea name=\"PWSeditName\" class=\"inputTextLargeField \" id=\"PWSeditStoryBody\" onclick=\"PWSmyStoryBody(this.id)\" onmouseup=\"PWSmyStoryBody(this.id)\" onkeyup=\"PWSmyStoryBody(this.id)\" oninput=\"PWSmyStoryBody(this.id)\"></textarea></div></form><div class=\"btnSideBySide\"><button class=\"btnSecondary\">Cancel</button><button class=\"btnPrimary\" onclick=\"PWSeditMyStorySave()\">Submit Story</button></div></div>"
+	modalToggle(); 
+}
+
+function PWSeditMyStoryTitle(id) {
+	var value = document.getElementById(id).value;	
+	var reg = new RegExp('^[ A-Za-z0-9_./?&\!-,]*$');
+	console.log(reg.test(value));
+	var value = document.getElementById(id).value;	
+	console.log(value);
+	if ((value.length <= 30) && (reg.test(value)) ) {
+		document.getElementById(id).classList.remove('error');
+		return false
+	}else{
+		document.getElementById(id).classList.add('error');
+		return true
+	}
+}
+
+
+
+
+
+function PWSmyStoryBody(id){
+	var value = document.getElementById(id).value;
+	var selectStart = document.getElementById(id).selectionStart;
+	var selectEnd = document.getElementById(id).selectionEnd;
+	console.log(value)
+	console.log(selectStart + " " + selectEnd + " " + (selectEnd - selectStart));
+	var tempLines = value.split("\n");
+	var tempWords = value.split(" ");
+	tempLines = (tempLines.length - 1)
+	tempWords = (tempWords.length - 1)
+	var adjustedCharCount = value.length - tempWords - tempLines;
+	if ((selectEnd - selectStart) > 0) {
+		console.log(value.substring(selectStart, selectEnd))
+	}
+	document.getElementById('PWSmyStoryCounter').innerHTML = adjustedCharCount + "/1000" 
+}
+
+function PWSeditMyStorySave() {
+//	var tempTitle = document.getElementById('PWSeditStoryTitle').value;
+var tempTitle = ""
+	var tempStory = "<p>" + document.getElementById('PWSeditStoryBody').value + "</p>";
+	tempStory = tempStory.split("\n").join("<br />");
+	tempStory = tempStory.split("\r").join("</p><p>");
+	console.log(tempStory);
+	if ((tempStory.length > 0 ) && (tempTitle.length == 0)) {
+//		document.getElementById('PWSmyStoryTitle').innerHTML = tempTitle;
+		document.getElementById('PWSmyStoryContent').innerHTML = tempStory;
+		modalClose();
+	}else{
+//		alert ("not filled out")
+	}
+
+}
+
+
+
+
+function salesOverrideDropDown(){
+	if (document.getElementById('salesOverrideDropDownDiv').innerHTML != "") {
+		var temp = document.getElementById('salesOverrideDropDownDiv').innerHTML;
+//		console.log(temp);
+//		document.getElementById('salesOverrideDropDownDiv').innerHTML = "";
+		document.getElementById('containerMainModalContent').innerHTML = temp;
+	}
+	modalToggle();
+}
+
+
+function dropDown(id){
+	if (document.getElementById(id).classList.contains('dropDownMenuContainerActive')){
+		document.getElementById(id + "Menu").style.height = "0px";
+		document.getElementById(id).classList.remove('dropDownMenuContainerActive')
+	}else{
+		document.getElementById(id + "Menu").style.height = document.getElementById(id + "Menu").scrollHeight + "px";
+		document.getElementById(id).classList.add('dropDownMenuContainerActive')
+	}
+}
+
+function dropDownSet(menuHeader,menuItem){
+	console.log(menuHeader)
+	console.log(menuItem)
+	document.getElementById(menuHeader + "Text").innerHTML = menuItem;
+	document.getElementById(menuHeader + "Text").classList.remove('mediumGrey')
+	document.getElementById(menuHeader).classList.remove('error')
+	console.log(dropDownCheckArray)
+	for (var i = 0; i < dropDownCheckArray.length; i++){
+		if (menuHeader.includes(dropDownCheckArray[i])){
+			if ((i + 1) < dropDownCheckArray.length) {
+				document.getElementById("dropDown" + dropDownCheckArray[i + 1]).classList.remove('dropDownDisabled')
+//				document.getElementById("dropDown" + dropDownCheckArray[i + 1] + "Header").classList.remove('error')
+			}
+		}
+	}
+}
+
+
+function validateName(id) {
+	var value = document.getElementById(id).value;	
+	var reg = new RegExp('^[ A-Za-z0-9_./?&\!-,]*$');
+	console.log(reg.test(value));
+	var value = document.getElementById(id).value;	
+	console.log(value);
+	if ((value.length <= 30) && (reg.test(value)) ) {
+		document.getElementById(id).classList.remove('error');
+		return false
+	}else{
+		document.getElementById(id).classList.add('error');
+		return true
+	}
+}
+
+
+function validatePhoneNumber(id){
+	var reg = new RegExp('^[0-9]+$');
+	console.log(id + " | " + document.getElementById(id).value)
+	if ((document.getElementById(id).value.length == 7) && (reg.test(document.getElementById(id).value)) ){
+		document.getElementById(id).classList.remove('error');
+	}else{
+		document.getElementById(id).classList.add('error');
+	}
+}
+
+
+
+
+
+
+
+function contactClusterToggle(id){
+	if (document.getElementById(id).classList.contains('optionActive')){
+		document.getElementById(id).classList.remove('optionActive')
+	}else{
+		document.getElementById(id).classList.add('optionActive')
+	}
+
+}
+var promos = [
+		{
+			"name":"holiday2018",
+			"value":"20",
+			"type":"discount"
+		},
+		{
+			"name":"50percent",
+			"value":"50",
+			"type":"percent"
+		},
+		{
+			"name":"radient",
+			"value":"50",
+			"type":"bxby",
+			"trigger":"aaprs01",
+			"result":"aaprso01"
+		},
+	]
+var appliedPromos = [];
+function promoAdd(){
+
+	var value = document.getElementById('cartPromoInput').value;
+	console.log(value)
+	var tempMaxPromos = 2;
+	if (value !== ""){
+		if (appliedPromos.length < tempMaxPromos){
+			if (Math.floor(Math.random() * 4) !== 1) {
+				document.getElementById('cartPromoInput').value = "";
+				document.getElementById('cartPromoContainer').innerHTML += promoNew(value);
+				promoBoxSize()	
+				newToast("You have successfully entered promo code " + value, "success",true,true);	
+			}else{
+				newToast(value + " is an invalid promo code", "warning",true,true);			
+			}
+		}else{
+			newToast("You can only apply " + tempMaxPromos + " promotional code" + (tempMaxPromos == 1 ? "" : "s" ) + " at any time, please remove " + (tempMaxPromos == 1 ? "the promotional code you have entered" : "at least one of your promotioanl codes" ) + " if you want to add <span class=\"bold uppercase underline\"> " + value + "</span>. ", "warning",true,true)	
+		}
+	}else{
+		newToast("Please enter a promotional code", "warning",true,true);	
+	}
+}
+
+
+
+function promoBoxSize(){
+	console.log(document.getElementById('cartPromoContainer').scrollHeight)
+}
+
+
+function promoNew(value){
+	var temp = "promo" + value + randomID()
+	appliedPromos.push(temp)
+	console.log(appliedPromos)
+	promoDiscount()
+	setTimeout(function(){
+		document.getElementById(temp).style.height = "48px";
+		document.getElementById(temp).style.width = document.getElementById(temp).scrollWidth + 24 + "px";
+	}, 5);
+	return "<div class=\"coupon\" id=\"" + temp + "\"><div class=\"couponInner\"><span class=\"couponRemove rf-icon rf-icon-cancel-outline\" onclick=\"removePromo('" + temp + "')\" ></span>" + value + "</div></div>"
+
+}
+
+function removePromo(id){
+	console.log(id)
+//	document.getElementById(id).style.width = document.getElementById(id).scrollWidth + "px";
+	document.getElementById(id).style.width = "0px"
+	document.getElementById(id).style.height = "2px"
+	document.getElementById(id).style.top = "0px"
+	document.getElementById(id).style.margin = "0px!important"
+	document.getElementById(id).style.marginTop = "0px"
+	document.getElementById(id).style.marginLeft = "0px"
+	document.getElementById(id).style.marginRight = "0px"
+	document.getElementById(id).style.marginBottom = "0px"
+	console.log(document.getElementById(id).style)
+	console.log(document.getElementById(id).style.marginTop)
+
+
+	
+	console.log(appliedPromos)
+	for (var i = 0; i < appliedPromos.length; i++) {
+		if (appliedPromos[i] == id) {
+			appliedPromos.splice(i,1)
+		}
+	}
+	console.log(appliedPromos)
+	promoDiscount()
+//	document.getElementById(id).style.overflow = "hidden"
+}
+function promoDiscount(){
+	if (appliedPromos.length > 0){
+		document.getElementById('promoDiscountContainer').style.height = "32px"
+		document.getElementById('cartPromoContainer').style.height = "auto"	
+//		document.getElementById('promoDiscountContainer').classList.remove('cartSubHiddenLine')
+	}else{
+		document.getElementById('promoDiscountContainer').style.height = "0px"
+		document.getElementById('cartPromoContainer').style.height = document.getElementById('cartPromoContainer').scrollHeight + "px";
+		setTimeout(function(){
+			document.getElementById('cartPromoContainer').style.height = "0px"	
+		},1);
+		
+//		document.getElementById('promoDiscountContainer').style.height = "32px"
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function validateQuantity(id){
+	var tempValue = (document.getElementById(id).value)
+	var cursorPosStart = document.getElementById(id).selectionStart;
+	var cursorPosEnd = document.getElementById(id).selectionEnd;
+	var cursorStartFromEnd = tempValue.length - cursorPosStart
+	var cursorEndFromEnd = tempValue.length - cursorPosEnd
+	
+	
+
+	console.log(tempValue)
+	var regex = tempValue.replace(/[^0-9]/gi, '');
+	console.log(Number(regex))
+	console.log(maxQty)
+	if (regex > maxQty) {
+		alert("Quantities over " + maxQty + " are not allowed")
+		regex = maxQty
+	}
+	if (regex < 0) {
+		alert("Are you sure you want to delete this item?")
+		regex = 1
+	}
+	document.getElementById(id).value = regex
+	document.getElementById(id).selectionStart = regex.toString().length - cursorStartFromEnd
+	document.getElementById(id).selectionEnd = regex.toString().length - cursorEndFromEnd
+}
+
+function increaseQuantity(id){
+	var tempValue = Number(document.getElementById(id).value)
+	if (tempValue < maxQty){
+		tempValue ++
+		fadeText(id,tempValue,true)
+		console.log(tempValue)
+	}else{
+		alert("Quantities over " + maxQty + " are not allowed","warning")
+	}
+}
+function decreaseQuantity(id){
+	var tempValue = Number(document.getElementById(id).value)	
+	if (tempValue > 1){
+		tempValue --
+		fadeText(id,tempValue,true)
+		console.log(tempValue)
+	}
+	document.getElementById(id).blur()
+}
+
+
+
+
+
+
+
+
+
+
+
+
+var optionActiveArray = [];
+
+
+function toggleOptionActive(id,clear){
+	console.log(id)
+	console.log(optionActiveArray)
+	if (document.getElementById(id)){
+		if (document.getElementById(id).classList.contains('optionActive')){
+			document.getElementById(id).classList.remove('optionActive')
+			if (clear == true) {
+				clearOptionActive()
+			}
+		}else{
+			document.getElementById(id).classList.add('optionActive')
+			if (clear == true) {
+				clearOptionActive()
+				optionActiveArray.push(id)
+			}
+		}
+	}
+	console.log(optionActiveArray)
+}
+
+
+function clearOptionActive(){
+	for (var i = 0; i < optionActiveArray.length; i++ ) {
+		if (document.getElementById(optionActiveArray[i])){
+			document.getElementById(optionActiveArray[i]).classList.remove('optionActive')
+		}
+	}
+	optionActiveArray = [];
+
+}
+
+
+
+
+
+
+
+
+
+
+
+//document.body.addEventListener("onload", onLoadFunction, false)
+//document.body.addEventListener("onresize", rfResize, false)
+
+function onLoadFunction() {
+	console.log(Date())
+	rfResize()
+//	if (ytOverlay) {ytOverlay()}
+	
+}
+
+
+
+
+
+
+
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+var player;
+function onYouTubeIframeAPIReady() {
+	if (document.getElementById('player')) {
+		player = new YT.Player('player', {
+		  events: {
+		    'onReady': onPlayerReady,
+		    'onStateChange': onPlayerStateChange
+		  }
+		});
+	}
+}
+ function onPlayerReady(event) {
+        event.target.playVideo();
+      }
+function onPlayerStateChange(event) {
+	ytOverlay()
+	console.log(event.data)
+	if (event.data == -1) {
+		// unstarted
+		document.getElementById('playerOverlay').classList.add("optionDisable")
+	}
+	if (event.data == 0) {
+		// end
+		document.getElementById('playerOverlay').classList.remove("optionDisable")
+	}
+	if (event.data == 1) {
+		// playing
+		document.getElementById('playerOverlay').classList.add("optionDisable")
+	}
+	if (event.data == 2) {
+		// paused (scrubbing too)
+		document.getElementById('playerOverlay').classList.add("optionDisable")
+	}
+	if (event.data == 3) {
+		// buffering
+		document.getElementById('playerOverlay').classList.remove("optionDisable")
+	}
+	if (event.data == 5) {
+		//cued
+	}
+}
+function stopVideo() {
+	player.stopVideo();
+}
+function toggleVideoPlay() {
+	console.log(player)
+	var tempPlayState = player.getPlayerState()
+	console.log("toggelVideoPlay: " + tempPlayState)
+	switch (player.getPlayerState()) {
+		case 0 :
+			console.log("end to restart play")
+			player.seekTo(0)
+			player.playVideo()
+			break;
+		case 1: 
+			console.log("playing to pause")
+			player.pauseVideo();
+			break;
+		case 2:
+			console.log("pause to play")
+			player.playVideo();
+			break;
+		case 3: 
+			console.log("buffering")
+			player.playVideo();
+			break;
+		case 5:
+			console.log("cued to play")
+			player.playVideo();
+			break;
+		default:
+			console.log("play state error")
+			break;
+	}
+}
+
+
+
+
+function ytOverlay(){
+	if (document.getElementById('playerOverlay')) {
+		console.log("playerOverlay = true")
+		return true;
+	}else{
+		console.log("playerOverlay = false")
+		if (document.getElementById('playerDiv')) {
+			document.getElementById('playerDiv').innerHTML += "<div class=\"container169overlay optionDisable\" id=\"playerOverlay\"><div class=\"container169overlayInner\"><img src=\"images/models169.png\" class=\"imageFullWidth pointer\" onclick=\"toggleVideoPlay()\" /></div></div>"
+		}
+	}
+}
+
+
+
+
+
+
+
+
+function fadeText(id,text,fast) {
+	if (fast !== true) {
+		fast = false
+	}
+	var tempDelay = (fast) ? 150 : 300;
+	document.getElementById(id).style.transition = "all " + (tempDelay / 1000 ) + "s ease";
+	var tempColor = document.getElementById(id).style.color;
+	document.getElementById(id).style.color = "transparent";
+	document.getElementById(id).scrollTop = 0;
+	setTimeout(function(){
+		document.getElementById(id).innerHTML = text;
+		document.getElementById(id).value = text;
+		document.getElementById(id).style.color = tempColor;
+	}, tempDelay);
+}
+function fadeImage(id,src) {
+	var tempDelay = 300;
+	document.getElementById(id).style.transition = "all " + (tempDelay / 1000 ) + "s ease";
+	document.getElementById(id).style.opacity = 0;
+	setTimeout(function(){
+		document.getElementById(id).src = src;
+		document.getElementById(id).style.opacity = 1;
+	}, tempDelay);
+}
+
+
+
+window.addEventListener('DOMContentLoaded', rfInit, false);
+
+
+function rfInit() {
+	
+	// if (initTab) {
+	// 	tabToggle(initTab,1)	
+	// 	setTimeout(function(){
+	// 		tabToggle(initTab,1)	
+	// 	}, 1000)
+		
+	// }
+	var formElements = document.getElementsByTagName("input")
+	console.log(formElements)
+	for (var i = 0 ; i < formElements.length; i++){
+		if (formElements[i].value.length > 0) {
+			formElements[i].classList.add("inputActive");
+		}
+	}
+}
+
+
+
+
+
+function tooltipToggle(){
+	console.log(this)
+//	this.id.classList.add("error")
+	document.getElementById('containerMainOverlay').classList.add('optionActive')
+}

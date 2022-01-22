@@ -1,0 +1,1084 @@
+var siteRoot = "https://www.rodanandfields.com/blog/"
+if (window.location.href.includes('localhost')){
+	siteRoot = "http://localhost/clarity3/wordpress/"
+}
+
+
+
+function timeToMS(s,m,h,d){
+	s = !isNaN(Number(s)) ? s : 0
+	m = !isNaN(Number(m)) ? m : 0
+	h = !isNaN(Number(h)) ? h : 0
+	d = !isNaN(Number(d)) ? d : 0
+	return (s * 1000) + (m * 60 * 1000) + (h * 3600 * 100) + (d * 86400 * 1000)
+}
+
+
+
+function blog_eyebrowClose(el){
+	el = el.parentNode.parentNode
+	el.style.height = el.scrollHeight + "px";
+
+	setTimeout(function() {el.style.height = "0px";}, 3,el)
+	setTimeout(function() {
+		el.outerHTML = ""
+
+		var now = new Date();
+		now.setTime(now.getTime() + timeToMS(0,5));
+		console.log(now)
+		var cookieString = "eyebrowDismiss=true; expires=" + now.toUTCString()
+    	document.cookie = cookieString;
+
+
+    	console.log(document.cookie)
+	}, 300,el)	
+}
+
+function blog_eyeBrowResize(){
+	var el1 = document.getElementsByClassName('blogHeaderContainer')[0]
+	var el2 = document.getElementsByClassName('blogHeaderBottomBarInner')[0]
+	var el3 = document.getElementsByClassName('blog_eyebrow')[0]
+	console.log(el1.style.height)
+	console.log(el2.style.height)
+	console.log(el3.style.height)
+}
+
+
+
+
+
+function getBlogOnload(){
+	if (findLowestCard){
+		findLowestCard()
+	}
+	if (removeOffset){
+		removeOffset();
+	}
+	if (blogSideBarPosition){
+		blogSideBarPosition()
+	}
+	if (sideBarHeight){
+		sideBarHeight()
+	}
+	if (scrubHeroImage){
+		scrubHeroImage()
+	}
+}
+
+function getBlogResize(){
+	if (findLowestCard){
+		findLowestCard()
+	}
+	if (blogSideBarPosition){
+		blogSideBarPosition()
+	}
+	if (sideBarHeight){
+		sideBarHeight()
+	}
+
+}
+function wWidth(){return window.innerWidth}
+function wHeight(){return window.innerHeight}
+
+
+
+
+
+
+function testEvent(input){
+	//console.log(input)
+}
+
+
+var menuJSON = {}
+
+
+
+
+function navMobileGen(){
+	var t = ""
+	for(var i = 0; i < Object.keys(menuJSON).length; i ++){
+		t += "<div class=\" " + (i !== 0 ? "sub-menu" : "top-menu") + "\" style=\"\" id=\"navMenu" + Object.keys(menuJSON)[i] + "\">"
+		for (var j = 0; j < menuJSON[Object.keys(menuJSON)[i]].length; j++){
+			t += (((j == 0) && Object.keys(menuJSON)[i] !== "ID0") ? "<a class=\"noChevron\" onclick=\"blogCloseSubMenu('navMenuID" + menuJSON[Object.keys(menuJSON)[i]][j].menu_item_parent + "')\" ><span class=\"rf-icon-chevron-left\"></span>&nbsp;&nbsp;back </a>" : "")
+			var hasSub = Object.keys(menuJSON).includes("ID" + menuJSON[Object.keys(menuJSON)[i]][j].ID)
+			t += "<a " + (hasSub ? "" : "href=\"" + menuJSON[Object.keys(menuJSON)[i]][j].url + "\"") + " class=\"" + (hasSub ? "" : "noChevron") + "\" " + ( hasSub ? "onclick=\"blogOpenSubMenu('navMenuID" + menuJSON[Object.keys(menuJSON)[i]][j].ID + "')" : ""  ) + "\" >" + menuJSON[Object.keys(menuJSON)[i]][j].title + "</a>"
+		}
+		t += "</div>"
+	}
+	return t
+}
+
+function blogOpenSubMenu(id){
+	el = document.getElementById(id)
+	if (el){
+		el.classList.add('optionActive')
+		document.getElementsByClassName('top-menu')[0].classList.add('optionOut')
+	}
+}
+
+function blogCloseSubMenu(id){
+	el = document.getElementById(id)
+	if (el){
+		el.classList.remove('optionActive')
+		document.getElementsByClassName('top-menu')[0].classList.remove('optionOut')
+	}
+}
+
+
+
+
+
+function getScrollBlog(){
+	var scrollHeight = window.pageYOffset;
+	var wWidth = window.innerWidth
+	var wHeight = window.innerHeight
+	bottomBarInner = document.getElementById("blogHeaderBottomBarInner")
+	var topBarHeight = document.getElementsByClassName('blogHeaderTopBar')[0].clientHeight
+	console.log(topBarHeight)
+	if (scrollHeight > topBarHeight) {
+		bottomBarInner.style.position = "fixed"
+	}else{
+		bottomBarInner.style.position = "relative"
+		document.getElementsByClassName("blogHeaderContainer")[0].classList.remove("blogHeaderSmall")
+	}
+	if (removeOffset){
+		removeOffset();
+	}
+
+	if (blogContentSharePosition){
+		blogContentSharePosition()
+	}
+	if (blogSideBarPosition){
+		blogSideBarPosition()
+	}
+	if (sideBarHeight){
+		sideBarHeight()
+	}
+}
+
+
+function sideBarHeight(){
+	if (document.getElementById('blogSideBar')){
+		el = document.getElementById('blogSideBar')
+		var tempValue = 0
+		for (var i = 0; i < el.childNodes.length - 1; i++){
+			if (el.childNodes[i].tagName == "DIV"){
+			}
+			(el.childNodes[i].tagName == "DIV") ? tempValue += el.childNodes[i].clientHeight : false;
+		}
+
+	}
+
+	if (document.getElementById("blogContent")){
+		if (wWidth() >= 1050){
+			document.getElementById("blogContent").style.minHeight = tempValue + "px"
+		}else{
+			document.getElementById("blogContent").style.minHeight = "0px"
+		}
+	}	
+
+}
+
+
+function findLowestCard(){
+	if (!document.getElementsByClassName("wrapperDiv")[0]){
+		return false;
+	}
+	el = document.getElementsByClassName("wrapperDiv")[0]
+	if (el.classList.contains("optionSearch")){
+		return false
+	}
+	var tempCardsHeightArray = [];
+
+	var columns = 3;
+	if ((wWidth() > 640) && (wWidth() <= 960)){columns = 2}
+		if (wWidth() < 640) {columns = 1}
+			var cards = document.getElementsByClassName("offsetWrapper")
+		for (var i = 0; i < cards.length; i ++) {
+			var tempMod = i % columns
+			if (tempCardsHeightArray[tempMod] == undefined) {tempCardsHeightArray[tempMod] = 0}
+				if (tempMod == 0) {
+//						cards[i].classList.add("manifestoBG");
+tempCardsHeightArray[tempMod] += cards[i].clientHeight + 24}
+if (tempMod == 1) {
+//						cards[i].classList.add("redefineBG");
+tempCardsHeightArray[tempMod] += cards[i].clientHeight + 24}
+if (tempMod == 2) {
+//						cards[i].classList.add("reverseBG");
+tempCardsHeightArray[tempMod] += cards[i].clientHeight + 24}
+}
+
+
+var longestColumn = 0 
+for (var i = 0; i < tempCardsHeightArray.length; i++) {
+	if (tempCardsHeightArray[i] > longestColumn){longestColumn = tempCardsHeightArray[i]}
+}
+el.style.height = longestColumn + 2 + "px"
+return true;
+
+
+
+
+
+
+
+if (true) {
+//		document.getElementById("wrapperDiv").style.height = "auto"
+var temp = document.getElementsByClassName("offsetWrapper")
+lowestCard = 0;
+for (var i = temp.length - 3; i < temp.length; i++){
+//			temp[i].classList.add("manifestoBG")
+if (temp[i].getBoundingClientRect().bottom + window.scrollY > lowestCard)
+	lowestCard = temp[i].getBoundingClientRect().bottom + window.scrollY
+}
+}
+
+document.getElementById("wrapperDiv").style.height = lowestCard - 100 + "px"
+}
+
+function removeOffset() {
+	findLowestCard()
+	var tempArray = document.getElementsByClassName("offset")
+	for (var i = tempArray.length -1; i >= 0 ; i--) {
+
+		if (tempArray[i].getBoundingClientRect().top < (window.innerHeight * ( 8 / 13 ))) {
+			tempArray[i].classList.remove("offset")		
+		}
+	}
+	getItems()
+}
+
+function getItems(){
+	var tempArray = document.getElementsByClassName("blogPostCard")
+//	console.log(tempArray)
+var colOne = 0
+var colTwo = 0
+var colThree = 0
+for (var i = 0; i < tempArray.length; i++){
+	colOne += Number(tempArray[i].clientHeight)
+}
+//	console.log(tempArray[0].clientHeight)
+}
+
+
+
+function loremReturn(){
+	return false;
+	var i = Math.floor(Math.random() * loremArray.length)
+	return ("<p style=\"font-size: 18px; line-height: 24px; text-align: center; font-weight: bold;\">" + loremArray[i].title + "</p><p style=\"font-size: 16px; line-height: 24px\">" + loremArray[i].body + "</p>")
+	return(loremArray[Math.floor(Math.random() * loremArray.length)]);
+}
+
+
+function shuffleGen(input){
+	return false;
+	shuffleArray = []
+	for (var i = 1; input.length; i ++){
+		shuffleArray.push(i)
+	}
+	return shuffleArray
+}
+
+
+
+
+function blogCardCarouselWrapper(input){
+	var carouselAction = input.parentNode.classList.contains("blogCardCarouselPrev") ? 'prev' : "next";
+	console.log(input)
+	var carousel = input.parentNode.parentNode;
+	var carouselContent = carousel.getElementsByClassName("blogCardCarouselContent")[0]
+	var carouselCount = carousel.getElementsByClassName("blogCardCarouselItem").length
+	var carouselCard = Number(carouselContent.dataset.card)
+	var carouselPrev = carousel.getElementsByClassName("blogCardCarouselPrev")[0]
+	var carouselNext = carousel.getElementsByClassName("blogCardCarouselNext")[0]
+	var offsetValue = Math.floor(carousel.clientWidth / carousel.getElementsByClassName("blogCardCarouselItem")[0].clientWidth)
+	var carouselMax = ((Math.floor(carouselCount / offsetValue)) + 1 ) * offsetValue
+	carouselMax = (carouselMax > carouselCount ? carouselCount : carouselMax)
+
+	
+	if (carouselAction == "next"){
+		carouselPrev.classList.remove("optionDisabled");
+		carouselCard += offsetValue;
+		if ((carouselCard) >= carouselMax){
+			window.location.href = siteRoot + "page/2/"
+		}		
+		if ((carouselCard + offsetValue ) >= carouselMax){
+			carouselCard = carouselMax;
+			//carouselNext.classList.add("optionDisabled");
+		}		
+		carouselContent.dataset.card = carouselCard;
+	}
+	if (carouselAction == "prev"){
+		carouselNext.classList.remove("optionDisabled");
+		carouselCard -= offsetValue;
+		if (carouselCard <= 1){
+			carouselCard = 1;
+			carouselPrev.classList.add("optionDisabled");
+		}		
+		carouselContent.dataset.card = carouselCard;
+	}
+	console.log(carouselCount, offsetValue, carouselCard, carouselMax)
+
+}
+
+
+
+
+
+
+
+
+function blogContentSharePosition(){
+
+	if (!document.getElementById("blogContentShare")){
+		return false
+	}
+
+	share = document.getElementById("blogContentShare")
+	contentWrapper = document.getElementById("blogContent")
+	if ((contentWrapper.getBoundingClientRect().bottom - 200  - share.clientHeight) > 0) {
+		share.classList.remove("optionScroll")
+	}else{
+		share.classList.add("optionScroll")
+	}
+
+	if (wWidth() <= 500) {
+		console.log(wHeight())
+		if (blogContentShareWrapper.getBoundingClientRect().bottom <= wHeight()){
+			share.classList.add("optionMobileScroll")
+		}else{
+			share.classList.remove("optionMobileScroll")
+		}
+
+	}
+
+
+}
+
+
+function blogSideBarPosition(){
+	if (!document.getElementById("blogSideBarFixedWrapper")){
+		return false;
+	}
+	var blurOffset = document.getElementById("blogBlurbBox") ? document.getElementById("blogBlurbBox").clientHeight : 0;
+	blogSideBarFixedWrapper = document.getElementById("blogSideBarFixedWrapper")
+	blogSideBarFixedWrapperPre = document.getElementById("blogSideBarFixedWrapperPre")
+	blogSideBar = document.getElementById("blogSideBar")
+	fixedScollEndTarget = document.getElementById("fixScrollEndTarget")
+	blogContentShareWrapper = document.getElementById("blogContentShareWrapper")
+	if ((wWidth() > 1050)){
+
+		blogSideBar.style.height = document.getElementById("blogContent").clientHeight + "px"
+		if ( (blogSideBarFixedWrapperPre.getBoundingClientRect().bottom > 80)) {
+			blogSideBarFixedWrapper.classList.remove("optionScroll")
+			blogSideBarFixedWrapper.classList.remove("optionFixed")
+			blogSideBarFixedWrapper.classList.remove("optionNormal")
+
+		}else{
+
+			if ((fixedScollEndTarget.getBoundingClientRect().bottom  - blogSideBarFixedWrapper.clientHeight - 80) >= 0) {
+				blogSideBarFixedWrapper.classList.remove("optionScroll")
+				blogSideBarFixedWrapper.classList.add("optionFixed")
+				blogSideBarFixedWrapper.classList.remove("optionNormal")
+
+			}else{
+				blogSideBarFixedWrapper.classList.add("optionScroll")
+				blogSideBarFixedWrapper.classList.remove("optionFixed")
+				blogSideBarFixedWrapper.classList.remove("optionNormal")
+
+			}	
+		}
+
+
+	}else{
+		blogSideBar.style.height = "auto"
+		blogSideBarFixedWrapper.classList.remove("optionScroll")
+		blogSideBarFixedWrapper.classList.remove("optionFixed")
+		blogSideBarFixedWrapper.classList.add("optionNormal")
+	}
+
+
+}
+
+function blogSearchContainerToggle(){
+	el = document.getElementsByClassName("blogSearchContainer")[0];
+	if (el.classList.contains("optionActive")){
+		blogSearchContainerClose()
+	}else{
+		blogSearchContainerOpen()
+	}
+}
+
+function blogSearchContainerClose(){
+
+	document.getElementsByClassName("blogSearchWrapper")[0].classList.remove("optionActive")
+	document.getElementById("blogSearchBox").blur();
+	document.getElementById("blogSearchBox").value = ""
+
+	blogSearchReset()	
+
+	if (blogFullWidthModuleCarouselPlay){
+		blogFullWidthModuleCarouselPlay()
+	}
+
+
+
+
+
+}
+
+function blogSearchReset(){
+	document.getElementById("blogSearchResultsCounter").innerHTML = ""
+	document.getElementById("blogSearchResultsContainer").innerHTML = ""
+	document.getElementById("blogSearchResultsSeeAll").innerHTML = ""
+}
+
+
+
+
+function blogSearchContainerOpen(){
+	document.getElementsByClassName("blogSearchWrapper")[0].classList.add("optionActive")
+	setTimeout(function() {document.getElementById("blogSearchBox").focus()}, 300)
+	
+
+	if (blogFullWidthModuleCarouselPause){
+		blogFullWidthModuleCarouselPause()
+	}
+
+	return false
+
+}
+
+function blogClosePanels(){
+	return
+	console.log("!!!!!!!!!")
+	blogSearchContainerClose()
+
+}
+
+function blogSearchClear(el){
+	var searchForm = el.parentNode
+	var searchInput = searchForm.getElementsByClassName("blogSearchBox")[0]
+	if (searchInput.value.length > 0 ){
+		searchInput.value = "";
+		blogSearchReset()
+		searchInput.focus()
+		
+	}else{
+		blogSearchReset()
+		blogSearchContainerClose()
+	}
+	
+}
+
+function truncateWords(input,length){
+	return input.split(" ").slice(0,(!isNaN(length) ? length : 5)).join(" ")
+}
+
+
+function blogSearchValidate(input){
+	var term = input.getElementsByClassName("blogSearchBox")[0].value
+	blogSearchReturnResults(term)
+}
+
+function get_first_image(content){
+	matches = content.match(/<img.+src=[\'"]([^\'"]+)[\'"].*>/i);	
+	if (matches){
+		image_url = matches[1];
+		return image_url;
+	}
+	return false
+	
+}
+
+
+function blogSearchCard(input){
+	console.log(input)
+	var image = "https://www.rodanandfields.com/blog/wp-content/themes/clarity/images/the-skincare-source-logo.svg"
+	temp = ""
+	temp += "<div class='blogResults pad16 '>"
+	temp += "<div class='blogResultsImage '>"
+
+	if (input._embedded.self[0].featured_image_url !== undefined){
+		image = input._embedded.self[0].featured_image_url
+	}
+	if (input._embedded.self[0].media_details !== undefined){
+		if (input._embedded.self[0].media_details.sizes["skyline-image"].source_url !== undefined){
+			image = input._embedded.self[0].media_details.sizes["skyline-image"].source_url
+		}
+	}
+	temp += "<a href=\"" + input._embedded.self[0].link + "\" class=\"\"><img src=\"" + image + "\" class=\"\"></a>"
+	temp += "</div>"
+	temp += "<div class=\"blogResultsText\">"
+	var d = new Date(input._embedded.self[0].date )
+	var datestring = monthsLong[(d.getMonth())] + " " + d.getDate() + getOrdinal(d.getDate()) + ", " + d.getFullYear();
+	temp += "<a href=\"" + input._embedded.self[0].link + "\" class=\"rf_detailStandard noDecoration \">" + datestring +  "</a><br />"
+	temp += "<a href=\"" + input._embedded.self[0].link + "\" class=\"rf_bodyHeadline rf_linkHover rf_fontRoman_OR\">" + input.title + "</a><br />"
+	temp += "<a href=\"" + input._embedded.self[0].link + "\" class=\"rf_detailStandard noDecoration rf_bodyStandard\">" + truncateWords(input._embedded.self[0].excerpt.rendered,(wWidth() > 500 ? 20 : 10)) + "...</a><br />"
+	temp += "</div>"
+	temp += "</div>"
+	return temp
+}
+
+
+
+function blogSearchCount(input){
+	var currentSearchTerm = document.getElementsByClassName("blogSearchBox")[0].value	
+	return (input.length == 0 ? "No" : "Top " + input.length ) + " result" + (input.length !== 1 ? "s" : "") + " for \"<strong>" + currentSearchTerm.toUpperCase() + "</strong>\""
+}
+
+
+function blogSearchSeeAll(input){
+	return "<a class='aBlue rf_bodyStandard' href='" + siteRoot + "?s=" + document.getElementsByClassName("blogSearchBox")[0].value + "'>See all results" + "</a>"
+
+}
+
+function blogSearchResultsGen(input){
+	document.getElementById("blogSearchResultsCounter").innerHTML = blogSearchCount(input)
+	var temp = ""
+	for (var i = 0; i < input.length; i++){
+		temp += blogSearchCard(input[i])
+	}
+	document.getElementById("blogSearchResultsContainer").innerHTML = (input.length !== 0 ? temp : "")
+	document.getElementById("blogSearchResultsSeeAll").innerHTML = (input.length !== 0 ? blogSearchSeeAll() : "")
+}
+
+
+function blogSearchReturnResults(searchTerm){
+	var page = siteRoot + "wp-json/wp/v2/search/";
+	page = "https://www.rodanandfields.com/blog/wp-json/wp/v2/search/"
+	var params = "_embed=1&orderby=relevance&per_page=10&search=" + searchTerm 
+	if (searchTerm.length > 0){	
+		var xhttp = ajaxResponderGet(page,params)
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				try {
+					var response = JSON.parse(this.responseText);
+				} catch(e) {
+				        console.log(e); // error in the above string (in this case, yes)!
+				    }
+				    var response = JSON.parse(this.responseText);
+
+				    console.log(response)
+				    
+				    blogSearchResultsGen(response)
+
+
+
+				}
+			}
+		}else{
+		}
+	}
+
+
+
+
+	function blogMobileMenuToggle(){
+		if (document.getElementById("blogMobileMenu").classList.contains("optionActive")){
+			blogMobileMenuClose()
+		}else{
+			blogMobileMenuOpen()
+		}
+	}
+
+	function blogMobileMenuClose(){
+		document.body.scroll = "yes";
+		var menu = document.getElementById("blogMobileMenu")
+		els = menu.getElementsByClassName("optionActive")
+		for (var i = 0; i < els.length ; i ++){
+			els[i].classList.remove("optionActive")
+		}
+		menu.classList.remove("optionActive")
+		document.getElementsByClassName("navMobileBackground")[0].classList.remove("optionActive")
+		if (blogFullWidthModuleCarouselPlay){
+			blogFullWidthModuleCarouselPlay()
+		}
+	}
+
+	function blogMobileMenuOpen(){
+		document.body.scroll = "no";
+		document.getElementById("blogMobileMenu").classList.add("optionActive")
+		document.getElementsByClassName("navMobileBackground")[0].classList.add("optionActive")
+		if (blogFullWidthModuleCarouselPause){
+			blogFullWidthModuleCarouselPause()
+		}
+	}
+
+
+	function searchCounter(){
+		var temp = 0
+		if (queryArray.s){
+			if (!queryArray.s.toLowerCase().includes("my why")) {
+				for (var i = 0; i < articlesArray.length; i++){
+					if (articlesArray[i].copy.toLowerCase().includes(queryArray.s.toLowerCase())){
+						temp++
+					}
+				}
+			}else{
+				temp = 12;
+			}
+		}else{
+			temp = 674;
+		}
+		return temp
+	}
+
+	function blogCommentFlyout(input){
+		el = document.getElementById("commentlist")
+		console.log(el.style.height)
+		if ((el.style.height == "0px") || (el.style.height == "") ){
+			blogCommentOpen()
+		}else{
+			blogCommentClose()
+		}
+	}
+
+
+	function blogCommentOpen(){
+		el = document.getElementById("commentlist")
+		while ((el.style.height == "auto") || (el.style.height == "")){
+			el.style.height = el.clientHeight + "px";
+		}
+		el.style.height = el.scrollHeight + "px";
+//	document.getElementById("comments").classList.add("toggleContentFlyoutActive")
+setTimeout(function(){ el.style.height = "auto";},400);
+}
+function blogCommentClose(){
+	el = document.getElementById("commentlist")
+	document.getElementById("comments").classList.remove("toggleContentFlyoutActive")
+	while (el.style.height == "auto"){
+		el.style.height = el.scrollHeight + "px"	
+	}
+	setTimeout(function(){ document.getElementById("commentlist").style.height = "0px";},4);
+}
+
+
+function scrubHeroImage(){
+	return false
+	if (document.getElementsByClassName("blogContentHeroImage").length == 0){
+		return false;
+	}
+	heroSRC = document.getElementsByClassName("blogContentHeroImage")[0].src
+	var blogContentImages =  document.getElementsByClassName("blogContent")[0].getElementsByTagName("img")
+	for (var i = 0 ; i < blogContentImages.length; i++){
+		if (!blogContentImages[i].classList.contains("blogContentHeroImage")){
+			if (blogContentImages[i].src == heroSRC){
+				if ((blogContentImages[i].parentNode.tagName.toLowerCase() == "figure") || (blogContentImages[i].parentNode.classList.contains("wp-caption"))){
+					blogContentImages[i].parentNode.style.display = "none";
+				}
+				if ((blogContentImages[i].parentNode.parentNode.tagName.toLowerCase() == "figure") || (blogContentImages[i].parentNode.parentNode.classList.contains("wp-caption"))){
+					blogContentImages[i].parentNode.parentNode.style.display = "none";
+				}
+				blogContentImages[i].style.display = "none"
+			}
+		}
+	}
+}
+
+
+
+
+
+var ymalAPIresult = "" 
+function ymalAPI(searchTerm){
+	var page = siteRoot + "wp-json/wp/v2/search/";
+	page = "https://www.rodanandfields.com/blog/wp-json/wp/v2/search/";
+	var params = "search=" + searchTerm + "&_embed=1"
+	temp = ""
+	console.log(page + " ? " +  params)
+	if (true){	
+		var xhttp = ajaxResponderGet(page,params)
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				try {
+					var response = JSON.parse(this.responseText);
+				} catch(e) {
+				        console.log(e); // error in the above string (in this case, yes)!
+				    }
+				    var response = JSON.parse(this.responseText);
+				    console.log((response))
+				    if (response.length > 0) {
+				    	ymalAPIresult = response
+				    	ymalResultsGen(response)
+				    	blogHeroSliderGen(response)
+				    }else{
+				    }
+				    if (document.getElementById('ymalTestContainer')){
+				    	document.getElementById('ymalTestContainer').innerHTML = searchTerm	
+				    }
+				    
+				}
+			}
+		}else{
+
+		}
+
+
+	}
+
+	function ymalResults(input){
+		if (blog){}
+
+	}
+
+
+var daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+var monthsLong = ["Janurary", "Feburary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+var monthsShort = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+
+function ymalResultsGen(input){
+	console.log("ymalResultsGen started")
+	console.log(input)
+	if (!document.getElementById("ymalTestContainer")){
+		return false;
+	}
+	var temp = ""
+	for (var i = 0; i < 4; i++){
+		if (i >= 5) {
+
+		}
+		temp += "<div class=\"blogResults pad16 \">"
+		temp += "<div class=\"blogResultsImage\">"
+		temp += "<a href=\"" + input[i].link + "\" class=\"\"><img src=\"" + input[i]._embedded["wp:featuredmedia"][0].source_url + "\" class=\"\"></a>"
+		temp += "</div>"
+		temp += "<div class=\"blogResultsText\">"
+		temp += "<a href=\"" + input[i].link + "\" class=\"rf_bodyStandard\">" + input[i].title.rendered + "</a><br />"
+		var d = new Date(input[i].date )
+			// var datestring = monthsLong[(d.getMonth())] + " " + d.getDate() + getOrdinal(d.getDate()) + ", " + d.getFullYear();
+			// temp += "<p class=\"blogResultsDate\">" + datestring + " by: " + input[i]._embedded.author[0].name + "</p>"
+			//temp += truncate(input[i].excerpt.rendered, "long" )
+			temp += input[i].excerpt.rendered
+			temp += "</div>"
+			temp += "</div>"
+		}	
+		document.getElementById("ymalTestContainer").innerHTML = "temp";
+		console.log("ymalResultsGen finished")
+	}
+
+
+
+
+	function parseDateStringMLDYYY(input){
+		var d = new Date(input)
+		return monthsLong[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear() + " " + ((d.getHours() > 12) ? + " " + d.getHours() - 12 : + " " + d.getHours()) + ":" + d.getMinutes().toString().padStart(2, "0") + "" + ((d.getHours() > 12) ? "pm" : "am")
+	}
+
+
+
+	function blogFullWidthModuleCarouselEvent(input){
+		var item = input.dataset.dot
+		var el = (input.parentNode.parentNode)
+		blogFullWidthModuleCarouselFade(el,Number(item))
+	}
+
+	function blogFullWidthModuleCarouselFade(el,item){
+		items = el.getElementsByClassName("blogFullWidthModuleCarouselItem")
+		dots = el.getElementsByClassName("blogFullWidthModuleCarouselDot")
+		for (var i = 0; i < items.length; i++){
+			items[i].classList.remove("optionActive")
+			dots[i].classList.remove("optionActive")
+		}
+		items[item].classList.add("optionActive")
+		dots[item].classList.add("optionActive")
+
+	}
+	var carouselAdvanceTimer = null
+
+	function blogFullWidthModuleCarouselPause(){
+		clearTimeout(carouselAdvanceTimer)
+	}
+	function blogFullWidthModuleCarouselPlay(){
+		carouselAdvanceTimer = setTimeout(function(){ carouselAdvance()},7000);
+	}
+
+	function carouselAdvance(){
+		blogFullWidthModuleCarouselPause()
+		var carousels = document.getElementsByClassName("blogFullWidthModuleCarouselWrapper")
+		if (carousels.length > 0){
+			for (var i = 0; i < carousels.length; i++){
+				var items = carousels[i].getElementsByClassName('blogFullWidthModuleCarouselDot carouselDot')
+				var activeDot = carousels[i].getElementsByClassName('blogFullWidthModuleCarouselDot carouselDot optionActive')[0]
+				if (isInView(carousels[i])){
+					if (Number(activeDot.dataset.dot) < (items.length - 1)){
+						blogFullWidthModuleCarouselEvent(items[Number(activeDot.dataset.dot) + 1])
+					}else{
+						blogFullWidthModuleCarouselEvent(items[0])
+					}	
+				}
+
+			}			
+			blogFullWidthModuleCarouselPlay()
+		}else{
+			console.log("no carousel")
+		}
+	}
+
+	blogFullWidthModuleCarouselPlay()
+
+	function isInView(el){
+		if ((el.getBoundingClientRect().top >= 0) && el.getBoundingClientRect().bottom <= window.innerHeight ){
+			return true
+		}else{
+			return false
+		}
+	}
+
+
+
+
+	function searchResultsCard(input){
+		temp = ""
+
+
+
+
+	}
+
+
+	function searchResultsCount(input){
+
+	}
+
+	function searchResultsShowMore(input){
+
+	}
+
+
+
+	function blogMenuOffset(){
+		var subMenus = document.getElementsByClassName("blogNavDesktopMenu")[0].getElementsByClassName("sub-menu")
+		console.log(subMenus)
+		for (var i = 0; i < subMenus.length; i++){
+			var temp = Math.floor((subMenus[i].parentNode.getElementsByTagName("a")[0].getBoundingClientRect().left - subMenus[i].getBoundingClientRect().left) - 16) + "px"
+			subMenus[i].style.left = temp
+		}
+	}
+
+
+
+	function blogCommentPostValidate(input){
+		input.classList.add("btnLoading")
+		input.classList.remove("btnError")
+		input.classList.remove("btnSuccess")
+		var paramsArray = (input.closest('form').elements)
+		var params = ""
+		for (var i = 0; i < paramsArray.length; i++){
+			params += (i !== 0 ? "&" : "") + paramsArray[i].name + "=" + encodeURI(paramsArray[i].value)
+		}
+		var page = siteRoot + "wp-json/wp/v2/comments/";
+		var xhttp = ajaxResponderPost(page,params)
+		xhttp.onreadystatechange = function() {
+			input.classList.remove("btnLoading")
+			input.classList.remove("btnError")
+			if (this.readyState == 4 && this.status == 201) {
+				document.getElementById("commentsDropDown").classList.remove("hide")
+				try {
+					var response = JSON.parse(this.responseText);
+				}
+				catch(e) {
+					input.classList.remove("btnLoading")
+					input.classList.add("btnError")
+					document.getElementById("commentsCounter").innerHTML = "Error Loading Comments"
+					console.log(e); 
+				}
+				var response = JSON.parse(this.responseText);
+				console.log(response)
+				document.getElementById("commentsPreview").innerHTML = "<italic>" + commentWrite(response,true) + "</italic>"
+				commentsPostNewToggle()
+				
+				input.innerHTML = "Comment submitted"
+				input.classList.add("btnSuccess")
+				for (var i = 0; i < paramsArray.length; i++){
+					paramsArray[i].value = ""
+				}
+			}
+			if (this.readyState == 4 && this.status == 401) {
+				input.classList.add("btnError")
+				input.innerHTML = "Error posting to page"
+			}
+			if (this.readyState == 4 && this.status == 403) {
+				RFmodalGen(JSON.parse(this.responseText).message)
+			}
+			if (this.readyState == 4 && this.status == 400) {
+				input.classList.add("btnError")
+				input.innerHTML = "Error Posting Comment"
+			}
+			if (this.readyState == 4 && this.status == 409) {
+				input.classList.add("btnError")
+				input.innerHTML = "Duplicate Comment"
+			}
+		}
+
+
+	}
+
+	function commentsPostNewToggle(){
+		document.getElementById("commentsPreview").style.height = document.getElementById("commentsPreview").scrollHeight + "px"
+		document.getElementById("commentsPreview").style.opacity = 1;
+//		document.getElementById("commentsPostNew").classList.toggle("optionHide")
+}
+
+
+var commentsJSON = []
+function getCommentsAPI(postID,pageID){
+	if (!pageID){
+		pageID = 1;
+		commentsJSON = []
+	}
+	var page = siteRoot + "wp-json/wp/v2/comments/"
+	var params = "post=" + postID + "&per_page=100" + (pageID ? "&page=" + pageID : "")
+	temp = ""
+	console.log(page + "?" +  params)
+
+	var xhttp = ajaxResponderGet(page,params)
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			document.getElementById("commentsDropDown").classList.remove("hide")
+
+			try {
+				var response = JSON.parse(this.responseText);
+			}
+			catch(e) {
+				document.getElementById("commentsCounter").innerHTML = "Error Loading Comments"
+				console.log(e); 
+			}
+			var response = JSON.parse(this.responseText);
+			if (response.length > 0) {
+				commentsJSON = commentsJSON.concat(response)
+				getCommentsAPI(postID,pageID + 1)
+			}else{
+				commentsDisplay()
+				blogCommentOpen()
+			}
+		}
+	}
+}
+
+
+var maxComments = 6
+var commentsOffset = 0
+var useLocalhost = true
+
+
+function commentsDisplay(loadAll,returnAll){
+	document.getElementById("commentsCounter").innerHTML = commentsJSON.length > 0 ? "" + commentsJSON.length + " comment" + (commentsJSON.length == 1 ? "" : "s") : "Be the first to leave a comment"
+	temp = ""
+
+	temp += "<div id=\"commentsLoad\">" + commentsGen(loadAll,returnAll) + "</div>"
+	if ((commentsJSON.length > maxComments) && (returnAll !== true)){
+		temp += "<div id=\"commentsMore rf_bodyStandard\" class=\"\"><br />"
+		temp += "<a class=\"aBlue padSide16  rf_bodyStandard\" onclick=\"commentsLoadMore()\">Show more...</a>&nbsp;&nbsp;"   
+		temp += "<a class=\"aBlue  rf_bodyStandard\" onclick=\"commentsLoadAll(true)\" style=\"float: right;\">Show all</a><br />"    
+		temp += "<br /></div>"
+	}
+	if (returnAll !== true ){
+		document.getElementById("commentsContainer").innerHTML = (temp);
+	}else{
+		return temp
+	}
+}
+
+function commentsGen(loadAll,returnAll){
+	var temp = ""
+	if (loadAll !== true){loadAll = false}
+		if (returnAll !== true){returnAll = false}
+			if (returnAll == true){loadAll = true}
+				for (var i = (returnAll ? 0 : (commentsOffset * maxComments)); i < ( loadAll ? commentsJSON.length : ((commentsOffset + 1) * maxComments) ); i++){      
+					if (i >= commentsJSON.length){
+						break
+					}
+					temp += commentWrite(commentsJSON[i])
+				}
+				return temp
+			}
+
+			function commentsHaveMore(input){
+				return (((commentsOffset * maxComments) + (input == true ? maxComments : 0)) < commentsJSON.length)
+			}
+
+			function commentsLoadMore(loadAll){
+				if (loadAll !== true){loadAll = false}
+					commentsOffset++
+				console.log((commentsOffset * maxComments) + maxComments)
+				if (!commentsHaveMore(true)){
+					document.getElementById("commentsMore").classList.add("hide")
+					document.getElementById("commentsMore").innerHTML = ""
+				}
+				if (commentsHaveMore()){
+					document.getElementById("commentsLoad").innerHTML += commentsGen(loadAll)
+					
+				}
+				if (loadAll){commentsOffset = 1000}
+					if (!commentsHaveMore(true)){
+						document.getElementById("commentsMore").classList.add("hide")
+						document.getElementById("commentsMore").innerHTML = ""
+					}
+					blogCommentOpen()    	
+				}
+				function commentsLoadAll(){
+					console.log("commentsLoadAll Running")
+					RFmodalGen("<div class=\"modalContentMedium blogCommentWrapper rf_bodyStandard\">" + commentsDisplay(false,true) + "</div>" )
+					return false;
+					if (commentsHaveMore()){
+						commentsLoadMore()
+						setTimeout(function(){ commentsLoadAll()},100);
+					}
+				}
+
+
+				
+
+
+				function commentWrite(input,pending){
+					if (pending !== true){pending = false;}
+					var temp = ""
+					temp += "<div class=\"comment-body\">"
+					temp += "<div class=\"comment-author vcard\">"
+					temp += "<img alt=\"\" src=\"" + input.author_avatar_urls["96"] + "\" srcset=\"" + input.author_avatar_urls["96"] + " 2x\" class=\"avatar avatar-32 photo\" height=\"32\" width=\"32\">"
+					temp += (pending ? "PENDING<br />" : "") + "<cite class=\"fn\">" + lastNameInitial(input.author_name) + "</cite> <span class=\"spanBreak rf_detailStandard\">"  + parseDateStringMLDYYY(input.date)  + "</span>"
+					temp += "</div>"
+					temp +=	input.content.rendered
+					temp += "</div>"
+
+
+					return temp
+				}
+
+				function commentWriteOld(input,pending){
+					if (pending !== true){pending = false;}
+					var temp = ""
+					temp += "<li class=\"comment even thread-even depth-1\" id=\"comment-5\">"
+					temp += "<div id=\"div-comment-5\" class=\"comment-body\">"
+					temp += "<div class=\"comment-author vcard\">"
+					temp += "<img alt=\"\" src=\"" + input.author_avatar_urls["96"] + "\" srcset=\"" + input.author_avatar_urls["96"] + " 2x\" class=\"avatar avatar-32 photo\" height=\"32\" width=\"32\">"
+					temp += (pending ? "PENDING<br />" : "") + "<cite class=\"fn\">" + input.author_name + "</cite>"
+					temp += "<span class=\"says\">says:</span>"
+					temp += "</div>"
+
+					temp += "<div class=\"comment-meta commentmetadata\">"
+					temp += "<a href=\"" + input.link + "\">"
+					temp +=parseDateStringMLDYYY(input.date)
+					temp += "</a>"
+					temp += "</div>"
+					temp +=	input.content.rendered
+					temp += "</div>"
+					temp += "</li>"
+
+					return temp
+				}
+				function lastNameInitial(input){
+					temp = input.split(" ")
+					if (temp.length > 1){
+						temp[temp.length - 1] = temp[temp.length - 1].substring(0,1) + "."
+					}
+					return temp.join("  ");
+				}
+
+
+				function resizeTextarea(input){
+					input.style.height = "48px"
+					input.style.height = input.scrollHeight - 16 + "px"	
+				}

@@ -1,0 +1,35 @@
+.up{
+    display: flex;
+    width: 100%;
+    height: 300px;
+} 
+.up>div{
+    margin: 10px;
+    text-align: left;
+    width: 48%;
+}
+#first {
+    display: flex;
+    height: 281px;
+    width: 50%;
+}
+#first>div {
+    margin: 10px;
+    text-align: left;
+    width: 48%;
+}
+#first>div>ul>li{
+    list-style-type: none;
+    margin: 10px;
+    font-family: sans-serif;
+}
+#get{
+    display: flex;
+    justify-content: space-around;
+    width: 20%;
+
+}
+#let{
+    padding-left: 20px;
+}
+

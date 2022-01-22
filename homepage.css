@@ -1,0 +1,245 @@
+
+   #third {
+       padding-top: 50px;
+       text-align: center;
+   }
+
+   .img {
+       width: 100%;
+       height: 600px;
+       background-image: url("https://www.rodanandfields.ca/medias/Homepage-Hero-Banner-FullWidth-Evergreen-Offers-Desktop-Tablet-1-.jpg?context=bWFzdGVyfHJvb3R8MjczMzIzfGltYWdlL2pwZWd8aDA3L2g0MS8xNDI5NjMzNjc5MzYzMC5qcGd8OWRjMGM4YjM0NzM3MGJlN2FiNDk3M2I4OGNmNzM1NjRhNTFiYWY1NGI0ZGM0YWQxNWU3YmIwNGI5OGFmYTljOQ");
+
+   }
+
+   #con{
+       width: 300px;
+       margin-left: 70px;
+       padding-top: 180px;
+       padding-bottom: 180px;
+   }
+   button{
+       width: 90%;
+       padding: 10px;
+       text-size-adjust: 12px;
+       cursor: pointer;
+   }
+
+   #left-p{
+       /* margin-left: 1320px;
+       margin-top: 30px; */
+       text-align: center;
+       text-decoration: underline;
+       cursor: pointer;
+       font-size: larger;
+       
+   }
+
+   .img2{
+        width: 100%;
+       height: 480px;
+       background-image: url("https://www.rodanandfields.ca/medias/Best-Sellers-Image-Desktop.jpg?context=bWFzdGVyfHJvb3R8NjA5MTd8aW1hZ2UvanBlZ3xoY2EvaDI2LzEyODg3MzE3NDQ2Njg2LmpwZ3w4YThmYzZkMGNiYWQyNGYyOTVjYmNiNzJiMzI0ZjhmMjlhZWVhNmE5YTNlYTU1ODlmNjEzMjVkZThlNmUwNjY5");
+    
+   }
+   #con1{
+       display: flex;
+      height: 100%;
+   }
+   #con1>div {
+       
+       width: 24%;
+       margin-left: 1%;
+   }
+   #box1{
+    width: 300px;
+    margin-left: 70px;
+    padding-top: 40px;
+    padding-left: 20px;
+    padding-right: 30px;
+    padding-bottom: 180px;
+}
+#box1>h4{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.box2 {
+    margin-top: 25px;
+}
+
+ .box2>div{
+     margin: 10px;
+     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+     text-align: left;
+     text-justify: auto;
+     width: 95%;
+
+     
+ }
+
+.box2>div>img{
+    height: 165px;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.innercon{
+    margin-left: 10px;
+    padding-bottom: 10px;
+}
+
+#follow{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: larger;
+}
+.product{
+    display: grid;
+    grid-template-rows: repeat(10,450px);
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 20px;
+
+}
+
+.product>div:hover{
+    box-shadow:rgba(0, 0, 0, 0.25) 0px 54px 55px,
+     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17)
+     0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    border-radius: 15px;
+}
+
+footer{
+    background-color:cornsilk;
+}
+
+body {
+    background-color: #ffffff;
+}
+
+.loginfull{
+ 
+    background-image: url("image/signup5.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    
+}
+.loginfull1{
+ 
+    background-image: url("image/sign6.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    
+}
+
+#login {
+    padding: 10px 20px;
+    width: 95%;
+    margin: auto;
+    margin-top: 10px;
+    margin-left: 30px;
+    
+}
+h1 {
+    color: black;
+}
+
+#password {
+    padding: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid lightgray;
+    border-radius: 20px;
+    margin-left: 30px;
+}
+
+#email {
+    padding: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid lightgray;
+    border-radius: 20px;
+    margin-left: 30px;
+}
+
+#number {
+    padding: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid lightgray;
+    border-radius: 20px;
+    margin-left: 30px;
+}
+
+#username {
+    padding: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid lightgray;
+    border-radius: 20px;
+    color: black;
+    margin-left: 30px;
+}
+
+#submit {
+    padding: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    color: black;
+    margin-left: 30px;
+}
+
+.img3{
+    background-image: url("https://www.rodanandfields.ca/medias/Best-Sellers-Image-Desktop.jpg?context=bWFzdGVyfHJvb3R8NjA5MTd8aW1hZ2UvanBlZ3xoY2EvaDI2LzEyODg3MzE3NDQ2Njg2LmpwZ3w4YThmYzZkMGNiYWQyNGYyOTVjYmNiNzJiMzI0ZjhmMjlhZWVhNmE5YTNlYTU1ODlmNjEzMjVkZThlNmUwNjY5");
+    width: 100%;
+    height: 500px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+
+#Derm{
+    text-align: center;
+    height: 35px;
+    
+}
+
+#derm1{
+    display: flex;
+    height: 350px;
+    width: 100%;
+}
+
+#derm1>div{
+    width: 16%;
+    margin-left: 0.5%;
+    background-color: white;
+}
+
+#inderm1>img{
+    height: 270px;
+    width: 100%;
+}
+#content{
+    text-align: center;
+    background-color: white;
+    height: 50px;
+    padding: 10px ;
+}
+
+#content:hover{
+    cursor: pointer;
+}
+
+#All{
+margin-top: 10px;
+margin-left: 38%;
+width: 30%;
+font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.Story{
+ text-align: center;
+}
+
+
+

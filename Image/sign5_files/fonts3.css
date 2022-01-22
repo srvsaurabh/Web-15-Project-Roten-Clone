@@ -1,0 +1,980 @@
+
+
+@font-face {
+    font-family: 'rf_proximaNovaLight';
+    font-weight:  200;
+    src: url('../fonts/ProximaNova-Light.ttf') format('truetype'),url('../fonts/ProximaNova-Light.woff') format('woff'), url('../fonts/ProximaNova-Light.eot') format('eot');
+    font-weight: 300;  
+}
+
+@font-face {
+    font-family: 'rf_proximaNovaRegular';
+    src: url('../fonts/ProximaNova-Regular.ttf') format('truetype'),url('../fonts/ProximaNova-Regular.woff') format('woff'), url('../fonts/ProximaNova-Regular.eot') format('eot');
+    font-weight: 400;  
+}
+
+@font-face {
+    font-family: 'rf_proximaNovaMedium';
+    src: url('../fonts/ProximaNova-Medium.ttf') format('truetype'),url('../fonts/ProximaNova-Medium.woff') format('woff'), url('../fonts/ProximaNova-Medium.eot') format('eot');
+    font-weight: 500;  
+}
+
+
+
+
+@font-face {
+    font-family: 'rf_proximaNovaLightItalic';
+    font-weight:  200;
+    src: url('../fonts/RFFont-Roman.ttf') format('truetype'),url('../fonts/RFFont-Roman.woff') format('woff');
+    font-weight: 300;  
+}
+
+@font-face {
+    font-family: 'rf_proximaNovaRegularItalic';
+    src: url('../fonts/RFFont-Roman.ttf') format('truetype'),url('../fonts/RFFont-Roman.woff') format('woff');
+    font-weight: 400;  
+}
+
+@font-face {
+    font-family: 'rf_proximaNovaMediumItalic';
+    src: url('../fonts/RFFont-Roman.ttf') format('truetype'),url('../fonts/RFFont-Roman.woff') format('woff');
+    font-weight: 500;  
+}
+
+
+
+
+
+
+
+
+
+
+
+@font-face {
+    font-family: 'RFdisplayRegular';
+    src: url('../fonts/RFFont-Roman.ttf') format('truetype'),url('../fonts/RFFont-Roman.woff') format('woff');
+}
+@font-face {
+    font-family: 'RFdisplayItalic';
+    src:  url('../fonts/RFFont-Italic.ttf') format('truetype'),url('../fonts/RFFont-Italic.woff') format('woff'),url('../fonts/RFFont-Italic.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'RFcaptionItalic';
+    src: url('../fonts/RFFont-Caption.ttf') format('truetype'),url('../fonts/RFFont-Caption.woff') format('woff'),url('../fonts/RFFont-Caption.woff2') format('woff2');
+}
+
+
+
+
+
+@font-face {
+    font-family: 'RFbankGothicBold';
+    src:	url('../fonts/BankGothic-Bold.ttf') format('truetype');
+
+}
+@font-face {
+    font-family: 'RFbankGothic';
+    src:  url('../fonts/BankGothic.ttf') format('truetype');
+}
+
+
+
+
+
+
+
+@font-face{
+    font-family: 'RFtradeGothicLight';
+    src:  url('../fonts/TradeGothicLTStd-Light.otf') format('otf'),  url('../fonts/TradeGothicLTStd-Light.ttf') format('truetype');
+}
+@font-face{
+    font-family: 'RFtradeGothicLightOblique';
+    src:  url('../fonts/TradeGothicLTStd-LightObl.ttf') format('truetype');
+}
+@font-face{
+    font-family: 'RFtradeGothicCondensed18';
+    src:  url('../fonts/TradeGothicLTStd-Cn18.ttf') format('truetype');
+}
+@font-face{
+    font-family: 'RFtradeGothicBold2';
+    src:  url('../fonts/TradeGothicLTStd-Bd21.ttf') format('truetype');
+}
+@font-face{
+    font-family: 'RFtradeGothicBoldCondensed20';
+    src:  url('../fonts/TradeGothicLTStd-BdCn20.ttf') format('truetype');
+}
+@font-face{
+    font-family: 'RFtradeGothicBold';
+    src:  url('../fonts/TradeGothicLTStd-Bold.ttf') format('truetype');
+}
+
+
+
+
+
+
+
+@font-face {
+    font-family: 'rf-icons';
+    src:  url('../fonts/rf-icons2.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+.rf_fontRoman{
+    font-family: RFdisplayRegular;
+}
+
+
+.rf_fontRoman_OR{
+    font-family: RFdisplayRegular!important;
+}
+
+
+.rf_h1, h1.rf_h{
+    font-family: RFdisplayRegular;
+    font-size: 40px; 
+    letter-spacing: 1px;
+    line-height: 48px;
+    font-weight: 200;
+}
+.rf_h1Italic, h1.rf_h > em, h1.rf_h > i, .rf_h1 i{
+    font-family: RFdisplayItalic;
+    font-size: 40px; 
+    letter-spacing: 1px;
+    line-height: 48px;
+    font-weight: 200;
+}
+
+
+.rf_h1.optionTight, h1.rf_h.optionTight{
+    line-height: 48px;
+}
+
+
+.rf_h2, h2.rf_h{
+    font-family: RFdisplayRegular;
+    font-size: 30px; 
+    letter-spacing: 1px;
+    line-height: 48px;
+    font-weight: 200;
+}
+.rf_h2Italic, h2.rf_h > em, h2.rf_h > i, .rf_h2 i{
+    font-family: RFdisplayItalic;
+    font-size: 30px; 
+    letter-spacing: 1px;
+    line-height: 48px;
+    font-weight: 200;
+}
+
+
+
+.rf_h3, h3.rf_h{
+    font-family: RFdisplayRegular;
+    font-size: 24px; 
+    letter-spacing: 1px;
+    line-height: 48px;
+    font-weight: 200;
+}
+.rf_h3Italic, h3.rf_h > em, h3.rf_h > i, .rf_h3 i{
+    font-family: RFdisplayItalic;
+    font-size: 24px; 
+    letter-spacing: 1px;
+    line-height: 48px;
+    font-weight: 200;
+}
+
+.rf_h3.optiontight, h3.rf_h.optionTight{
+    line-height: 24px;
+}
+
+
+@media screen and (max-width: 767px){
+    .rf_h1, .rf_h1.optionTight{
+        font-size: 30px;
+        line-height: 32px;
+    }
+}
+
+
+.rf_h4, h4.rf_h{
+    font-family: RFdisplayRegular;
+    font-size: 18px; 
+    letter-spacing: 1px;
+    line-height: 24px;
+}
+.rf_h4Italic, h4.rf_h > em, h4.rf_h > i, .rf_h4s i{
+    font-family: RFdisplayItalic;
+    font-size: 18px; 
+    letter-spacing: 1px;
+    line-height: 24px;
+}
+
+
+
+
+
+
+.rf_bodyHeadline, .rf_paragraphStandard h1, .rf_paragraphStandard h2, .rf_paragraphStandard h3, .rf_paragraphStandard h4, .rf_paragraphStandard h5, .rf_paragraphStandard h6{
+    font-family: rf_proximaNovaMedium;
+    font-size: 18px; 
+    letter-spacing: .5px;
+    line-height: 24px;
+
+}
+
+
+.rf_bodySize{
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.rf_bodyStandard{
+    font-family: rf_proximaNovaLight;
+    font-weight:  200;
+    font-size: 16px;
+    letter-spacing: .5px;
+    line-height: 24px;
+}
+.rf_bodyStandardItalic, .rf_bodyStandard em{
+    font-family: rf_proximaNovaLightItalic;
+    font-weight:  200;
+    font-size: 16px;
+    letter-spacing: .5px;
+    line-height: 24px;
+}
+
+.rf_bodyBold, .rf_bodyStandard strong, .rf_bodyStandard b{
+    font-weight: 200;
+    font-family: rf_proximaNovaRegular;
+    font-size: 16px;
+    letter-spacing: .5px;
+    line-height: 24px;
+}
+.rf_bodyBoldItalic, .rf_bodyStandard strong em, .rf_bodyStandard b em{
+    font-weight: 200;
+    font-family: rf_proximaNovaRegularItalic;
+    font-size: 16px;
+    letter-spacing: .5px;
+    line-height: 24px;
+}
+
+.rf_detailStandard{
+    font-family: rf_proximaNovaLight;
+    font-weight:  200;
+    font-size: 14px;
+    letter-spacing: .5px;
+    line-height: 24px;
+}
+
+.rf_detailBold, .rf_detailStandard strong, .rf_detailStandard b{
+    font-weight: 200;
+    font-family: rf_proximaNovaMedium;
+    font-size: 14px;
+    letter-spacing: .5px;
+    line-height: 24px;
+}
+
+
+.rf_legalStandard{
+    font-family: rf_proximaNovaLight;
+    font-weight:  200;
+    font-size: 12px;
+    letter-spacing: .5px;
+    line-height: 18px;
+}
+
+.rf_legalBold, .rf_legalStandard strong, .rf_legalStandard b{
+    font-weight: 200;
+    font-family: rf_proximaNovaRegular;
+    font-size: 12px;
+    letter-spacing: .5px;
+    line-height: 18px;
+}
+
+.rf_legalStandard.rf_textPad, .rf_legalBold.rf_textPad{
+    line-height: 24px;
+}
+
+.rf_bodyStandard, .rf_bodyStandardItalic, .rf_bodyHeadline, .rf_bodyBold, .rf_detailStandard, .rf_detailBold, .rf_h1, .rf_h2, .rf_h3, .rf_h4, .rf_h5, .rf_h6, .rf_h{
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+
+
+
+
+
+
+.RFtradeGothicLight{
+    font-family: RFtradeGothicLight;
+}
+.RFtradeGothicLightOblique{
+    font-family: RFtradeGothicLightOblique;
+}
+.RFtradeGothicCondensed18{
+    font-family: RFtradeGothicCondensed18;
+}
+.RFtradeGothicBold2{
+    font-family: RFtradeGothicBold2;
+}
+.RFtradeGothicBoldCondensed20{
+    font-family: RFtradeGothicBoldCondensed20;
+}
+.RFtradeGothicBold{
+    font-family: RFtradeGothicBold;
+}
+
+
+
+*[class*="rf-icon"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'rf-icons' !important;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+}
+
+.rf-icon-group:before {
+    content: "\e915";
+}
+.rf-icon-check-outline:before {
+    content: "\e914";
+}
+.rf-icon-account:before {
+    content: "\e900";
+}
+.rf-icon-add:before {
+    content: "\e901";
+}
+.rf-icon-add-circle:before {
+    content: "\e902";
+}
+.rf-icon-add-circle-outline:before {
+    content: "\e903";
+}
+.rf-icon-app-switcher:before {
+    content: "\e904";
+}
+.rf-icon-arrow-back:before {
+    content: "\e905";
+}
+.rf-icon-arrow-drop-down:before {
+    content: "\e906";
+}
+.rf-icon-arrow-drop-right:before {
+    content: "\e907";
+}
+.rf-icon-arrow-forward:before {
+    content: "\e908";
+}
+.rf-icon-ascending {
+    content: url('../images/icons/ascending.svg');
+}
+.rf-icon-attach:before {
+    content: "\e90a";
+}
+.rf-icon-bag:before {
+    content: "\e90b";
+}
+.rf-icon-bulleted-list:before {
+    content: "\e90c";
+}
+.rf-icon-calendar:before {
+    content: "\e90d";
+}
+.rf-icon-camera:before {
+    content: "\e90e";
+}
+.rf-icon-cancel:before {
+    content: "\e90f";
+}
+.rf-icon-cancel-outline:before {
+    content: "\e910";
+}
+.rf-icon-cc:before {
+    content: "\e911";
+}
+.rf-icon-check:before {
+    content: "\e912";
+}
+.rf-icon-checkbox:before {
+    content: "\e913";
+}
+.rf-icon-checkbox-selected:before {
+    content: "\e916";
+}
+.rf-icon-check-circle:before {
+    content: "\e917";
+}
+.rf-icon-chevron-left:before {
+    content: "\e91a";
+}
+.rf-icon-chevron-right:before {
+    content: "\e91b";
+}
+.rf-icon-close:before {
+    content: "\e91c";
+}
+.rf-icon-contact:before {
+    content: "\e91d";
+}
+.rf-icon-contact-2:before {
+    content: "\e91e";
+}
+.rf-icon-crp-autoship:before {
+    content: "\e91f";
+}
+.rf-icon-cut:before {
+    content: "\e920";
+}
+.rf-icon-descending {
+    content: url('../images/icons/ascending.svg');
+}
+.rf-icon-day {
+    content: url('../images/icons/day.svg');
+}
+.rf-icon-night {
+    content: url('../images/icons/night.svg');
+}
+.rf-icon-download:before {
+    content: "\e922";
+}
+.rf-icon-edit:before {
+    content: "\e923";
+}
+.rf-icon-email:before {
+    content: "\e924";
+}
+.rf-icon-error:before {
+    content: "\e925";
+}
+.rf-icon-error-outline:before {
+    content: "\e926";
+}
+.rf-icon-expand:before {
+    content: "\e927";
+}
+.rf-icon-expand-less:before {
+    content: "\e928";
+}
+.rf-icon-expand-more:before {
+    content: "\e929";
+}
+.rf-icon-expand-more-2:before {
+    content: "\e92a";
+}
+.rf-icon-facebook:before {
+    content: "\e92b";
+}
+.rf-icon-facebook-messenger:before {
+    content: "\e974";
+}
+.rf-icon-favorite:before {
+    content: "\e92c";
+}
+.rf-icon-favorite-outline:before {
+    content: "\e92d";
+}
+.rf-icon-filter:before {
+    content: "\e92e";
+}
+.rf-icon-full-screen:before {
+    content: "\e92f";
+}
+.rf-icon-gplus:before {
+    content: "\e930";
+}
+.rf-icon-hamburger:before {
+    content: "\e936";
+}
+.rf-icon-heart:before {
+    content: "\e937";
+}
+.rf-icon-heart-outline:before {
+    content: "\e938";
+}
+.rf-icon-help:before {
+    content: "\e939";
+}
+.rf-icon-help-outline:before {
+    content: "\e93a";
+}
+.rf-icon-hide:before {
+    content: "\e93b";
+}
+.rf-icon-image:before {
+    content: "\e93c";
+}
+.rf-icon-info-circle:before {
+    content: "\e93d";
+}
+.rf-icon-info-circle-outline:before {
+    content: "\e93e";
+}
+.rf-icon-instagram:before {
+    content: "\e93f";
+}
+.rf-icon-location:before {
+    content: "\e940";
+}
+.rf-icon-lock:before {
+    content: "\e941";
+}
+.rf-icon-lock-outline:before {
+    content: "\e942";
+}
+.rf-icon-map:before {
+    content: "\e943";
+}
+.rf-icon-more-horiz:before {
+    content: "\e944";
+}
+.rf-icon-note:before {
+    content: "\e945";
+}
+.rf-icon-notifications:before {
+    content: "\e946";
+}
+.rf-icon-phone:before {
+    content: "\e947";
+}
+.rf-icon-pinterest:before {
+    content: "\e948";
+}
+.rf-icon-print:before {
+    content: "\e949";
+}
+.rf-icon-pulse-mark:before {
+    content: "\e94a";
+}
+.rf-icon-quote-1:before {
+    content: "\e94b";
+}
+.rf-icon-quote-2:before {
+    content: "\e94c";
+}
+.rf-icon-refresh:before {
+    content: "\e951";
+}
+.rf-icon-remove:before {
+    content: "\e952";
+}
+.rf-icon-remove-circle:before {
+    content: "\e953";
+}
+.rf-icon-remove-circle-outline:before {
+    content: "\e954";
+}
+.rf-icon-rf-stamp:before {
+    content: "\e955";
+}
+.rf-icon-search:before {
+    content: "\e956"!important;
+}
+.rf-icon-send:before {
+    content: "\e957";
+}
+.rf-icon-settings:before {
+    content: "\e958";
+}
+.rf-icon-share:before {
+    content: "\e959";
+}
+.rf-icon-share-2:before {
+    content: "\e95a";
+}
+.rf-icon-share-2-outline:before {
+    content: "\e95b";
+}
+.rf-icon-sort:before {
+    content: "\e95c";
+}
+.rf-icon-sound-off:before {
+    content: "\e95d";
+}
+.rf-icon-sound-on:before {
+    content: "\e95e";
+}
+.rf-icon-store:before {
+    content: "\e95f";
+}
+.rf-icon-textsms:before {
+    content: "\e960";
+}
+.rf-icon-time:before {
+    content: "\e961";
+}
+.rf-icon-tracking:before {
+    content: "\e969";
+}
+.rf-icon-trash:before {
+    content: "\e96a";
+}
+.rf-icon-twitter:before {
+    content: "\e96b";
+}
+.rf-icon-unlock:before {
+    content: "\e96c";
+}
+.rf-icon-unlock-outline:before {
+    content: "\e96d";
+}
+.rf-icon-upload:before {
+    content: "\e96e";
+}
+.rf-icon-view:before {
+    content: "\e96f";
+}
+.rf-icon-view-details:before {
+    content: "\e970";
+}
+.rf-icon-warning:before {
+    content: "\e971";
+}
+.rf-icon-warning-outline:before {
+    content: "\e972";
+}
+.rf-icon-youtube:before {
+    content: "\e973";
+}
+
+
+/* SVG clored icons */
+.rf-colored-icon {
+    display: block;
+    vertical-align: top;
+    width: 100%;
+}
+
+
+.rf-icon-fb-messenger{
+    content: url('../images/icons/fb-messenger.svg');
+}
+.rf-icon-prop65{
+    content: url('../images/icons/prop65.svg');
+}
+
+.rf-icon-cc-amex{
+    content: url('../images/icons/svg-sprite.svg#icon-cc-amex');
+}
+.rf-icon-cc-discover {
+    content: url('../images/icons/svg-sprite.svg#icon-cc-discover');
+}
+.rf-icon-cc-mastercard{
+    content: url('../images/icons/svg-sprite.svg#icon-cc-mastercard');
+}
+.rf-icon-cc-visa{
+    content: url('../images/icons/svg-sprite.svg#icon-cc-visa');
+}
+.rf-icon-flag-aus{
+    content: url('../images/icons/svg-sprite.svg#icon-aus');
+}
+.rf-icon-flag-can{
+    content: url('../images/icons/svg-sprite.svg#icon-can');
+}
+.rf-icon-flag-kor{
+    content: url('../images/icons/svg-sprite.svg#icon-kor');
+}
+.rf-icon-flag-jpn{
+    content: url('../images/icons/svg-sprite.svg#icon-jpn');
+}
+.rf-icon-flag-usa{
+    content: url('../images/icons/svg-sprite.svg#icon-usa');
+}
+
+
+
+.RFfontLegal {
+    font-size:  10px;
+    line-height: 16px;
+}
+.RFfontLegalPad {
+    font-size:  10px;
+    line-height: 24px;
+}
+.RFfontExSmall {
+    font-size:  12px;
+    line-height: 16px;
+}
+.RFfontExSmallPad {
+    font-size:  12px;
+    line-height: 24px;}
+    .RFfontSmallTight {
+        font-size:  14px;
+        line-height: 16px;
+    }
+    .RFfontSmall {
+        font-size:  14px;
+        line-height: 24px;
+    }
+
+    @media screen and (max-width: 374px){
+        .RFfontSmall.optionMobileResponsive {
+            font-size:  12px;
+            line-height: 18px;
+        }
+    }
+    .RFls05{
+        letter-spacing: .5px;
+    }
+    .RFls10{
+        letter-spacing: 1px;
+    }
+    .RFfontMediumTight {
+        font-size:  16px;
+        line-height: 16px;
+    }
+    .RFfontMedium {
+        font-size:  16px;
+        line-height: 24px;
+    }
+    .RFfontMediumPad {
+        font-size:  16px;
+        line-height: 48px;
+    }
+
+    .RFfontLarge {
+        font-size:  18px;
+        line-height: 24px;
+    }
+    .RFfontExLarge {
+        font-size:  24px;
+        line-height: 32px;
+    }
+    @media screen and (max-width: 500px){
+        .RFfontExLarge.fontResponsive, .RFfontExLarge.optionMobileResponsive{
+            //letter-spacing: 2px;
+            font-size: 24px;
+            line-height: 24px;
+        }
+        .RFfontLarge.optionMobileResponsive{
+            font-size: 14px;
+        }
+        .RFheader6.optionMobileResponsive{
+            font-size: 18px;
+            line-height: 24px;
+        }
+    }
+    h6.RFheader, .RFheader6, .clarityFont2532 {
+        font-size:  24px;
+        line-height: 32px;
+    }
+    h5.RFheader, .RFheader5 {
+        font-size:  30px;
+        line-height: 40px;
+    }
+    h4.RFheader, .RFheader4 {
+        font-size:  35px;
+        line-height: 40px!important;
+    }
+    h3.RFheader, .RFheader3 {
+        font-size:  40px;
+        line-height: 48px!important;
+    }
+    h2.RFheader, .RFheader2 {
+        font-size:  45px;
+        line-height: 56px!important;
+    }
+    h1.RFheader, .RFheader1 {
+        font-size:  50px!important;
+        line-height: 56px!important;
+    }
+    .lhHeader3{
+        line-height: 48px;
+    }
+    @media screen and (max-width: 768px) {
+        .RFheader4.optionMobileResponsive {
+            font-size: 24px;
+            line-height: 32px;
+        } 
+        .RFheader5.optionMobileResponsive {
+            font-size: 24px;
+            line-height: 32px;
+        } 
+    }
+
+    .clarityFont1016, .clarityFont1024, .clarityFont1216, .clarityFont1616, .clarityFont1416, .clarityFont1424, .clarityFont1624, .clarityFont1824, .clarityFont2532, .clarityFont3040, .clarityFont3540, .clarityFont4048, .clarityFont4556,  .clarityFont5056, .RFheader6, .RFheader5, .RFheader4, .RFheader3, .RFheader2, .RFheader1, .RFfontExSmall, .RFfontLegal, .RFfontSmall, .RFfontSmallTight, .RFfontMedium, .RFfontMediumTight, .RFfontLarge {
+        //  padding: 0px;
+        //  margin: 0px;
+        // width: auto;
+    }
+
+    p.RFfontSmall, p.RFfontMedium, p.RFfontLarge{
+        padding: 0px;
+        margin: 0px;
+        //  margin-bottom: 24px;
+    }
+
+
+    [class*="RFfont"], [class*="RFheader"] {
+
+    }
+
+
+    [class*="RFfont"] ~ p {
+        padding: 0px;
+        margin-top: 0px;
+    }
+    [class*="RFfont"] ~ p {
+    }
+
+
+
+    [class*="RFfont"] p:last-of-type {
+
+        margin-bottom: 0px;
+    }
+
+
+
+
+    .gothicLeftMarginAdjust{
+        margin-left: -.6%;
+    }
+
+
+
+
+
+
+
+    .underline, .underline > * {
+        text-decoration: underline;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    .RFgothamExLight{
+        color: #ff00ff!important;
+        opacity: .2;
+        background-color: #eeddcc;
+        font-family: RFgothamExLight,Helvetica,Arial,sans-serif;
+    }
+    .RFgothamLight{
+        color: #ff00ff!important;
+        opacity: .2;
+        background-color: #eeddcc;
+        font-family: RFgothamLight,Helvetica,Arial,sans-serif;
+    }
+    .RFgotham, .RFgothamBook{
+        color: #ff00ff!important;
+        opacity: .2;
+        background-color: #eeddcc;
+        font-family: RFgothamBook,Helvetica,Arial,sans-serif;
+    }
+    .RFgothamMedium{
+        color: #ff00ff!important;
+        opacity: .2;
+        background-color: #eeddcc;
+        font-family: RFgothamMedium,Helvetica,Arial,sans-serif;
+    }
+    .RFgothamBold{
+        color: #ff00ff!important;
+        opacity: .2;
+        background-color: #eeddcc;
+        font-family: RFgothamBold,Helvetica,Arial,sans-serif;
+    }
+    .RFgothamBlack{
+        color: #ff00ff!important;
+        opacity: .2;
+        background-color: #eeddcc;
+        font-family: RFgothamBlack,Helvetica,Arial,sans-serif;
+    }
+
+
+
+    .serif, .RFbodoni{
+        font-family: RFbodoni, "Times New Roman", Times, serif!important;
+        letter-spacing: 1px;
+        //  font-size: 103%;
+
+    }
+    .serif + .italic, .RFbodoni + .italic, .RFbodoniItalic{
+        font-family: RFbodoniItalic, "Times New Roman", Times, serif!important;
+        //  font-style: italic;
+
+    }
+
+
+
+    .RFdisplayRegular{
+        font-family: RFdisplayRegular, "Times New Roman", Times, serif;
+        letter-spacing: 0px;
+    }
+    .RFdisplayItalic{
+        font-family: RFdisplayItalic, "Times New Roman Italic", Times, serif;
+        letter-spacing: 0px;
+    }
+    .RFcaptionItalic{
+        font-family: RFcaptionItalic, "Times New Roman Italic", Times, serif;
+        letter-spacing: 0px;
+    }
+
+
+
+    .RFtradeGothicLight{
+        font-family: RFtradeGothicLight;
+    }
+    .RFtradeGothicLightOblique{
+        font-family: RFtradeGothicLightOblique;
+    }
+    .RFtradeGothicCondensed18{
+        font-family: RFtradeGothicCondensed18;
+    }
+
+
+
+
+
+
+    .gothic, .RFbankGothicBold{
+        position: relative;
+        font-family: RFbankGothicBold;
+        font-size: 140.1%;
+    }
+    .gothic, .RFbankGothic{
+        position: relative;
+        font-family: RFbankGothic;
+        font-size: 140.1%;
+    }
+
+    .clarityFont5064 .RFbankGothic {
+        letter-spacing: -5px;
+    }
+
+    .logoPlus {
+        position: relative;
+        font-size: 85%!important;
+
+
+    }
+    .RFgotham:hover {
+        //  font-size: 100%;
+    }
+
+    .clearFontSize{
+        font-size: 100%;
+    }

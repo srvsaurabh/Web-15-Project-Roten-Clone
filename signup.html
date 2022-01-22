@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="homepage.css">
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="footer.css">
+    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+      rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="nav">
+            <div class="upper">
+            <div class="left"><a href="product.html">Find A Consultant</a></div>
+            <div class="center">
+                <a href="homepage.html"><img src="https://www.rodanandfields.com/en-us/medias/rf-logo.svg?context=bWFzdGVyfGltYWdlc3w3MzczfGltYWdlL3N2Zyt4bWx8aW1hZ2VzL2g2MC9oYWIvODgyMjE0NzE4NjcxOC5zdmd8YjNmMmU2YTg5MTM0NTMzM2Y2ODg2ZmRkZTJhNmY2OWZhYmYyYjk5NWQxODkxODFiYjVkY2MxY2NjOWRlMzA5OA" alt="RODAN+Fields">
+                </a>
+                 </div>
+            <div class="right">
+                <div id="search">
+                    Search<span class="material-icons-outlined">
+                    search
+                    </span></div>
+    
+                <div id="Signin">
+                    Sign In
+                    <span class="material-icons-outlined">
+                        person
+                        </span></div>
+    
+                <div id="bag">
+                    Bag
+                   <span class="material-icons-outlined">
+                        shopping_bag
+                        </span> </div>
+    
+                <div id="language">
+                    language
+                    <span class="material-icons-outlined">
+                        language
+                        </span></div>
+                        
+                <div id="signup">
+                    Sign Up
+                    <span class="material-icons-outlined">
+                        person_add
+                        </span></div>
+            </div>
+        </div>
+        <hr>
+            <div class="lower">
+                <div> <a href="">Shop</a></div>
+                <div><a href="">Best Seller</a></div>
+                <div><a href="">Featured</a></div>
+                <div><a href="">Our Story</a></div>
+                <div><a href="">Peeks Program</a></div>
+                <div><a href="">Become A Consultant</a></div>
+                <div><a href="">Blog</a></div>
+            </div>
+        </div>
+    </header>
+<hr>
+
+    <div class="loginfull1">
+        <!-- <h1>Login</h1> -->
+        <div id="login">
+          <h1>Sign Up To Your Account</h1>
+          <form>
+            <h3>Email</h3>
+            <input id="email"  type="email" placeholder="Enter Email"/>
+            <h3>User Name</h3>
+            <input id="username"  type="text" placeholder="Enter username"/>
+              <h3>Password</h3>
+              <input id="password"  type="Password" placeholder="Enter password"/>
+              <h3>Mobile Number</h3>
+            <input id="number"  type="number" placeholder="Enter Mobile Number"/>
+              <h3>Login</h3>
+              <input id="submit" type="submit" value="Login">
+          </form>
+          </div>
+        </div>
+    
+    
+<hr>
+    <footer>
+        <div class="up">
+            <div id="first">
+                <div>
+                    <ul>
+                        <h2>ABOUT H+F</h2>
+                        <li><a href="">PRESS ROOM</a></li>
+                        <li><a href="">COMPANY INFO</a></li>
+                        <li><a href="">EXECUTIVE TEAM</a></li>
+                        <li><a href="">CAREERS</a></li>
+                        <li><a href="">R+F RECYCLING PROGRAM</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <ul>
+                        <h2>Help</h2>
+                        <li><a href="">PRODUCT & HELP CENTER</a></li>
+                        <li><a href="">SHIPPING</a></li>
+                        <li><a href="">SATISFACTION GURANTEE</a></li>
+                        <li><a href="">PROMOTIONAL TERMS & CONDITION</a></li>
+                        <li><a href="">R+F FAQS</a></li>
+                        <li><a href="">SITE MAP</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="let">
+                <h2>Let's Get Started</h2>
+                <div id="get">
+                <div><span class="material-icons-outlined">
+                    call
+                    </span></div>
+                    <div>
+                        <span class="material-icons-outlined">
+                            email
+                            </span>
+                    </div>
+                    <div>
+                        <span class="material-icons-outlined">
+                            support_agent
+                            </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+
+</body>
+</html>
+
+<script src="main.js">
+    
+    document.querySelector("form").addEventListener("submit", formSubmit)
+        var userStack = JSON.parse(localStorage.getItem("userDataBase")) || [];
+
+    function formSubmit(event) {
+        event.preventDefault();
+
+        var email = document.querySelector(".email").value;
+        var pass = document.querySelector(".pass").value;
+        var user = document.querySelector(".user").value;
+        var mob = document.querySelector(".mob").value;
+
+        var userData = {
+            emailAdd: email,
+            psswd: pass,
+            userName: user,
+            mobNum: mob,
+        }
+
+        userStack.push(userData);
+
+        localStorage.setItem("userDataBase", JSON.stringify(userStack));
+         alert("signup success");
+         window.location.href = "login.html";
+    }
+</script>

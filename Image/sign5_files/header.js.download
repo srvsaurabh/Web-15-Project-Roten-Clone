@@ -1,0 +1,4459 @@
+
+
+
+var localizationCode = "usa"
+function mainURL(input){
+	switch(input) {
+		case "usa":
+		return "http://www.rodanandfields.com"
+		break;
+		case "aus":
+		return "http://www.rodanandfields.com/au"
+		break;
+		case "can":
+		return "http://www.rodanandfields.com/ca"
+		default :
+		return "#"
+	}
+}
+
+var cart = []
+customerAccountType = "rc"
+
+
+
+
+
+if (!clarityOptions){
+	var clarityOptions = {}
+}
+
+
+clarityOptions['cartShowContains'] = false
+
+
+function effectRemove(){
+	var temp = document.getElementsByClassName("effect")
+	var wSH = window.scrollHeight
+	var wIH = window.innerHeight
+	for (var i = (temp.length - 1) ; i >= 0 ; i--){
+		var top = (temp[i].getBoundingClientRect().top)
+		var bottom = top + temp[i].style.height
+		if ( (top <= (wIH * .75) ) || (bottom <= wIH * .85) ){
+			if (temp[i].classList.contains('spcEffect')) {
+				salesProgressChart(temp[i].id)
+			}
+			if (wSH > 100 ){
+				temp[i].classList.remove("effectDelay")
+			}
+			if ( temp[i].nodeName.toLowerCase() == "img" ) {
+				if (temp[i].complete) {
+					temp[i].classList.remove("effect")		
+				}
+			}else{
+				temp[i].classList.remove("effect")
+			}
+
+
+		}
+	}
+}
+
+
+
+
+function effect(){
+	windowH = window.innerHeight;
+	var temp = document.getElementsByClassName("effect")
+	var tempScroll = scrollHeight + ( windowH / 1.2);
+	if (effectCards.length > 0){
+		for (var i = 0; i < effectCards.length; i ++){
+//			console.log( document.getElementById(effectCards[i].id).getBoundingClientRect())
+if (   (tempScroll + (document.getElementById(effectCards[i].clientHeight) )) > effectCards[i].xPos) {
+	document.getElementById(effectCards[i].id).classList.remove('effect')
+}
+}
+}
+for (var i = (effectCards.length - 1); i >= 0; i --) {
+	if (document.getElementById(effectCards[i].id).classList.contains('effect')) {
+
+	}
+}
+
+}
+
+window.addEventListener("scroll", function() {
+	effectRemove()
+});
+
+
+
+String.prototype.includes = function (str) {
+	var returnValue = false;
+
+	if (this.indexOf(str) !== -1) {
+		returnValue = true;
+	}
+	return returnValue;
+}
+
+
+function formatNumberHundreds(num) {
+	return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+}
+
+
+var maxQty = 999;
+var w = window.innerWidth;
+var wiw = window.innerWidth;
+var wih = window.innerHeight;
+var wSH = window.scrollHeight
+var productItem = "AAPRS01";
+var userType = "";
+var navType = ""
+var currentDate = getYYYYMMDD();
+
+function wWidth(){
+	return window.innerWidth
+}
+
+function wHeight(){
+	return window.innerHeight
+}
+
+
+
+function baGenObject(input){
+	function writeAfter(input){
+		return "<span class=\"RFgothamMedium\">" + (input.afterTime ? input.afterTime.toLowerCase().includes("immediately") ? "": "After: " : "After:") + " </span>" + (input.afterTime ? ("<span class=\"RFgothamExLight\">" + input.afterTime + "</span>") : "") 
+	}
+	function writeBefore(input){
+		return "<span class=\"RFgothamMedium\">Before</span>"
+	}
+	temp = ""
+	if (input){
+		if (input.beforeSRC.includes("rodanandfields.com")){input.labels = false; input.alignReverse = true}
+
+
+		var id = input.name ? ("ba-" + (input.name).split(" ").join("_")) + randomID() : randomID()		
+		temp += "<div class=\"containerBA  \"  >"
+		temp += input.nameOverlay !== true ? "<div class=\"\">" : ""
+		temp += "<div class=\"containerBAInner\">"
+		temp += "<img src=\"" + (input.alignReverse !== true ? input.beforeSRC : input.afterSRC) + "\" class=\"ba-Img\" />"
+		if (input.labels !== false){
+			temp += "<div class=\"ba-Before-Title\">"
+			temp += (input.alignReverse !== true ? writeBefore() : writeAfter(input))
+			temp += "</div>"
+		}
+		temp += "<div class=\"ba-After\" style=\"width: " + (input.alignReverse !== true ? "80" : "20") +  "%; \">"
+		temp += "<div class=\"ba-After-Inner\" >"
+		temp += "<img src=\"" + (input.alignReverse !== true ? input.afterSRC : input.beforeSRC) + "\" class=\"ba-Img ba-ImgAfter\" />"
+		temp += "</div>"
+		if (input.labels !== false){
+			temp += "<div class=\"ba-After-Title\">"
+			temp += (input.alignReverse !== true ? writeAfter(input) : writeBefore())
+			temp += "</div>"
+		}
+		temp += "</div>	"
+		temp += "</div>"
+
+		temp += "<div class=\"container-ba-Slider \">"
+		//temp += "<input type=\"range\" min=\"0\" max=\"1000\" value=\"" + (input.alignReverse !== true ? "200" : "800") + "\" class=\" baRange\" onchange=\"beforeAfter('" + id + "')\" oninput=\"beforeAfter('" + id + "')\"/>"
+		temp += "<input type=\"range\" min=\"0\" max=\"1000\" value=\"" + (input.alignReverse !== true ? "200" : "800") + "\" class=\" baRange\" oninput=\"this.parentNode.parentNode.getElementsByClassName('ba-After')[0].style.width = (100 - (this.value / 10)) + '%'\" onchange=\"this.parentNode.parentNode.getElementsByClassName('ba-After')[0].style.width = (100 - (this.value / 10)) + '%'\"  />"
+		temp += "</div>"
+		if (input.name){
+			if (input.nameOverlay == true) {
+				temp += "<div class=\"container-ba-overlay\">"
+				temp += "<p>" + input.name + "</p>"
+				temp += "</div>"	
+			}else{
+				temp += input.nameOverlay !== true ? "<p class=\"textLeft RFgothamLight RFfontExSmall\">" + input.name + "</p>" : "" 		
+			}			
+		}
+		
+		temp += "</div></div>	"
+	}
+	return (temp);	
+	
+}
+
+
+
+
+
+
+
+
+
+
+var toasts = [];
+
+var toastIcon = [];
+toastIcon["success"] = "rf-icon-check-circle";
+toastIcon["info"] = "rf-icon-info-circle";
+toastIcon["warning"] = "rf-icon-warning";
+toastIcon["error"] = "rf-icon-error";
+
+
+
+
+
+function toastCreator(id){
+	var temp = "<div class=\"toastOuter " + toasts[id].type + " " + toasts[id].type + "BG\" id=\"" + toasts[id].id + "\">"
+	temp += "<div class=\"toastInner\">";
+	temp += "<p class=\"\">"
+	temp += "<span class=\"rf-icon " + toastIcon[toasts[id].type] + " toastIcon \"></span>"
+	temp += toasts[id].text;
+	
+	if ((toasts[id].undo !== false) && (toasts[id].undo !== undefined)) {
+		console.log(toasts[id].undo)
+//		(function(){alert('test')})();return false
+console.log("the text is: " + toasts[id].text)
+console.log(toastTimeout(id))
+temp += "&nbsp;&nbsp;<span class=\"toastUndo\" onclick=\"(" + toasts[id].undo + ")();return false;\">UNDO</span>";
+}
+if (toasts[id].auto == true){
+	temp += "<span class=\"toastBarDismiss " + toasts[id].type + "TextBG\" style=\"transition: all " + (toastTimeout(id) / 1) + "ms linear;\" id=\"" + toasts[id].id + "UndoBar\"></span>";
+}
+if (toasts[id].dismiss == true){
+	temp += "<span class=\"rf-icon rf-icon-close toastIconClose\" onclick=\"toastClose('" + toasts[id].id + "')\"></span>"
+};
+console.log(toasts[id].undo)
+temp += "</p></div></div>";
+return temp;
+}
+
+
+
+function toastTimeout(id){
+	console.log(toasts[id].text)
+	console.log(toasts[id].timeout)
+	if (toasts[id].timeout == "") {
+
+		var toastDismissLength = 5000;
+		if (toasts[id].text.length > 50) {
+			toastDismissLength = 9000;
+		}
+		if (toasts[id].undo) {
+			toastDismissLength = toastDismissLength * 1.5;
+		}
+	}else{
+		toastDismissLength = toasts[id].timeout;
+	}
+	console.log(toastDismissLength)
+	return toastDismissLength;
+}
+function toastBarClose(id) {
+	document.getElementById(toasts[id].id + "UndoBar").style.width = "0px";
+	window.clearTimeout(toasts[id].closeBar)
+}
+function toastDisplay(id){
+	if (toasts[id].auto == true){
+		var toastDismissLength = toastTimeout(id)
+		console.log(toasts[id].id)
+//		toasts[id].text += "&nbsp;" + (toastDismissLength / 1000) + " seconds";
+toasts[id].closetimeout = setTimeout(function(){toastClose(toasts[id].id);}, toastDismissLength);
+toasts[id].closeBar = setTimeout(function(){toastBarClose(id);}, 1);
+console.log(toasts[id].closetimeout)
+console.log(toasts[id].closeBar)
+}
+if (toasts.length > 0) {
+	for (var i = 0; i < (toasts.length - 1); i ++) {
+		if (toasts[i].auto == true){
+			if (document.getElementById(toasts[i].id) !== undefined) {
+				console.log(document.getElementById(toasts[i].id + "UndoBar").style.transition)
+				document.getElementById(toasts[i].id + "UndoBar").style.transition = "all 0ms linear";
+				var tempDismissBarWidth = document.getElementById(toasts[i].id + "UndoBar").clientWidth;
+				document.getElementById(toasts[i].id + "UndoBar").style.width = tempDismissBarWidth + "px";
+				var tempSpeed = (tempDismissBarWidth / 100) * toastTimeout(i);
+				console.log(tempSpeed);
+
+				document.getElementById(toasts[i].id + "UndoBar").style.width = tempDismissBarWidth + "px";
+				var breakOut = 0;
+				while (document.getElementById(toasts[i].id + "UndoBar").clientWidth == tempDismissBarWidth) {
+					document.getElementById(toasts[i].id + "UndoBar").style.transition = "all " + tempSpeed + "ms linear";
+					document.getElementById(toasts[i].id + "UndoBar").style.width = "500px!important";
+					if (breakOut > 100) {
+						break
+					}
+					breakOut ++;
+				}
+			}
+		}
+	}
+}
+
+document.getElementById('toastContainer').innerHTML += toastCreator(id);
+document.getElementById(toasts[id].id).style.height = document.getElementById(toasts[id].id).scrollHeight + "px";
+setTimeout(function(){
+	document.getElementById(toasts[id].id).style.height = "auto";			
+}, 300);
+console.log(toasts[id].id);
+if (toasts[id].auto == true){
+//		document.getElementById(toasts[id].id + "UndoBar").style.width = "0px";
+}
+//console.log(document.getElementById(toasts[id].id + "UndoBar").style.width)
+}
+
+
+
+function toastClose(id){
+	console.log(id + " is closing")
+	if (document.getElementById(id).style.height !== "0px"){
+		console.log(id + "not 0px high")
+	}else{
+		console.log(id + "is 0px high")
+	}
+	console.log(document.getElementById(id).style.height);
+	while ( (document.getElementById(id).style.height == "auto") || (document.getElementById(id).style.height == "") ) {
+		document.getElementById(id).style.height = document.getElementById(id).scrollHeight + "px";
+	}
+	setTimeout(function(){
+		document.getElementById(id).style.height = "0px";
+		document.getElementById(id).style.borderTop = "0px solid #dcdcdc";
+	}, 5);
+	toasts[id.substring(5,id.length)].status = "closed";
+	console.log(toasts);
+	console.log(toasts[id.substring(5,id.length)].timeout);
+	window.clearTimeout(toasts[id.substring(5,id.length)].timeout);
+	console.log(toasts[id.substring(5,id.length)].timeout);
+}
+
+
+function toastResize(){
+	if (toasts.length > 0){
+		for (var i=0; i < toasts.length; i++){
+			if (toasts[i].status !== "closed") {
+				document.getElementById(toasts[i].id).style.height = "auto";
+				document.getElementById(toasts[i].id).style.height = document.getElementById(toasts[i].id).scrollHeight + "px";
+				console.log(toasts[i].id + " resized")
+			}
+		}
+	}
+}
+
+
+
+function newToast(text,type,auto,dismiss,undo,timeout){
+	console.log(undo);
+	if (text !== ""){
+		if (!isNaN(timeout)) {
+			timeout = timeout;
+		}else{
+			timeout = "";
+		}
+		if ((type == "") || type == undefined ) {type = "warning"};
+		if ((auto == "yes") || (auto == true) ) {auto = true} else {auto == false} ;
+		if ((dismiss == "yes") || (dismiss == true) ) {dismiss = true} else {dismiss == false} ;
+		if ((undo == "") || (undo == undefined) || (undo == false)  ){undo = false};
+		if ((timeout == "") || (timeout == undefined) || (timeout == false)  ){timeout = false};
+		var temp = {
+			"id":"toast" + (toasts.length),
+			"type":type,
+			"text":text,
+			"auto":auto,
+			"dismiss":dismiss,
+			"status":"visible",
+			"undo":undo,
+			"timeout":timeout
+		};
+		toasts.push(temp);
+		console.log(toasts)
+		toastDisplay(toasts.length - 1);
+		console.log(toasts);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function addToCart(productItem){
+	var temp = "";
+	console.log(document.getElementById(productItem + "-Button").innerHTML);
+	if (document.getElementById(productItem + "-Button").innerHTML == "Out Of Stock") {
+		alert(truncate(sku[productItem].name, 'for') + " is out of stock!")
+	}else{
+		if (document.getElementById(productItem + "-shadeBox")) {
+			if ((document.getElementById(productItem + "-shadeBox").innerHTML == "Selected Shade: None") || (document.getElementById(productItem + "-shadeBox").innerHTML == "<span class=\"rf-icon rf-icon-info-circle\"></span>Please select a shade to continue"))  {
+				document.getElementById(productItem + "-Button").innerHTML = "Select a shade";
+				document.getElementById(productItem + "-shadeBox").classList.add("error");
+				document.getElementById(productItem + "-shadeBox").classList.add("errorBG");
+				document.getElementById(productItem + "-shadeBox").classList.add("rfBorder");
+				document.getElementById(productItem + "-Variants").style.height = "68px";
+				document.getElementById(productItem + "-shadeBox").innerHTML = "<span class=\"rf-icon rf-icon-info-circle\"></span>Please select a shade to continue";
+				return;
+			}else{
+				var temp = "\nSHADE: " + document.getElementById(productItem + "-shadeBox").innerHTML.substring(16) ;
+			}
+		}
+		alert("Added to Bag: \n" + sku[productItem].name + temp)
+	}
+}
+
+
+
+function truncate(input,option){
+	if (option != "for") {
+		truncLength = 25;
+		if (option === "long") {
+			var truncLength = 75
+		}
+		var ellipsis = "";
+		if (input.length > truncLength) {var ellipsis = "..."};
+		return input.substring(0, truncLength) + ellipsis;
+	}
+	if (option == "for") {
+		var temp = input.split(" for");
+		return temp[0];
+	}
+}
+
+
+var countries = ["usa", "aus", "can"];
+
+if ((getYYYYMMDD() > 20200301) || (clarityAccountType >= 1) ) {
+//	countries.push("jpn")
+}
+countries.sort();
+
+
+if (localizationCode != ""){
+	var country = localizationCode;	
+}else{
+	var country = "can";
+}
+
+
+function countryFullName(input){
+	if (input === "aus") {return "Austrailia"};
+	if (input === "can") {return "Canada"};
+	if (input === "jpn") {return "Japan"};
+	if (input === "usa") {return "United States"};
+}
+
+
+
+
+function selectCountry(input){
+	console.log(input);
+	document.getElementById('selectedCountry').src = "images/flags/" + input + ".png";
+	document.getElementById('selectedCountryMobile').src = "images/flags/" + input + ".png";
+	country = input;
+	currencySymbol();
+	countryToggle();
+}
+
+function countryDisplayMobile(){
+	var countryDisplayMobile = "";
+	for (var i=0; i < countries.length; i++) {
+		if (countries[i] !== country) {
+			countryDisplayMobile = countryDisplayMobile + "<div class=\"navMobileItem\" onclick=\"selectCountry('" + countries[i] + "'), navMobileSlideOut('navMobileCardSelectCountry')\" ><span><img src=\"images/flags/" + countries[i] + ".png\" />" + countryFullName(countries[i]) + "</span><span class=\"navMobileRight\"><img src=\"images/icons/chevron-right.svg\" /></span></div>";
+		};
+	}	
+	document.getElementById('navMobileCountryDisplay').innerHTML = countryDisplayMobile;
+}
+
+function countryDisplay() {
+	var temp = "";
+	for (var i=0; i < countries.length; i++) {
+		if (countries[i] !== country) {
+			temp = temp + "<div><img src=\"images/flags/" + countries[i] + ".png\" height=\"15\" onclick=\"containerMainOverlayToggle(function(){selectCountry('" + countries[i] + "')},true)\"/></div>"
+		};
+	}
+	return temp
+	document.getElementById('countryLower').innerHTML = temp;
+}
+
+function countryDropDownGen() {
+	var temp = "";
+	for (var i=0; i < countries.length; i++) {
+		if (countries[i] !== country) {
+			temp = temp + "<div><img src=\"images/flags/" + countries[i] + ".png\" height=\"15\" onclick=\"containerMainOverlayToggle(function(){selectCountry('" + countries[i] + "')},true)\"/></div>"
+		};
+	}
+	return temp
+}
+
+
+
+function countryToggle() {
+//				console.log(document.getElementById('countryLower').scrollHeight);
+
+if (document.getElementById('countryLower').clientHeight === 0) {
+	countryDisplay();
+		//document.getElementById('countryLower').style.height = ((countries.length -1 ) * 40) + "px";
+		document.getElementById('countryLower').style.height = document.getElementById('countryLower').scrollHeight + "px";
+		document.getElementById('countryLower').style.boxShadow = "0 2px 4px 0 rgba(0,0,0,.25)";
+	}
+	else{
+		document.getElementById('countryLower').style.height = 0 + "px";
+		document.getElementById('countryLower').style.boxShadow = "0 0 0 0 rgba(0,0,0,0)";
+	}
+}
+
+
+
+
+function currencySymbol(){
+	if (country == "aus") {
+		return "A" ;
+	}
+	if (country == "can") {
+		return "C" ;
+	}
+	if (country == "usa") {
+		return "$" ;
+	}
+	if (country == "jpn") {
+		return "&yen;";
+	}
+}
+
+var openPanel = ""
+
+
+
+
+
+
+
+
+
+
+
+function containerMainOverlayToggle(input,run,clear){
+	console.log(run)
+	if (clear !== true) {clear = false}
+		if (run !== true) {run = false}
+			var gebi = document.getElementById('containerMainOverlay')
+		if (gebi.classList.contains('optionActive')) {
+			gebi.classList.remove('optionActive')
+			if (openPanel !== ""){
+				if (!clear) {
+					openPanel()	
+				}
+				openPanel = ""
+			}
+			if (run == true){
+				openPanel = ""
+				run
+				input()
+			}
+		}else{
+			gebi.classList.add('optionActive')
+			openPanel = input
+			input()
+			console.log("open")
+		}
+	}
+
+	function closePanels2(){
+		var gebi = document.getElementById('containerMainOverlay')
+		if (gebi.classList.contains('optionActive')) {
+			gebi.classList.remove('optionActive')
+		}
+		setTimeout(function(){
+//		gebi.classList.add('optionActive')
+} , 3000);
+	}
+
+	function containerMainOverlayToggle2(){
+		if (document.getElementById("containerMainOverlay")){
+			if (document.getElementById("containerMainOverlay").classList.contains("optionActive")) {
+				document.getElementById("containerMainOverlay").classList.remove("optionActive")
+			}else{
+				document.getElementById("containerMainOverlay").classList.add("optionActive")
+			}
+		}
+	}
+
+
+
+
+	function closePanels() {
+
+
+	}
+
+	var menu = 
+	{
+		"main":
+		{
+			"shop":
+			{
+				"featured":
+				{
+
+				},
+				"skin concern":
+				{
+					"fine lines & wrinkles":"#",
+					"acne & blemishes":"#",
+					"dullness & discoloration":"#",
+					"redness & sensitivity":"#",
+					"eyes & lashes":"#"
+				},
+				"collection":
+				{
+					"redefine":"#",
+					"reverse":"#",
+					"unblemish":"#",
+					"sooth":"#",
+					"enhancements":"#",
+					"essentials":"#",
+					"dermacosmetics":"#"
+
+				},
+				"more ways to shop":
+				{
+
+				}
+
+			},
+			"our story":
+			{
+				"skincare philoosphy":"#",
+				"real results":"#",
+				"personalized skin care service":"#",
+				"meet the doctors":"#",
+				"executive team":"#",
+				"giving back":"#"
+			},
+			"find a consultant":
+			{
+
+			},
+			"become a consultant":
+			{
+				"enroll now":"#",
+				"how it works":"#",
+				"events":"#",
+				"meet our community":"#",
+				"programs & incentives":"#"
+			},
+			"switch country":
+			{}
+		},
+		"account":
+		{
+			"profile":"#",
+			"orders":"#",
+			"address book":"#",
+			"payments":"#",
+			"subscriptions":"#"
+		}
+	}
+
+	var sku = 
+	{
+		"RVRGG01":
+		{
+			"name":"REVERSE Brightening Regimen",
+			"retail":{
+				"usa":190,
+				"can":200,
+				"aus":210,
+				"jpn":220
+			},
+			"tag":"Erase the visible signs of premature aging such as dullness, discoloration and uneven skin tone with the REVERSE \u2122 Brightening Regimen.",
+			"description":"Clean the slate and see a brighter future for your skin with REVERSE \u2122 Brightening Regimen. Exposure to the sun and the environment can leave you with less-than-youthful skin. Erase the appearance of premature aging including dullness, discoloration and uneven skin tone with REVERSE Brightening Regimen. REVERSE Brightening exfoliates, brightens, reduces the appearance of fine lines and wrinkles and defends against sun exposure for a long-term solution for a radiant complexion.",
+			"features":["RVWA125","RVTG125","RVTTG50","RVSS050"],
+			"prop65":"Benzophenone",
+			"image":"https://www.rodanandfields.com/images/us/rvrgg01-reverse-brightening-regimen-lg.png",
+			"QV":12
+		},
+		"RVWA125":
+		{
+			"name":"REVERSE Deep Exfoliating Wash",
+			"retail":{
+				"usa":43,
+				"can":53,
+				"aus":63,
+				"jpn":73
+			},
+			"tag":"Leave skin looking brighter and feeling refreshed with REVERSE \u2122 Deep Exfoliating Wash.",
+			"description":"REVERSE Deep Exfoliating Wash is a multi-mechanism exfoliator that simultaneously cleanses and refines sun damaged, blotchy complexions. Alpha hydroxy acids loosen old, dull skin cells so that tiny exfoliators can effectively sweep them away. With a fresh, polished surface, skin is instantly brighter and ready to receive the benefits of the medicines delivered in the subsequent steps of the regimen.",
+			"prop65":"Pulegone",
+			"image":"https://www.rodanandfields.com/images/us/rvwa125-reverse-deep-exfoliating-wash-lg.png",
+			"QV":"12",
+			"volume":{
+				"metric":"125",
+				"USFL":"4.2"
+			}
+		},
+		"AARG001":
+		{
+			"name":"REDEFINE Regimen for the Appearance of Lines, Pores and Loss of Firmness",
+			"retail":{
+				"usa":199,
+				"can":209,
+				"aus":219,
+				"jpn":220
+			},
+			"tag":"Achieve visibly firmer and smoother skin and defend against visible signs of aging with the REDEFINE \u2122 Regimen.",
+			"description":"We are all aging all the time, but what that looks like is up to you. REDEFINE \u2122 is a comprehensive Multi-Med \00AE Therapy skincare solution that layers potent cosmetic ingredients including peptides and Hyaluronic Acid. With regular use, REDEFINE helps defend against and reduce the visible signs of aging for noticeably firmer, smoother, flawless-looking skin.",
+			"prop65":"Benzophenone",
+			"image":"https://www.rodanandfields.com/images/us/aarg001-redefine-regimen-lg.png",
+			"QV":"12",
+			"features":["AAWA125","AATN125","AATT030","AAPM030",]
+		},
+		"AARGLP1":
+		{
+			"name":"REDEFINE + Lash Boost Special",
+			"retail":{
+				"usa":279,
+				"can":289,
+				"aus":299,
+				"jpn":309
+			},
+			"tag":"Get noticeably firmer, smoother, flawless-looking skin and the lashes you long for with our REDEFINE + Lash Boost Special.",
+			"description":"Save 20% on this special offer of ENHANCEMENTS Lash Boost \u2122 plus your REDEFINE \u2122 Regimen! We're all aging all the time, but what that looks like is up to you. Get noticeably firmer, smoother, flawless-looking skin plus the appearance of lush, longer, fuller-looking lashes with our REDEFINE + Lash Boost Special. REDEFINE is a comprehensive Multi-Med \00AE Therapy skincare solution that layers powerful anti-aging technologies including Hyaluronic Acid, peptides and antioxidants for undeniable results. It's clinically tested to help defend against and reduce the visible signs of aging for noticeably firmer, smoother, flawless-looking skin. Pair REDEFINE with Lash Boost, our innovative nightly eyelash-conditioning serum, to improve the appearance of lash volume and length for lashes that are 100% real, 100% yours. In weeks* you'll be wondering if you need mascara—or any makeup—at all. If the REDEFINE + Lash Boost Special is part of a PC Perks Enrollment order, or added to a PC Perks or CRP replenishment order, the next order will be the REDEFINE Regimen. Customers can change their replenishment order at any time before the order ships and will receive an email confirmation notifying them of this change. *For best results, use Lash Boost for 8 weeks",
+			"prop65":"Benzophenone",
+			"image":"https://www.rodanandfields.com/images/us/aarglp1-redefine-lash-boost-special-lg.png",
+			"QV":"12",
+			"features":["AAWA125","AATN125","AATT030","AAPM030","ENHLSH01"]
+		},
+		"AAPRS01":
+		{
+			"name":"REDEFINE AMP It Up Special",
+			"retail":{
+				"usa":336,
+				"can":346,
+				"aus":356,
+				"jpn":366
+			},
+			"tag":"Get on the fast track to smoother, firmer, younger-looking skin with the powerful combination of the REDEFINE Regimen and AMP MD System.",
+			"description":"The combination of the REDEFINE \u2122 Regimen and the AMP MD \u00AE System is Rodan + Fields \u00AE most comprehensive and advanced solution for smoother, firmer, younger-looking skin yet. Plus, you'll save 20% on the full purchase price when you bundle them together! </p><p>The REDEFINE Regimen features a perfectly curated combination of OTC and cosmetic ingredients such as Peptides and Hyaluronic Acid to help defend against and reduce the visible signs of aging. Now you can enhance those results while promoting smoother, firmer, younger-looking skin with the AMP MD System. </p><p> The AMP MD Derma-Roller offers high-precision micro-exfoliation technology while Intensive Renewing Serum merges powerful Peptides with R+F exclusive Retinal-MD \u2122 Technology, offering the highest potency Vitamin A available without a prescription.  </p><p> Based on clinical studies of the AMP MD System with the REDEFINE Regimen, smoother, softer and more refined-looking skin can be experienced starting as early as four weeks. With continued use, you'll see those results build and experience less noticeable fine lines and wrinkles and visibly firmer skin in no time at all.  </p><p> Learn how to use the AMP MD Derma-Roller.  </p><p> The AMP MD Derma-Roller is for individual use only. Do not share. Do not use on eyes, open wounds, or irritated, infected or sensitive skin. Keep out of reach of children.  </p><p> If this is part of a PC Perks enrollment order or added to a PC Perks or CRP replenishment order, the subsequent order will be the REDEFINE Regimen. Preferred Customers can change their replenishment order at any time before the order ships and will receive an email confirmation notifying them of this change.",
+			"prop65":"Benzophenone",
+			"image":"https://www.rodanandfields.com/images/us/sku-aaprs01-redefine-amp-it-up-special-lg.png",
+			"QV":"8",
+			"features":["AAWA125","AATN125","AATT030","AAPM030","AASRI60","PTPK002"]
+		},
+		"AAEY015":
+		{
+			"name":"REDEFINE AMP It Up Special",
+			"retail":{
+				"usa":336,
+				"can":346,
+				"aus":356,
+				"jpn":366
+			},
+			"tag":"Reveal a firmer, smoother, youthful-looking eye area with this multitasking eye cream.",
+			"description":"REDEFINE Multi-Function Eye Cream combines powerful peptides to minimize the appearance of crow's-feet while rich antioxidants and optical filters noticeably firm the area under the eye for a more vibrant and youthful appearance. This formula is ideal for maintaining the delicate skin around the eyes.",
+			"image":"https://www.rodanandfields.com/images/us/aaey015-multi-function-eye-cream-lg.png",
+			"QV":"12",
+			"volume":{
+				"metric":"15",
+				"USFL":".5"
+			}
+		},
+		"AAAPS01":
+		{
+			"name":"REDEFINE AMP MD System",
+			"retail":{
+				"usa":220,
+				"can":230,
+				"aus":240,
+				"jpn":250
+			},
+			"tag":"AMP up your skincare Regimen with the REDEFINE AMP MD System for revitalized, firmer-looking skin.",
+			"description":"Introducing a revolutionary new way to AMP up your skincare results. Combine the clinical- strength of Intensive Renewing Serum with the dermatology-inspired AMP MD \00AE Derma-Roller to accelerate and amplify your results. Intensive Renewing Serum merges powerful Peptides with R+F exclusive Retinal-MD \u2122 Technology, offering the highest potency Vitamin A available without a prescription. The AMP MD Derma-Roller offers high-precision micro-exfoliation technology to gently and safely condition the skin. Use nightly to amplify your results for visibly refined tone and texture, reduced appearance of lines and wrinkles and firmer-looking skin in no time. Learn how to use the AMP MD Derma-Roller. The AMP MD Derma-Roller is for individual use only. Do not use on eyes, open wounds, or irritated, infected or sensitive skin. Keep out of reach of children. If the AMP MD System is added to an auto-ship order, the subsequent order will be the REDEFINE AMP MD System Refill. Preferred Customers can change their auto-ship order at any time before the order ships and will receive an email confirmation notifying them of this change.",
+			"image":"https://www.rodanandfields.com/images/us/sku-aaaps01-redefine-amp-md-system-lg.png",
+			"QV":"12",
+			"features":["AASRI60","PTPK002"]
+		},
+		"AASRI60":
+		{
+			"name":"REDEFINE Intensive Renewing Serum",
+			"retail":{
+				"usa":99,
+				"can":109,
+				"aus":119,
+				"jpn":129
+			},
+			"tag":"R+F's clinical-strength Intensive Renewing Serum is your go-to for achieving smoother, firmer-looking skin.",
+			"description":"Experience the visible skin firming, smoothing and revitalizing benefits of powerful Vitamin A without a visit to the dermatologist's office. REDEFINE \u2122 Intensive Renewing Serum is the closest you can get to prescription-strength Vitamin A without a prescription. With Retinal-MD \u2122 Technology, an ingredient that is 20 times the strength of Retinol, Intensive Renewing Serum harnesses the skin's own renewing powers to reduce the appearance of fine lines, wrinkles and loss of firmness. This formula is not only stronger than Retinol, it's smarter too. Specifically designed to be tough on the signs of aging — not on your skin — it's gentle enough for everyday use on nearly all skin types.",
+			"image":"https://www.rodanandfields.com/images/us/aaey015-multi-function-eye-cream-lg.png",
+			"QV":"12",
+			"units":"60 Capsules"
+		},
+		"DERDS05":
+		{
+			"name":"RADIANT DEFENSE Perfecting Liquid SPF 30",
+			"retail":{
+				"usa":"66",
+				"can":"66",
+				"aus":"66",
+				"jpn":"66"
+			},
+			"pc":{
+				"usa":"59",
+				"can":"59",
+				"aus":"59",
+				"jpn":"59"
+			},
+			variant:"almond",
+			"tag":"R+F's clinical-strength Intensive Renewing Serum is your go-to for achieving smoother, firmer-looking skin.",
+			"description":"Experience the visible skin firming, smoothing and revitalizing benefits of powerful Vitamin A without a visit to the dermatologist's office. REDEFINE \u2122 Intensive Renewing Serum is the closest you can get to prescription-strength Vitamin A without a prescription. With Retinal-MD \u2122 Technology, an ingredient that is 20 times the strength of Retinol, Intensive Renewing Serum harnesses the skin's own renewing powers to reduce the appearance of fine lines, wrinkles and loss of firmness. This formula is not only stronger than Retinol, it's smarter too. Specifically designed to be tough on the signs of aging — not on your skin — it's gentle enough for everyday use on nearly all skin types.",
+			"image":"https://www.rodanandfields.com/medias/DERDS05-detail.jpg?context=bWFzdGVyfGltYWdlc3wyOTY1MnxpbWFnZS9qcGVnfGltYWdlcy9oNjMvaDE2Lzg4MjE4NDk0MjM5MDIuanBnfGQwZDMzYzY0MDdmOThjZjFhZGNkMmM0OTE1NWYxODdjNDJmZjgxZDIxZWQ2N2E1ZDBmNzRjNTM0NjY2OWMzODc",
+			"QV":"12",
+			"units":"50 mL / 1.69 Fl. Oz. U.S."
+		},
+
+
+
+
+	}
+
+	function keyGen() {
+
+	}
+	function qtyAdd() {
+
+	}
+	function qtySub(){
+
+	}
+	function removeFromCart(){
+
+	}
+
+
+
+
+	function searchValid() {
+		var searchTerm = "Moisturizer"
+		document.getElementById('searchPageFound').innerHTML = "8 results found for \"";
+		document.getElementById('searchPageFoundTerm').innerHTML = searchTerm;
+		document.getElementById('searchPageResults').innerHTML = categoryIteration();
+		oos();
+
+	}
+	function searchInvalid() {
+		var searchTerm = "Moisturizer"
+		document.getElementById('searchPageFound').innerHTML = "No results found for \"";
+		document.getElementById('searchPageFoundTerm').innerHTML = searchTerm;
+		document.getElementById('searchPageResults').innerHTML = "<p>Please try another search or broaden the type of product you need.</p><br /><p>Search tips:</p><p>1) Lorem ipsom</p><p>2) Lorem ipsom</p><p>3) Lorem ipsom</p><hr><p>Not finding what you're looking for?</p><button class=\"btnPrimary\">Shop All products</button>";
+	}
+
+
+	function multiTermSearch(input,item,any){
+		input = input.toLowerCase()
+		item = item.toLowerCase()
+		if (!any) {any = false}
+			var match = false;
+		var matchValue = 0;
+		var inputArray = input.split(" ");
+		var input2 = [];
+		for (var i = 0; i < inputArray.length; i++) {
+			if (
+				(!input2.includes(inputArray[i])) &&
+				(inputArray[i] !== "") &&
+				(inputArray[i] !== "and") &&
+				(inputArray[i] !== "&") &&
+				(inputArray[i] !== "+")
+				)
+			{
+				input2.push(inputArray[i])
+			}
+		}
+		item = parseFromUnderscore(item)
+		for (var i = inputArray.length - 1; i > 0; i--) {
+			if (
+				(inputArray[i] == "") ||
+				(inputArray[i] == "and") ||
+				(inputArray[i] == "&") ||
+				(inputArray[i] == "+")
+				){
+				inputArray.splice(i,1)
+		}
+	}
+	if (inputArray.length > 0){
+		for (var i = 0; i < inputArray.length; i++) {
+			if (item.includes(inputArray[i])){
+				matchValue++
+			}else{
+				return false
+			}
+		}
+
+		if ((matchValue / inputArray.length ) > (1 / 3)) {
+			console.log((matchValue / inputArray.length ) + " match " + item)
+			console.log(inputArray)
+			console.log(matchValue , inputArray.length)
+			return true
+		}else{
+			return false
+		}
+	}else{
+		return true
+	}
+}
+
+
+
+function highlightMultiSearch(string,terms) {
+	return string
+	if (terms == undefined) {terms = -1}
+		console.log(string,terms)
+	var output = ""
+	temp = ""
+	var stringSplit = string.split(" ")
+	console.log(stringSplit)
+	if (terms.length >= 0) {
+		for (var i = 0; i < stringSplit.length ; i++){
+			for (var j = 0; j < terms.length; j++) {
+				if (stringSplit[i].includes(terms[j])){
+					stringSplit[i] = stringSplit[i].split(terms[j]).join("!!!!!!!!" + terms[j] + "@@@@@@@@")
+				}
+			}
+		}
+	}
+	console.log(stringSplit)
+	stringSplit = stringSplit.join(" ").split("!!!!!!!!").join("<span class=\"bold\">").split("@@@@@@@@").join("</span>")
+	console.log(stringSplit)
+	return stringSplit
+
+}
+
+
+
+function updatePagination(current,end,id) {
+	console.log(id)
+	if (id !== "undefined"){
+		document.getElementById(id).innerHTML = paginationGen(current,end,id);
+	}else{
+		alert("current: " + current + ", end: " + end + ", ID: " + id)
+	}
+}
+
+function paginationGen(current,end,id){
+	console.log(current, end)
+	if (end <= 1){
+		return ""
+	}
+	if (current > end) { current == end}
+		if (current < 1) { current == 1}
+			var temp = "<div class=\"paginationContainer  \" " + (id ? "id=\"" + id + "\"" : "") + "\">"
+		if (end > 5) {
+			if ( (end - current) < 3) {
+				temp += "<a onclick=\"updatePagination(" + (current - 1) + "," + end + ",'" + id + "')\"><div class=\"paginationItem paginationPrev\"></div></a>"
+				temp += "<a onclick=\"updatePagination(1," + end + ",'" + id + "')\"><div class=\"paginationItem\">1</div></a>"
+				temp += "<div class=\"paginationItem paginationEllipsis\"></div>"
+				for (var i = (end - 3) ; i <= end; i ++) {
+					if (i == current){
+						temp += "<a><div class=\"paginationItem paginationSelected\">" + i + "</div></a>"
+					}else{
+						temp += "<a onclick=\"updatePagination(" + i + "," + end + ",'" + id + "')\"><div class=\"paginationItem\">" + i + "</div></a>"	
+					}			
+				}
+				if (current == end){
+					temp += "<a><div class=\"paginationItem paginationNext paginationDisabled \"></div></a>"
+				}else{
+					temp += "<a onclick=\"updatePagination(" + (current + 1) + "," + end + ",'" + id + "')\"><div class=\"paginationItem paginationNext \"></div></a>"
+				}
+			}else{
+				if (current <= 3) {
+					if (current == 1) {
+						temp += "<a><div class=\"paginationItem paginationPrev paginationDisabled\"></div></a>"
+					}else{
+						temp += "<a onclick=\"updatePagination(" + (current - 1) + "," + end + ",'" + id + "')\"><div class=\"paginationItem paginationPrev\"></div></a>"
+					}
+					for (var i = 1; i <= 4; i++){
+						if (i == current){
+							temp += "<a><div class=\"paginationItem paginationSelected\">" + i + "</div></a>"
+						}else{
+							temp += "<a onclick=\"updatePagination(" + i + "," + end + ",'" + id + "')\"><div class=\"paginationItem \">" + i + "</div></a>"
+						}
+					}
+					temp += "<a ><div class=\"paginationItem paginationEllipsis\"></div></a>"
+					temp += "<a onclick=\"updatePagination(" + end + "," + end + ",'" + id + "')\"><div class=\"paginationItem\">" + end + "</div></a>"
+					temp += "<a onclick=\"updatePagination(" + (current + 1) + "," + end + ",'" + id + "')\"><div class=\"paginationItem paginationNext\"></div></a>"
+				}else{
+					temp += "<a onclick=\"updatePagination(" + (current - 1) + "," + end + ",'" + id + "')\"><div class=\"paginationItem paginationPrev\"></div></a>"
+					temp += "<a onclick=\"updatePagination(1," + end + ",'" + id + "')\"><div class=\"paginationItem\">1</div></a>"
+					temp += "<div class=\"paginationItem paginationEllipsis\"></div>"
+					for (var i = (current - 1); i <= (current + 1); i ++) {
+						if (i == current){
+							temp += "<a><div class=\"paginationItem paginationSelected\">" + i + "</div></a>"
+						}else{
+							temp += "<a onclick=\"updatePagination(" + i + "," + end + ",'" + id + "')\"><div class=\"paginationItem\">" + i + "</div></a>"	
+						}
+					}
+					temp += "<div class=\"paginationItem paginationEllipsis\"></div>"
+					temp += "<a onclick=\"updatePagination(" + end + "," + end + ",'" + id + "')\"><div class=\"paginationItem\">" + end + "</div></a>"
+					temp += "<a onclick=\"updatePagination(" + (current + 1) + "," + end + ",'" + id + "')\"><div class=\"paginationItem paginationNext\"></div></a>"
+				}
+			}
+		}else{
+			if (current == 1){
+				temp += "<a ><div class=\"paginationItem paginationPrev paginationDisabled \"></div></a>"
+			}else{
+				temp += "<a onclick=\"updatePagination(" + (current - 1) + "," + end + ",'" + id + "')\"><div class=\"paginationItem paginationPrev\"></div></a>"
+			}
+			for (var i = 1; i <= end; i++){
+				if (current == i) {
+					temp += "<a ><div class=\"paginationItem paginationSelected\">" + i + "</div></a>"
+				}else{
+					temp += "<a onclick=\"updatePagination(" + i + "," + end + ",'" + id + "')\"><div class=\"paginationItem \">" + i + "</div></a>"
+				}
+			}
+			if (current == end){
+				temp += "<a ><div class=\"paginationItem paginationNext paginationDisabled\"></div></a>"
+			}else{
+				temp += "<a onclick=\"updatePagination(" + (current + 1) + "," + end + ",'" + id + "')\"><div class=\"paginationItem paginationNext\"></div></a>"
+			}
+		}
+		temp += "</div>"
+
+		return temp
+	}
+
+
+
+
+
+
+
+
+	var states = [
+	"Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming","American Samoa","District of Columbia","Federated States of Micronesia","Guam","Marshall Islands","Northern Mariana Islands","Palau","Puerto Rico","Virgin Islands"
+	]
+
+
+	var statesAbbr = [
+	"AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY","AS","DC","FM","GU","MH","MP","PW","PR","VI"]
+
+
+
+
+
+	function randomString(length) {
+		var result = '';
+		var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+		for ( var i = 0; i < length; i++ ) {
+			result += characters.charAt(Math.floor(Math.random() * characters.length));
+		}
+		return result;
+	}
+
+
+
+
+
+
+
+
+
+
+	var navigationMenu = [
+
+	{
+		"topLevel":"Featured",
+		"subLevel":
+		[
+		{
+			"header":"",
+			"item":
+			[
+			{
+				"name":"Special Offers",	
+				"link":"#"
+			},
+			{
+				"name":"new Product 1 Landing page",	
+				"link":"#"
+			},
+			{
+				"name":"new Product 2 Landing page",	
+				"link":"#"
+			},
+			]
+		}
+		]
+	},
+	{
+		"topLevel":"shop",
+		"subLevel":
+		[
+		{
+			"header":"shop by Product Line",
+			"item":
+			[
+			{
+				"name":"redefine",	
+				"link":"#"
+			},
+			{
+				"name":"reverse",	
+				"link":"#"
+			},
+			{
+				"name":"unblemish",	
+				"link":"#"
+			},
+			{
+				"name":"spotless",	
+				"link":"#"
+			},
+			{
+				"name":"soothe",	
+				"link":"#"
+			},
+			{
+				"name":"enchancments",	
+				"link":"#"
+			},
+			{
+				"name":"essentials",	
+				"link":"#"
+			},
+			{
+				"name":"dermacosmetics",	
+				"link":"#"
+			},
+			{
+				"name":"All products",	
+				"link":"#"
+			},												
+			]
+
+		},
+		{
+			"header":"Shop By Category",
+			"item":
+			[
+			{
+				"name":"regimens",	
+				"link":"#"
+			},
+			{
+				"name":"serums",	
+				"link":"#"
+			},
+			{
+				"name":"eyes, lips, lashes",	
+				"link":"#"
+			},
+
+			{
+				"name":"masks",	
+				"link":"#"
+			},
+			{
+				"name":"dermacosmetics",	
+				"link":"#"
+			},
+			{
+				"name":"hand & body",	
+				"link":"#"
+			},
+			{
+				"name":"sun protection",	
+				"link":"#"
+			},
+			{
+				"name":"tools",	
+				"link":"#"
+			},
+			{
+				"name":"accessories",	
+				"link":"#"
+			},
+
+			]
+		},
+		{
+			"header":"shop by skin concern",
+			"item":
+			[
+			{
+				"name":"fine lines & wrinkles",	
+				"link":"#"
+			},
+			{
+				"name":"lifting & firming",	
+				"link":"#"
+			},
+			{
+				"name":"acne & breakouts",	
+				"link":"#"
+			},
+			{
+				"name":"uneven skintone",	
+				"link":"#"
+			},
+			{
+				"name":"redness & sensitive skin",	
+				"link":"#"
+			},
+			{
+				"name":"dry skin",	
+				"link":"#"
+			},
+
+			]
+
+		},
+
+		{
+			"header":"Consultant Only ",
+			"hideUnlessUserType":["consultant"],						
+			"item":					
+			[
+			{
+				"name":"consultant only products 1",	
+				"link":"#"
+			},
+			{
+				"name":"consultant only products 2",	
+				"link":"#"
+			},
+			{
+				"name":"consultant only products 3",	
+				"link":"#"
+			},
+			{
+				"name":"consultant only products 4",	
+				"link":"#"
+			},
+
+			]
+
+		},
+
+		]
+	},
+	{
+		"topLevel":"Real Results",
+		"subLevel":
+		[
+		{
+			"header":"",
+			"item":
+			[
+			{
+				"name":"fine lines & wrinkles",	
+				"link":"#"
+			},
+			{
+				"name":"lifting & firming",	
+				"link":"#"
+			},
+			{
+				"name":"acne & breakouts",	
+				"link":"#"
+			},
+			{
+				"name":"uneven skintone & dark marks",	
+				"link":"#"
+			},
+			{
+				"name":"redness & senstitive skin",	
+				"link":"#"
+			},
+			]
+
+		},											
+		]
+	},
+	{
+		"topLevel":"our story",
+		"subLevel":
+		[
+		{
+			"header":"",
+			"item":
+			[
+			{
+				"name":"R+F difference",	
+				"link":"#"
+			},
+			{
+				"name":"personalized skin care service",	
+				"link":"#"
+			},
+			{
+				"name":"benefit of a consultant",	
+				"link":"#"
+			},
+			{
+				"name":"explore our regimens",	
+				"link":"#"
+			},
+			{
+				"name":"our founders",	
+				"link":"#"
+			},
+			{
+				"name":"our impact",	
+				"link":"#"
+			},
+			]
+
+		},											
+		]
+	},
+	{
+		"topLevel":"perks program",
+		"subLevel":
+		[
+		{
+			"header":"",
+			"item":
+			[
+			{
+				"name":"learn more",	
+				"link":"#"
+			},
+			{
+				"name":"pc perks faqs",	
+				"link":"#"
+			},
+			]
+
+		},					
+		]
+	},
+	{
+		"topLevel":"become a consultant",
+		"hideForUserType":["consultant"],
+		"subLevel":
+		[
+		{
+			"header":"",
+			"item":
+			[
+			{
+				"name":"why r+f",	
+				"link":"#"
+			},
+			{
+				"name":"Start your jounrey",	
+				"link":"#"
+			},
+			{
+				"name":"consultant faqs",	
+				"link":"#"
+			},
+
+			{
+				"name":"enroll now",	
+				"link":"#"
+			},
+			]
+
+		},				
+		]
+	},
+	{
+		"topLevel":"Consultant only",
+		"showForUserType":["consultant"],
+		"hideUnlessUserType":["consultant"],
+		"subLevel":
+		[
+		{
+			"header":"",
+			"item":
+			[
+			{
+				"name":"Consultant only products 1",	
+				"link":"#"
+			},
+			{
+				"name":"Consultant only products 2",
+				"link":"#"
+			},
+			{
+				"name":"Consultant only products 3",
+				"link":"#"
+			},
+
+			{
+				"name":"Consultant only products 4",
+				"link":"#"
+			},
+			]
+
+		},				
+		]
+	}
+
+	]
+
+
+
+
+
+
+
+	function RFheaderGen(type) {
+		var temp = "";
+		if ((navType != "mini") && (navType != "micro")){
+			if (type == "mini") {
+				navType = "mini"
+			}else{
+				if (type == "micro"){
+					navType = "micro"
+				}else{
+					navType = "full"
+				}
+			}
+		}
+		
+		temp += "<div class=\"containerMainLoadingAnimation  \" id=\"containerMainLoadingAnimation\"><div class=\"loadingAnimation\"></div></div>"
+		temp += RFModalInit()
+		temp += "<div class=\"navContainer " + (navType != "full" ? navType : "") +" \" id=\"navContainer\">\n"
+		temp += "<div class=\"containerMainOverlay\" id=\"containerMainOverlay\" onclick=\"containerMainOverlayToggle()\"></div>\n"
+		if (navType == "full"){
+			temp += RFpromoGen()	
+		}	
+		temp += RFnavTopBarGen()
+		if (navType == "full") {
+			temp += RFnavMenu()	
+		}
+		temp += "<div class=\"toastContainer\" id=\"toastContainer\"></div>"
+		temp += RFnavMobileGen();
+		temp += "</div>"
+		document.write(temp)
+		getHash()
+	}
+
+
+
+	function RFnavMobileGen(){
+		var temp = ""
+		if (navType == "full") {
+			temp = "<div class=\"navMobileContainer mobile\" id=\"navMobileContainer\">"
+			temp += RFnavMobileCard("initial")
+			temp += RFnavMobileCountryCard()
+			temp += RFnavMobileCardMenu()
+			temp += "</div>"	
+		}
+		return temp
+	}
+
+
+
+	function RFnavMobileCountryCard() {
+		var temp = ""
+		temp += "<div class=\"navMobileCard navMobileOffScreen\" id=\"navMobileCardSelectCountry\">\n"
+		temp += "<div class=\"navMobileHeader strong\">\n"
+		temp += "<span onclick=\"navMobileSlideOut('navMobileCardSelectCountry')\" class=\"navMobileLeft rf-icon rf-icon-chevron-left iconExLarge\"></span>\n"
+		temp += "<span>Select Country</span>\n"
+		temp += "<span class=\"navMobileRight rf-icon rf-icon-close iconExLarge\" onclick=\"navMobileClose()\"></span>\n"
+		temp += "</div>\n"
+		temp += "<div id=\"navMobileCountryDisplay\">\n"
+		temp+= "</div>\n"
+		temp += "</div>\n"
+
+		return temp
+	}
+
+	function RFnavMobileCardMenu(){
+		var temp = ""
+		for (var topLevelCount = 0; topLevelCount < navigationMenu.length; topLevelCount++){
+
+			if (navigationMenu[topLevelCount].subLevel.length == 1){
+
+
+				temp +=	RFnavMobileCard(navigationMenu[topLevelCount].topLevel,navigationMenu[topLevelCount].subLevel[0].item)	
+			}else{
+
+
+				var tempArray = []
+				for (var i = 0; i < navigationMenu[topLevelCount].subLevel.length; i++){
+				}
+				for (var i = 0; i < navigationMenu[topLevelCount].subLevel.length; i ++){
+
+
+					console.log(navigationMenu[topLevelCount].subLevel[i].header)
+					tempArray.push({"name":navigationMenu[topLevelCount].subLevel[i].header})
+					temp +=	RFnavMobileCard(navigationMenu[topLevelCount].subLevel[i].header,navigationMenu[topLevelCount].subLevel[i].item,2)		
+				}
+
+				temp +=	RFnavMobileCard(navigationMenu[topLevelCount].topLevel,tempArray)	
+				for (var subLevelCount = 0; subLevelCount < navigationMenu[topLevelCount].subLevel.length; subLevelCount ++){
+
+
+				}
+			}
+
+
+		}
+
+		return temp
+	}
+	function RFnavMobileCard(header,sub,zindex){
+		var zTemp = ""
+		if (!isNaN(zindex)){
+			zTemp = "style=\"z-index: " + zindex + ";\" "
+		}
+		var temp = "<div class=\"navMobileCard " + (header == "initial" ? "" : "navMobileOffScreen") + "\" " + zTemp + " id=\"navMobileCard" + parseSpacesFromString(header) + "\" >\n"
+		temp += "<div class=\"navMobileHeader\">"
+		if (header == "initial"){
+			temp += "<span class=\"navMobileLeft\" onclick=\"navMobileSlideIn('navMobileCardMyAccount')\" id=\"navMobileUser\">\n"
+			temp += "</span>\n"
+			temp += "<div class=\"navMobileLeft\" onclick=\"navMobileSlideIn('navMobileCardSignIn')\" id=\"navMobileSignIn\"><span class=\"rf-icon rf-icon-account-image iconExLarge\"></span>&nbsp;Sign in\n"
+			temp += "</div>\n"
+		}else{
+			temp += "<span onclick=\"navMobileSlideOut('navMobileCard" + parseSpacesFromString(header) + "')\" class=\"navMobileLeft  rf-icon rf-icon-chevron-left iconExLarge\"></span>\n"
+			temp += "<span>" + header + "</span>\n"
+		}
+
+		temp += "<span class=\"navMobileRight rf-icon rf-icon-close iconExLarge\" onclick=\"navMobileClose(null)\"></span>\n"
+		temp += "</div>"
+		if (header == "initial"){
+			for (var topLevelCount = 0; topLevelCount < navigationMenu.length; topLevelCount++){
+//			console.log(navigationMenu[topLevelCount].topLevel)
+temp +=	RFnavMobileCardItem(navigationMenu[topLevelCount].topLevel,navigationMenu[topLevelCount].subLevel)
+}
+temp += "<div class=\"navMobileItem\" onclick=\"countryDisplayMobile(), navMobileSlideIn('navMobileCardSelectCountry')\">\n"
+temp += "<span>	\n"
+temp += "SWITCH COUNTRY &nbsp;<img src=\"images/flags/usa.png\" id=\"selectedCountryMobile\"/>\n"
+temp += "</span>\n"
+temp += "<span class=\"navMobileRight rf-icon rf-icon-chevron-right iconExLarge\"></span>\n"
+temp += "</div>\n"
+temp += "<div class=\"navMobileFooter\">\n"
+temp += "<span class=\"navMobileLeft\" id=\"navMobileSignOut\" onclick=\"userLogOut()\"></span>\n"
+temp += "</div>\n"
+
+temp += "</div>"
+}else{
+	if (sub.item){
+//			console.log(sub.item)	
+}
+//		console.log(sub)
+for (var subLevelCount = 0; subLevelCount < sub.length; subLevelCount++){
+//			console.log(navigationMenu[topLevelCount].topLevel)
+//			console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& " + sub[subLevelCount].name)
+temp +=	RFnavMobileCardItem(sub[subLevelCount].name,sub[subLevelCount].link)
+}
+
+temp += "</div>\n"		
+}
+
+return temp
+
+
+
+
+
+}
+
+
+function RFnavMobileCardItem(header,sub){
+
+	
+// 	tempOnClick = "TEST"
+tempOnClick = "onclick=\"navMobileClose(null)\" "
+var temp = ""
+var tempChevron = ""
+console.log(sub)
+if ((sub !== "#")){
+//		console.log(sub)
+var tempOnClick = "onclick=\"navMobileSlideIn('navMobileCard" + parseSpacesFromString(header) + "')\" "
+tempChevron += "<span class=\"navMobileRight rf-icon rf-icon-chevron-right iconExLarge\" " + tempOnClick + " ></span>\n"
+}
+temp += "<div class=\"navMobileItem\" " + tempOnClick + " \">\n"
+temp += "<span>" + header + "</span>\n"
+temp += tempChevron
+temp += "</div>\n"
+return temp
+}
+
+
+function RFModalInit(){
+	var temp = "<div class=\"containerMainModal\" id=\"containerMainModal\">\n"
+	temp += "<div class=\"containerMainModalOverlay pointer\" id=\"containerMainModalOverlay\" onclick=\"modalToggle()\"></div>\n"
+
+
+
+	temp += "<div class=\"containerMainModalFrame\" id=\"containerMainModalFrame\"></div>\n"
+
+
+	temp += "</div>"
+
+
+	temp += "</div>\n"
+	return temp
+
+}
+function RFmodalGen(content,pctaName,pctaAction,sctaName,sctaAction,tctaName,tctaAction){
+	var temp = ""
+	var tempFooter = ""
+	var tempHeader = ""
+	if (document.getElementById('containerMainModal')){
+		if (document.getElementById('containerMainModal').classList.contains("optionActive")){	
+			document.getElementById('containerMainModal').classList.remove("optionActive")
+			document.getElementById('containerMainModalFrame').innerHTML = ""
+		}
+	}else{
+		return false
+	}
+
+	if (pctaName !== undefined){			
+		tempFooter += "<div class=\"containerMainModalFooter \" id=\"containerMainModalFooter\">\n"
+		tempFooter += "<div class=\"btnSideBySide  \">"
+		if (sctaName !== undefined){	
+			tempFooter += "<a class=\"btnSecondary btnSmall\" onclick=\"" + sctaAction + "\">" + sctaName + "</a>\n"	
+		}			
+		tempFooter += "<a class=\"btnPrimary btnSmall\" onclick=\"" + pctaAction + "\" id=\"modalPrimary\">" + pctaName + "</a>\n"
+		tempFooter += "</div>\n"
+	}
+	if (tctaName !== undefined) {
+		//tempHeader = "<a class=\"containerMainModalTertiary aBlue\" onclick=\"" + tctaAction + "\">" + tctaName + "</a>\n"
+		tempHeader = "<a class=\"containerMainModalTertiary uppercase\" onclick=\"" + tctaAction + "\">" + tctaName + "</a>\n"
+	}
+
+	temp += "<div class=\"containerMainModalHeader \">" + tempHeader + "<span class=\"rf-icon rf-icon-close pointer containerMainModalClose\" onclick=\"modalToggle()\"></span></div>\n"
+
+	
+	if (content != "") {
+		temp += "<div class=\"containerMainModalContent  " + ((tempFooter.length == 0) ? "optionNoFooter" : "") + " \" id=\"containerMainModalContent\">\n"
+		temp += content
+		temp += "</div>\n"
+		temp += tempFooter
+		if (document.getElementById('containerMainModalFrame')) {
+			document.getElementById('containerMainModalFrame').innerHTML = temp
+		}
+		modalToggle()
+	}	
+}
+
+
+
+
+
+
+function tempModalInner2(){
+	var temp = ""
+
+	temp += "<div class=\"modalContentSmall \">"
+	temp += "<div class=\"inputRadioButtonCardContainer\"><input type=\"radio\" class=\"inputRadioButtonCard\" name=\"group2\" id=\"radioButtonCard1\" value=\"1\" checked=\"\"><label for=\"radioButtonCard1\"><p> Expedited Shipping ($19.95)</p><p>1 day</p></label></div>"
+	temp += "<div class=\"inputRadioButtonCardContainer\"><input type=\"radio\" class=\"inputRadioButtonCard\" name=\"group2\" id=\"radioButtonCard2\" value=\"1\"><label for=\"radioButtonCard2\"><p> Standard Shipping ($9.95)</p><p>5 days</p></label></div>"
+	temp += "<div class=\"inputRadioButtonCardContainer\"><input type=\"radio\" class=\"inputRadioButtonCard\" name=\"group2\" id=\"radioButtonCard3\" value=\"1\"><label for=\"radioButtonCard3\"><p> Smart Post ($8.95)</p><p>FedEX fullfillment and shipping with USPS last leg delivery</p><p>6 - 14 days</p></label></div>"
+	temp += "<div class=\"inputRadioButtonCardContainer\"><input type=\"radio\" class=\"inputRadioButtonCard\" name=\"group2\" id=\"radioButtonCard4\" value=\"1\"><label for=\"radioButtonCard4\"><p> Free Shipping</p><p>6-8 weeks</p></label></div>"
+	temp += "</div>"
+	return temp
+}
+
+function tempModalInner() {
+	var temp = ""
+
+
+
+
+	temp += "<div class=\"RF_cardContainerMedium noBorder\">"
+	temp += "<h1>"
+	temp += "Account Management"
+	temp += "</h1>"
+	temp += "<br>"
+	temp += "<h2>"
+	temp += "September 07, 2018"
+	temp += "</h2>"
+	temp += "<br>"
+	temp += "<h2>"
+	temp += "Overview:"
+	temp += "</h2>"
+
+	temp += "<ul class=\" \">"
+	temp += "<li>This is the interaction pattern for adding new credit cards, address, et cetera within account management</li>"
+	temp += "<li>Cards should exist in a 2 column view in tablet/desktop and a single column view for mobile or when the container width is too small to do a 2 up view (some in between breakpoints)</li>"
+	temp += "<li>Adding a new entry should automatically bring out an editable card to enter the new details</li>"
+	temp += "<li>Default card should stay in-line while adding new cards but should populate to the begining of the list on refresh. Cavet is that setting an entry to default will move it to the top of the list</li>"
+	temp += "<li>Card animation should fly them in the container in a zig zag pattern when in two column pattern</li>"
+	temp += "<li>Removing a card will reorder the list</li>"
+	temp += "<li>Editing the card will push the lower cards down</li>"
+	temp += "<li>3 dot menu is a click event and should disappear on clicking outside of the menu or dots, as well as when the cards are reordering.  There is a bug where setting a default card does not close the menu which I've not addressed yet</li>"
+	temp += "<li>3 dot menu should animate out from the 3 dot image</li>"
+	temp += "<li>Removing a card that is not default should fire a success toast, default cards will fire a warning toast alerting you to pick a new default card</li>"
+	temp += "</ul>"
+	temp += "</div>"
+
+
+	return temp
+
+
+}
+
+
+
+
+function RFModalGen2(){
+	var temp = "<div class=\"containerMainModal optionActive\" id=\"containerMainModal\">\n"
+	temp += "<div class=\"containerMainModalOverlay pointer\" id=\"containerMainModalOverlay\" onclick=\"modalToggle()\">\n"
+	temp += "</div>\n"
+	temp += "<table class=\"containerMainModalTable\" id=\"containerMainModalTable\">\n"
+	temp += "<tbody><tr><td align=\"center\">\n"
+	temp += "<div class=\"containerMainModalOuter\" id=\"containerMainModalOuter\">\n"
+	temp += "<div class=\"containerMainModalInner\" id=\"containerMainModalInner\">\n"
+	temp += "<p class=\"alignRight clarityFont1824\"><span class=\"rf-icon rf-icon-close pointer\" onclick=\"modalClose()\"></span></p>\n"
+	temp += "<div class=\"br16\"></div>\n"
+	temp += "<div class=\"containerMainModalContent\" id=\"containerMainModalContent\">\n"
+	temp += "<!-- content goes here -->\n"
+	temp += "</div>\n"
+	temp += "<div class=\"br16\"></div>\n"
+	temp += "</div>\n"
+	temp += "</div>\n"
+	temp += "</td></tr>\n"
+	temp += "</tbody></table>\n"
+	temp += "</div>\n"
+	return temp
+
+}
+
+
+
+function RFpromoGen(){
+	var temp = ""
+	temp += "<div class=\"navPromo fontSmall invert\" id=\"navPromo\">\n"
+	temp += "<div class=\"promoCenter\">\n"
+	temp += "<p id=\"consoleDumpP\">New Prefered Customer Offer: Free Lash with any Regimen Purchase* <a href=\"#\">Learn More</a></p>\n"
+	temp += "</div>\n"
+	temp += "<div class=\"navBarRight fontLarge \" onclick=\"closePromo()\">\n"
+	temp += "<span class=\"rf-icon rf-icon-close iconSmall invert\"></span>\n"
+	temp += "</div>\n"
+	temp += "</div>\n"
+	return temp
+}
+function RFnavTopBarGen () {
+	var temp = "";
+	temp += "<div class=\"navHead \" id=\"navHead\">\n"
+	temp += "<div class=\"navHeadInner\" id=\"\">\n"
+
+	temp += "<div class=\"navBarLeft fontSmall \" id=\"navBarLeftConsultant\">\n"
+	temp += RFnavBarLeftConsultantContent()
+	if (navType == "full"){
+		temp += "<span class=\"mobile\" onclick=\"navMobileOpen()\">\n"
+		temp += "<img src=\"images/icons/hamburger.svg\">\n"
+		temp += "</span>\n"	
+	}
+	
+	temp += "</div>\n"
+	temp += "<div class=\"navBarCenter\">\n"
+	temp += "<a href=\"" + mainURL(localizationCode) +"\" class=\"pointer \">"
+	temp += "<span class=\"navLogo desktop\">\n"
+	temp += "<img src=\"images/icons/rf-full-logo.svg\" alt=\"rodan and fields\" title=\"rodan and fields\">\n"
+	temp += "</span>\n"
+	temp += "<span class=\"navLogo mobile\">\n"
+	temp += "<img src=\"images/icons/rf-stamp-logo.svg\" alt=\"rodan and fields\" title=\"rodan and fields\">\n"
+	temp += "</span>\n"
+	temp += "</a>"
+	temp += "</div>\n"
+	temp += "</div>\n"
+	if (navType == "full") {
+		temp += RFtopBarRightGen()
+		temp += RFnavSigninDropDown()
+		temp += RFnavSearchDropDown()	
+	}
+	
+	temp += "</div>\n"
+	return temp;
+}
+
+function RFnavBarLeftConsultantContent() {
+	var temp = ""
+	if (navType == "full") {
+		temp += "<div class=\"desktop \" id=\"findConsultantContainer\">\n"
+		if (userType !== "consultant") {
+			temp += "<a href=\"#\" class=\"RF_linkPrimary uppercase\">Find A Consultant</a>\n"
+		}else{
+			temp += "<div class=\"menuConsultantContainer\">"
+			temp += "<div class=\"menuConsultantCopy\">"
+			temp += "<div class=\"RFgothamLight RFfontMediumTight textLeft\">"
+			temp += "Independent Consultant<br />\n"
+			temp += "Sarah LaChance-Johnson<br />\n"
+			temp += "<a href=\"#\" class=\"RF_linkPrimary capitalize\">About Me</a>\n"
+			temp += "</div>"
+			temp += "</div>"
+			temp += "</div>"
+		}
+		temp += "</div>\n"
+	}
+	return temp
+}
+function RFtopBarRightGen(){
+	var temp = ""
+	
+	temp += "<div class=\"navBarRight \">\n"
+	if (navType == "full" ) {
+		temp += RFnavSearch()
+		temp += RFnavCart()
+		temp += RFnavCountry();		
+	}
+	temp += "</div>\n"
+	return temp
+}
+function RFnavSearch(){
+	var temp = "<div class=\"spanTarget \" onclick=\"containerMainOverlayToggle(function(){searchBarAll()})\"> <!-- add \"mobile\" to the class to remove it from the top bar on desktop -->\n"
+	temp += "<span class=\" rf-icon rf-icon-search iconLarge \" id=\"searchIconMobile\"></span><span class=\"fontSmall capitalize desktop  \">Search</span><!-- use \"searchBarMobile()\" if above class contains mobile, \"searcBarAll()\" if for all breakpoints  -->\n"
+	temp += "</div>\n"
+	temp += "<div class=\" desktop\" onmouseenter=\"\" onclick=\"containerMainOverlayToggle(userLogInToggle)\">\n"
+	temp += "<span class=\"rf-icon rf-icon-account-image iconLarge\"></span><span class=\"fontSmall capitalize \" id=\"user\">Sign In</span>\n"
+	temp += "</div>\n"
+	return temp
+}
+function RFnavCart(){
+	var temp = "<div class=\"cartIcon\" onclick=\"closePanels(), miniCartToggle(), cartCountAdd(2)\">\n"
+	temp += "<span class=\"rf-icon rf-icon-bag iconLarge \"></span>\n"
+	temp += "<div class=\"cartIconCount\" id=\"cartIconCount\" style=\"background-color: transparent; height: 0px; width: 0px; bottom: 28px; right: 1px;\"><p id=\"cartIconCountP\" style=\"color: transparent;\"></p></div>\n"
+	temp += "</div>	\n"
+	return temp
+}
+
+function RFnavCountry() {
+	var temp = "<div class=\"country floatRight desktop\">\n"
+	temp += "<div onclick=\"containerMainOverlayToggle(function(){countryToggle()})\"><div style=\"width:30px; \"><img id=\"selectedCountry\" src=\"images/flags/usa.png\" height=\"15\" class=\"flag\"></div><img src=\"images/icons/triangle.svg\" id=\"countryTriangle\" class=\"countryTriangle\"></div>\n"
+	temp += "<div class=\"countryLower\" id=\"countryLower\">\n"
+	temp += "<div><img src=\"images/flags/aus.png\" height=\"15\" onclick=\"containerMainOverlayToggle(function(){selectCountry('aus')})\"></div>\n"
+	temp += "<div><img src=\"images/flags/can.png\" height=\"15\" onclick=\"containerMainOverlayToggle(function(){selectCountry('can')})\"></div>\n"
+	temp += "<div><img src=\"images/flags/jpn.png\" height=\"15\" onclick=\"containerMainOverlayToggle(function(){selectCountry('jpn')})\"></div>\n"
+	temp += "<div><img src=\"images/flags/usa.png\" height=\"15\" onclick=\"containerMainOverlayToggle(function(){selectCountry('usa')})\"></div>\n"
+	temp += "</div>\n"
+	temp += "</div>\n"
+	return temp
+}
+
+
+
+
+
+function RFnavSigninDropDown(){
+	var temp = "<div class=\"userLogIn desktop  \" id=\"userLogInDesktop\">\n"
+	temp += "<!-- <div class=\"userLogInClose fontLarge\" onclick=\"closePanels(), userLogInToggle()\"><img src=\"images/icons/close.svg\" /></div> -->\n"
+	temp += "<div class=\"\">\n"
+	temp += "<div class=\"userLogInErrorContainer  error errorBG\" id=\"userLogInErrorContainer\">\n"
+	temp += "<div class=\"userLogInErrorInner\" id=\"userLogInErrorInner\">\n"
+	temp += "<div class=\"br16\"></div><span class=\"rf-icon rf-icon-error noPadding\"></span><p>This is an error</p><div class=\"br16\"></div>\n"
+	temp += "</div>\n"
+	temp += "</div>\n"
+	temp += "<div class=\"pad16\">\n"
+	temp += "<form class=\"  \">\n"
+
+
+	temp += "<div class=\"inputContainer \">"
+	temp += "<input type=\"text\" name=\"signInEmail\" id=\"signInEmail\" class=\"inputTextField input\" placeholder=\"\" oninput=\"inputLabel(this.id,'email')\">"
+	temp += "<label for=\"signInEmail\" class=\" inputTextFieldLabel\">"
+	temp += "Email"
+	temp += "</label>"
+	temp += "<div class=\"inputTextFieldHelperContainer\">"
+	temp += "<div class=\"inputTextFieldHelper \">"
+	temp += ""
+	temp += "</div>"
+	temp += "</div>"
+	temp += "<div class=\"inputTextFieldValidate\"></div>"
+	temp += "<div class=\"inputTextFieldInlineIcon\"></div>"
+	temp += "</div>"
+
+	temp += "<div class=\"inputContainer \">"
+	temp += "<input type=\"text\" name=\"signInPassword\" id=\"signInPassword\" class=\"inputTextField input inputPasswordHide\" placeholder=\"\" oninput=\"inputLabel(this.id)\">"
+	temp += "<label for=\"signInPassword\" class=\" inputTextFieldLabel\">"
+	temp += "Password"
+	temp += "</label>"
+	temp += "<div class=\"inputTextFieldHelperContainer\">"
+	temp += "<div class=\"inputTextFieldHelper \">"
+	temp += ""
+	temp += "</div>"
+	temp += "</div>"
+	temp += "<div class=\"inputTextFieldValidate\"></div>"
+//	temp += "<div class=\"inputTextFieldInlineIcon \"></div>"
+temp += "<div class=\"inputTextFieldPasswordIcon \" onclick=\"inputPasswordToggle('signInPassword')\"></div>"
+temp += "</div>"	
+temp += "</form>\n"
+temp += "<p class=\"textRight lineHeight32\"><a href=\"\" class=\"RF_linkSecondary capitalize noPadding \">Forgot password</a></p>\n"
+temp += "<input type=\"button\" name=\"submit\" placeholder=\"SIGN IN\" value=\"SIGN IN\" class=\"btnPrimary\" onclick=\"userLogIn()\">\n"
+
+
+temp += "</div>\n"
+temp += "</div>\n"
+temp += "</div>	\n"
+temp += "<div class=\"userAccount desktop uppercase\" id=\"userAccountDesktop\">\n"
+temp += "<!-- <div class=\"userLogInClose fontLarge\" onclick=\"closePanels(), userLogInToggle()\"><img src=\"images/icons/close.svg\" /></div> -->\n"
+temp += "<div>\n"
+temp += "<br>\n"
+temp += "<p>orders</p>\n"
+temp += "<p>profile</p>\n"
+temp += "<p>Address Book</p>\n"
+temp += "<p>payment methods</p>\n"
+temp += "<br>\n"
+temp += "<p><a href=\"#\" onclick=\"userLogOut()\" class=\"aBlue capitalize\">Sign Out</a></p>\n"
+temp += "</div>\n"
+temp += "</div>\n"
+return temp
+}
+function RFnavSearchDropDown() {
+	var temp = "<div class=\"searchContainer2 \" id=\"searchContainer\">\n"
+//	temp += "<div class=\" \">\n"
+temp += "<div class=\"searchInputContainer\">\n"
+temp += "<form class=\"searchForm\" id=\"searchForm\">\n"
+temp += "<input type=\"text\" name=\"searchBar\" id=\"searchBar\" placeholder=\"Search all products\" class=\"searchInput fontSmall \" onfocus=\"closePanels(), search2('searchBar')\" oninput=\"search2('searchBar')\">\n"
+temp += "<div class=\"searchIconContainer\" id=\"searchIconMobile\" onclick=\"getScroll(), searchBarMobile()\">\n"
+temp += "<span class=\"rf-icon rf-icon-close iconLarge\" id=\"searchIcon\"></span>\n"
+temp += "</div>\n"
+temp += "</form>\n"
+temp += "</div>\n"
+temp += "<div class=\"searchResultsContainer \" id=\"searchResultsContainer\">\n"
+temp += "<div class=\"searchResultsInner \">\n"
+temp += "<div class=\"fontSmall searchCount \">\n"
+temp += "<div class=\" alignLeft\" id=\"searchHeader\">\n"
+temp += "<div class=\"mediumGrey \">\</div>\n"
+temp += "</div>\n"
+temp += "</div>\n"
+temp += "<div class=\"searchResults\" id=\"searchResults\"></div>\n"
+temp += "</div>\n"
+temp += "</div>\n"
+//	temp += "</div>\n"
+temp += "</div>\n"
+return temp
+}
+
+function RFnavMenu() {
+	var temp = "";
+	temp += "<div class=\"navBar desktop\" id=\"navBar\">\n"
+	temp += "<div class=\"navBarLeft navLogo \" id=\"rfMiniLogo\" style=\"opacity: 0;\">\n"
+	temp += "<span class=\"navLogo desktop\">\n"
+	temp += "<img src=\"images/icons/rf-full-logo.svg\" class=\"logoSmallTrigger\" alt=\"rodan and fields\" title=\"rodan and fields\">\n"
+	temp += "</span>\n"
+	temp += "</div>\n"
+	temp += "<div class=\"navBarCenter \" id=\"navBarCenter\"> \n";
+	temp += RFnavMenuContent()
+	temp += "</div>\n"
+	temp += "</div>"
+	return(temp)
+
+}
+
+
+function RFnavMenuContent() {
+	var temp = ""
+	for (var topLevelCount = 0; topLevelCount < navigationMenu.length; topLevelCount++){
+		var tempShowForUserType = (navigationMenu[topLevelCount].showForUserType == undefined) ? true : userType.includes(navigationMenu[topLevelCount].showForUserType);
+		var tempHideForUserType = (navigationMenu[topLevelCount].hideForUserType == undefined) ? true : !userType.includes(navigationMenu[topLevelCount].hideForUserType);
+		var tempHideUnlessUserType = (navigationMenu[topLevelCount].hideUnlessUserType == undefined) ? true : userType.includes(navigationMenu[topLevelCount].hideUnlessUserType);
+
+		if (
+
+			(tempShowForUserType )&&
+			(tempHideForUserType) &&
+			(tempHideUnlessUserType)
+
+			) {
+
+			temp += "<div class=\"navTopLevel \">\n"
+		temp += "<div class=\"navTopLevelContent \" onclick=\"closePanels()\" >\n" 
+		temp += navigationMenu[topLevelCount].topLevel + "\n"
+		temp += "</div>\n"
+		temp += "<hr>\n"
+	//		temp += "</div>\n";
+	temp += "<div class=\"navSubLevel \" >\n"
+
+	for (var subLevelCount = 0; subLevelCount < navigationMenu[topLevelCount].subLevel.length; subLevelCount ++ ){
+
+		tempShowForUserType = (navigationMenu[topLevelCount].subLevel[subLevelCount].showForUserType == undefined) ? true : userType.includes(navigationMenu[topLevelCount].subLevel[subLevelCount].showForUserType);
+		tempHideForUserType = (navigationMenu[topLevelCount].subLevel[subLevelCount].hideForUserType == undefined) ? true : !userType.includes(navigationMenu[topLevelCount].subLevel[subLevelCount].hideForUserType);
+		tempHideUnlessUserType = (navigationMenu[topLevelCount].subLevel[subLevelCount].hideUnlessUserType == undefined) ? true : userType.includes(navigationMenu[topLevelCount].subLevel[subLevelCount].hideUnlessUserType);
+		console.log(tempShowForUserType)
+		console.log(tempHideForUserType)
+		console.log(tempHideUnlessUserType)
+		if (
+
+			(tempShowForUserType )&&
+			(tempHideForUserType) &&
+			(tempHideUnlessUserType)
+
+			){
+			if (navigationMenu[topLevelCount].subLevel.length == 1) {
+				var classTemp = "navSubLevelCardFull"
+			}else{
+				var classTemp = ""
+			}
+			temp += "<div class=\"navSubLevelCard  " + classTemp + " \">"		
+			temp += "<div class=\"navSubLevelHeader\">" + navigationMenu[topLevelCount].subLevel[subLevelCount].header + "</div>"
+
+			for (var itemCount = 0; itemCount < navigationMenu[topLevelCount].subLevel[subLevelCount].item.length; itemCount ++){
+				temp += "<div class=\"navSubLevelContent \"><span class=\"navSubLevelContentSpan pointer\"><a href=\"" + navigationMenu[topLevelCount].subLevel[subLevelCount].item[itemCount].link + "\" class=\"noDecoration\" >" + navigationMenu[topLevelCount].subLevel[subLevelCount].item[itemCount].name + "</a></span></div> "
+			}
+			temp += "</div>"
+		}
+	}
+	temp += "</div>"
+	temp += "</div>\n"
+}
+}
+return temp
+}
+
+
+function RFnavMenuConsultantToggle() {
+	if (userType == "consultant"){
+		userType = "pc"
+	}else{
+		userType = "consultant"
+	}
+	if (loggedIn == true) {userType = "consultant"}
+		document.getElementById('navBarCenter').innerHTML = RFnavMenuContent()
+	document.getElementById('navBarLeftConsultant').innerHTML = RFnavBarLeftConsultantContent()
+}
+
+function RFnavMenuMiniToggle() {
+
+}
+
+
+function RFMiniCartGen(){
+
+}
+
+
+function RFfooterGen(){
+	var temp = ""
+	if (localizationCode == "aus"){
+		temp += RFfooterAus()
+	}else{
+		temp += ""
+	}
+	document.write(temp)
+}
+
+
+
+function RFfooterAus() {
+	var temp = ""
+	temp += "<div class=\"containerFullWidth  offWhiteBG\">"
+
+
+	temp += "<div class=\"containerDesktopWidth offWhiteBG\">"
+	temp += "<div class=\"RFcontainerSpacerResponsive\"></div>"
+	temp += "<div class=\"splitThirds\">"
+
+	temp += "<div class=\"splitCenter textCenter\">"
+	temp += "<div class=\"RF_cardContainerSmall\">"
+	temp += "<p class=\"RFheader2 RFdisplayRegular \" style=\"position: relative; left: -0px;\"><span class=\"RFdisplayItalic RFheader3\">&nbsp;life-changing</span><br /><span class=\"uppercase\">&nbsp;&nbsp;&nbsp;Skincare<sup class=\"RFheader6\">&trade;</sup></span></p>"
+	temp += "</div>"
+	temp += "</div>"
+
+	temp += "<div class=\"splitLeft textCenter\">"
+	temp += "<div class=\"RF_cardContainerSmall\">"
+	temp += "<hr class=\"clarityHR\">"
+	temp += RFfooterAusSideGen("left")
+	temp += "</div>"	
+	temp += "</div>"
+	
+
+
+	temp += "<div class=\"splitRight textCenter\">"
+	temp += "<div class=\"RF_cardContainerSmall\">"
+	temp += "<hr class=\"clarityHR\">"
+	temp += RFfooterAusSideGen("right")
+	if (clarityAccountType > 0 ) {
+//		temp += "<p class=\"textLeft\">country<p>" + RFnavCountry()
+}
+temp += "</div>"
+
+temp += "</div>"
+
+
+
+temp += "</div>"
+temp += "</div>"
+
+temp += "<div class=\"containerDesktopWidth offWhiteBG\">"
+temp += "<div class=\"RFcontainerSpacerResponsive\"></div>"
+temp += "<div class=\"splitThirds\">"
+
+
+temp += "<div class=\"splitCenter textCenter\">"
+temp += "</div>"
+
+temp += "<div class=\"splitCenter textCenter\">"
+temp += footerSocialGen()
+temp += "<div class=\"br24\"></div>"
+temp += "<p class=\"RFfontExSmall RFgothamLight\">&copy " + getYYYY() + " Rodan & Fields, LLC<br />All Rights Reserved</p>"
+temp += "</div>"	
+
+temp += "</div>"
+
+temp += "</div>"
+
+temp
+
+
+
+
+temp += "<div class=\"RFcontainerSpacerResponsive \"></div>"
+return temp
+}
+
+var ausFooterLeft = [
+{
+	"name" : "Contact Us",
+	"link" : "https://www.rodanandfields.com.au/contact",
+},
+{
+	"name" : "RF Connection",
+	"link" : "http://www.rodanandfields.com/rfconnection/",
+},
+{
+	"name" : "Press Room",
+	"link" : "https://www.rodanandfields.com.au/pressroom",
+},
+{
+	"name" : "Accessibility",
+	"link" : "https://www.rodanandfields.com.au/accessibility",
+},
+{
+	"name" : "Careers",
+	"link" : "https://www.rodanandfields.com.au/careers",
+},
+
+]
+
+var ausFooterRight = [
+{ 
+	"name": "Shipping",
+	"link":"https://www.rodanandfields.com.au/shipping",
+},
+{ 
+	"name": "Satisfaction Guarantee",
+	"link":"https://www.rodanandfields.com.au/satisfaction-guarantee",
+},
+{ 
+	"name": "PFC Perks",
+	"link":"https://www.rodanandfields.com.au/pc-perks",
+},
+{ 
+	"name": "Terms of use",
+	"link":"https://www.rodanandfields.com.au/terms-of-use",
+},
+{ 
+	"name": "Privacy policy",
+	"link":"https://www.rodanandfields.com.au/privacy-policy",
+},
+{ 
+	"name": "Privacy Collection Statement",
+	"link":"https://www.rodanandfields.com.au/privacy-statement",
+},
+{ 
+	"name": "Disclaimer",
+	"link":"https://www.rodanandfields.com.au/careers",
+},
+
+
+
+]
+
+
+
+
+
+function RFfooterAusSideGen(side){
+	if (side == "left") {
+		var tempArray = ausFooterLeft
+	}else{
+		if (side == "right") {
+			var tempArray = ausFooterRight
+		}else{
+			return
+		}
+	}	
+	var temp = ""
+	temp += "<div class=\"\"><br /> "
+	for (var i = 0 ; i < tempArray.length; i++){
+		temp += "<p class=\"textLeft RFgothamLight RFfontSmallTight  \"><a class=\"RF_linkQuaternary \" href=\"" + tempArray[i].link + " \" alt=\"" + caseChecker(firstToCapital(tempArray[i].name)) + "\" title=\"" + caseChecker(firstToCapital(tempArray[i].name)) + "\" target=\"_blank\">" + caseChecker(firstToCapital(tempArray[i].name)) + "</a></p>"
+	}
+	temp += "</div>"
+	return temp
+}
+
+
+var footerSocialIcons = [
+{
+	"usa":"https://www.facebook.com/rodanandfields",
+	"aus":"https://www.facebook.com/rodanandfieldsaus",
+	"icon":"rf-icon-facebook",
+	"title":"facebook"
+},
+{
+	"global":false,
+	"usa":"https://twitter.com/RodanFieldsHQ",
+	"icon":"rf-icon-twitter",
+	"title":"twitter"
+},
+{
+	"global":false,
+	"usa":"http://instagram.com/rodanandfields",
+	"icon":"rf-icon-instagram",
+	"title":"instagram"
+},
+{
+	"global":"http://www.youtube.com/RodanFields",
+	"icon":"rf-icon-youtube",
+	"title":"youtube"
+},
+{
+	"global":false,
+	"usa":"http://pinterest.com/RodanandFields/",
+	"icon":"rf-icon-pinterest",
+	"title":"pinterest"
+},
+
+]
+
+
+
+function footerSocialGen() {
+	var temp = ""
+	var socialIconBorder = "socialIconBorder"
+	temp += "<div class=\"iconLarge\">"
+
+	for (var i = 0; i < footerSocialIcons.length; i++){
+		if (footerSocialIcons[i].global){
+			temp += "<a href=\"" + footerSocialIcons[i].global + "\"><span class=\"rf-icon " + footerSocialIcons[i].icon + " " + socialIconBorder + " \"></span></a>"		
+		}else{
+			if (footerSocialIcons[i][localizationCode])
+				temp += "<a href=\"" + footerSocialIcons[i][localizationCode] + "\" target=\"_blank\"><span class=\"rf-icon " + footerSocialIcons[i].icon + " " + socialIconBorder + " \"></span></a>"		
+		}
+		
+	}
+	temp += "</div>"
+
+	return temp
+}
+
+
+
+function encodeChar(input){
+	output = input
+	console.log(output)
+	output = output.replace(/\+/gi, "&#43;");
+	console.log(output)
+	return output
+}
+
+
+
+
+function parseSpacesFromString(input){
+	var stringParse = "stringParseUndefined"
+	if (input != undefined){
+		stringParse =  input.split(' ').join('');
+		// stringParse = stringParse.split('(').join('');
+		// stringParse = stringParse.split(')').join('');
+		stringParse = stringParse.split('&').join('');
+		stringParse = stringParse.split(',').join('');
+		stringParse = stringParse.toString();
+
+	}
+//	console.log("parseSpacesFromString -- Input: " + input + " -- stringParse: " + stringParse)
+return stringParse
+}
+
+
+
+var queryArray = {}
+
+
+
+
+function getHash(){
+	queryValue = window.location.search
+	var temp = queryValue.split("?").join("").split("&");
+	
+	for (var i = 0 ; i < temp.length; i++) {
+		var temp2 = temp[i].split("=")
+		queryArray[temp2[0]] = decodeURIComponent(decodeURI(temp2[1]).split("+").join(" "));
+	}
+	var hashValue = (window.location.hash)
+	if (queryValue !== ""){
+		if (queryValue == "?demoLoadingAnimation"){
+			addLoadingAnimation();
+		}
+	}
+	return {queryValue,hashValue,queryArray}
+}
+
+function addLoadingAnimation(){
+	document.getElementById('containerMainLoadingAnimation').classList.add('loadingAnimationActive')
+}
+function clearLoadingAnimation(){
+	setTimeout(function(){
+		if (document.getElementById('containerMainLoadingAnimation').classList.contains('loadingAnimationActive')){
+			newToast('The page is now loaded','success','yes','yes',false)
+		}
+		document.getElementById('containerMainLoadingAnimation').classList.remove('loadingAnimationActive')
+		
+	} , 3000);
+
+}
+
+function tabToggle(tabMainId,tabId,toggle){
+	if (toggle !== false) {toggle = true}
+		console.log(tabId)
+	var doClose = false
+	var widthQuery = 768
+	for (var i = 1; i < 100; i++){
+		if (document.getElementById(tabMainId + "-" + i)){
+			if (tabId == i){
+				window.onresize = function(){tabToggle(tabMainId,tabId,false)}
+				if (document.getElementById(tabMainId + "-" + i).classList.contains("tabActive")) {
+					if (toggle) {
+						if (screenWidth() <= widthQuery){
+							document.getElementById(tabMainId + "-" + i).classList.remove("tabActive")
+							autoToZero(tabMainId + "-content-" + i)
+							doClose = true
+						}
+					}
+				}else{
+					document.getElementById(tabMainId + "-" + i).classList.add("tabActive")
+					toScrollHeightToAuto(tabMainId + "-content-" + i)
+				}
+			}else{
+				document.getElementById(tabMainId + "-" + i).classList.remove("tabActive")
+				autoToZero(tabMainId + "-content-" + i)
+			}
+		}else{
+			var temp = document.getElementById(tabMainId + "-content-" + tabId).scrollHeight;
+			if (temp > 500) {temp = 500} 
+				if (screenWidth() <= widthQuery) {
+					document.getElementById(tabMainId).style.height = temp + (48 * (i - 1)) + "px"
+				}else{
+					document.getElementById(tabMainId).style.height = temp + (48 * (1)) + "px"
+				}
+				break
+			}
+		}
+		console.log(doClose)
+		if (doClose){
+			if (screenWidth() <= widthQuery) {
+				document.getElementById(tabMainId).style.height = (48 * (i - 1)) + "px"
+			}
+		}
+	}
+
+
+
+
+	function autoToScrollHeight(id){
+		while ( (document.getElementById(id).style.height == "auto") || (document.getElementById(id).style.height == "") ) {
+			document.getElementById(id).style.height = document.getElementById(id).scrollHeight + "px";
+		}
+	}
+	function autoToZero(id){
+		while ( (document.getElementById(id).style.height == "auto") || (document.getElementById(id).style.height == "") ) {
+			document.getElementById(id).style.height = document.getElementById(id).scrollHeight + "px";
+		}
+		setTimeout(function(){		
+			document.getElementById(id).style.height = "0px";
+		}, 2);
+
+	}
+	function toScrollHeight(id){
+		document.getElementById(id).style.height = document.getElementById(id).scrollHeight + "px";
+		console.log(id + " " + document.getElementById(id).style.height)
+	}
+	function toZero(id){
+		document.getElementById(id).style.height = "0px";
+	}
+	function toAuto(id){
+		document.getElementById(id).style.height = "auto";	
+	}
+	function toScrollHeightToAuto(id){
+		document.getElementById(id).style.backgroundColor = "#ffccff!important";
+		document.getElementById(id).style.height = document.getElementById(id).scrollHeight + "px";
+		setTimeout(function(){		
+			document.getElementById(id).style.height = "auto";
+		}, 300);
+
+	}
+
+
+	function getScrollHeight(id){
+		console.log(document.getElementById(id).scrollHeight);
+	}
+
+
+
+
+	var spb = []
+	function steppedProgressBarUpdate(id,step,checked) {
+		var temp = ""
+		for (var i = 1; i < 10; i++) {
+			if (document.getElementById(id + "-" + i)){
+				console.log(id + "-" + i)
+				console.log(document.getElementById(id + "-" + i).style.transition)
+				document.getElementById(id + "-" + i).style.transitionDelay = (300 * (i -1)) + "ms!important"
+				if (i == step){
+					document.getElementById(id + "-" + i).classList.add("steppedProgressBarCurrent")
+				}else{
+					if (i < step) {
+						if (checked.includes(i)){
+							document.getElementById(id + "-" + i).classList.add("steppedProgressBarChecked")					
+						}else{
+							document.getElementById(id + "-" + i).classList.add("steppedProgressBarCompleted")
+						}					
+						document.getElementById(id + "-flex-" + i).classList.add("steppedProgressBarCompleted")
+					}else{
+						document.getElementById(id + "-" + i).classList.remove("steppedProgressBarCurrent")
+						document.getElementById(id + "-" + i).classList.remove("steppedProgressBarChecked")
+					}
+				}
+			}else{
+				break
+			}
+
+		}
+	}
+
+
+
+
+
+
+	var arcPathOffset = -90;
+
+	function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+		var angleInRadians = (angleInDegrees + arcPathOffset) / 180 * Math.PI;
+		return {
+			x: centerX + (radius * Math.cos(angleInRadians)),
+			y: centerY + (radius * Math.sin(angleInRadians))
+		};
+	}
+
+	function describeArc(centerX, centerY, radius, startAngle, endAngle){
+		var start = polarToCartesian(centerX, centerY, radius, startAngle);
+		var end = polarToCartesian(centerX, centerY, radius, endAngle);
+		var largeArc = (endAngle - startAngle <= 180) ? "0" : "1";
+		var arcSweep = (endAngle - startAngle <= 180) ? "1" : "1";
+		var d = [
+		"M", start.x, start.y, 
+		"A", radius, radius, 0, largeArc, arcSweep, end.x, end.y,
+		].join(" ");
+		return d;       
+	}
+
+
+
+
+
+	var spcArray = []
+	function salesProgressChart(id){
+		console.log("spc loop running")
+		var degreeAdvance = 1.5;
+		clearTimeout(salesGrowOuter)
+		if (id !== undefined) {
+			var spcAdd = true	
+			for (var i = 0; i < spcArray.length; i++){
+				if (spcArray[i].id == id) {
+					spcAdd = false
+					break
+				} 
+			}
+			if (spcAdd == true) {
+				spcArray.push({
+					"id":id,
+					"maxOuter":Number(document.getElementById(id).dataset.maxouter),
+					"maxInner":Number(document.getElementById(id).dataset.maxinner),
+					"valueOuter":Number(document.getElementById(id).dataset.valueouter),
+					"valueInner":Number(document.getElementById(id).dataset.valueinner),
+					"valueOuterCurrent":0,
+					"valueInnerCurrent":0,
+
+				})
+			}
+		}
+		for (var i = 0; i < spcArray.length; i++) {
+			if (spcArray[i].valueOuterCurrent < spcArray[i].valueOuter) {
+				spcArray[i].valueOuterCurrent = spcArray[i].valueOuterCurrent + ( (spcArray[i].maxOuter / 360) * degreeAdvance )
+			}else{
+				spcArray[i].valueOuterCurrent = Number(spcArray[i].valueOuter)
+			}
+			if (spcArray[i].valueOuterCurrent > spcArray[i].valueOuter ) {spcArray[i].valueOuterCurrent = spcArray[i].valueOuter}
+				arcOuterDegree += degreeAdvance
+			var arcOuterDegree = (spcArray[i].valueOuterCurrent / spcArray[i].maxOuter) * 360
+			if (arcOuterDegree >= 360) {arcOuterDegree = (360 - (1/100))}
+
+
+
+				if (spcArray[i].valueInnerCurrent < spcArray[i].valueInner) {
+					spcArray[i].valueInnerCurrent = spcArray[i].valueInnerCurrent + ( (spcArray[i].maxInner / 360) * degreeAdvance )
+				}else{
+					spcArray[i].valueInnerCurrent = Number(spcArray[i].valueInner)
+				}
+				if (spcArray[i].valueInnerCurrent > spcArray[i].valueInner ) {spcArray[i].valueInnerCurrent = spcArray[i].valueInner}
+					arcInnerDegree += degreeAdvance;
+				var arcInnerDegree = (spcArray[i].valueInnerCurrent / spcArray[i].maxInner) * 360
+				if (arcInnerDegree >= 360) {arcInnerDegree = (360 - (1/100))}
+
+
+
+
+					var arcOuter = describeArc(160, 160, 140, 0, arcOuterDegree);
+				var arcInner = describeArc(160, 160, 120, 0, arcInnerDegree);
+				document.getElementById(spcArray[i].id + '-arcOuter').setAttribute("d", arcOuter);
+				document.getElementById(spcArray[i].id + '-arcInner').setAttribute("d", arcInner);
+				var shadeInner = (arcInnerDegree >= 359.99) ? "#008000" : "#" + shadeTint('fcb131','D91E18',(arcInnerDegree / 360));
+				var shadeOuter = (arcOuterDegree >= 359.99) ? "#008000" : "#" + shadeTint('fcb131','D91E18',(arcOuterDegree / 360));
+				document.getElementById(spcArray[i].id + '-arcInner').style.stroke = shadeInner
+				document.getElementById(spcArray[i].id + '-arcOuter').style.stroke = shadeOuter
+				document.getElementById(spcArray[i].id + '-salesProgressChartOuterValue').style.color = shadeOuter
+				document.getElementById(spcArray[i].id + '-salesProgressChartInnerValue').style.color = shadeInner
+
+
+				document.getElementById(spcArray[i].id + '-salesProgressChartOuterValue').innerHTML = Math.floor(spcArray[i].valueOuterCurrent)
+				document.getElementById(spcArray[i].id + '-salesProgressChartInnerValue').innerHTML = Math.floor(spcArray[i].valueInnerCurrent)
+
+			}
+			var doSPCloop = false
+//	console.log(spcArray.length)
+if (spcArray.length > 0) {
+	for (var i = spcArray.length - 1; i >= 0; i--) {
+//		console.log(i)
+if ((spcArray[i].valueOuterCurrent < spcArray[i].valueOuter) || (spcArray[i].valueInnerCurrent < spcArray[i].valueInner)  ) {
+	doSPCloop = true
+}else{
+//				console.log("slice " + i)
+spcArray.splice(i,1)
+//				console.log(spcArray)
+}
+}
+
+if ( doSPCloop){
+	var salesGrowOuter = setTimeout(function (){ salesProgressChart(); }, 1)
+}
+}else{
+	console.log("spc loop done")
+}
+
+}
+
+
+
+function screenWidth(){
+	return window.innerWidth
+}
+function screenHeight() {
+	return window.innerHeight
+}
+
+
+
+
+
+
+
+
+function getYYYY(){
+	return (new Date().getFullYear())
+}
+function getYY(){
+	return (new Date().getFullYear()) - 2000
+}
+function getMM (){
+	return (new Date().getMonth()) + 1
+}
+function getDD (){
+	return (new Date().getDate())
+}
+function getDOW(){
+	return new Date().getDay() + 1
+}
+function getYYYYMMDD(){
+	return (getYYYY() * 10000) + (getMM() * 100) + getDD()
+}
+function getMMDDYYYY() {
+	return ( (getMM() * 1000000) + (getDD() * 10000) + (getYYYY()) )
+}
+function getMMDDYY() {
+	return ( (getMM() * 10000) + (getDD() * 100) + (getYY()) )	
+}
+
+function mmddyyyyFormatSlash(date){
+	return  Number(date.toString().substring(4, 6))  + "/" + Number(date.toString().substring(6, 8)) +  "/" + Number(date.toString().substring(0,4)   )
+}
+
+function ymdToWritten(date,option){
+	if ((localizationCode == "usa") || (localizationCode == "") || (localizationCode == undefined)) {
+		return  mmToName(Number(date.toString().substring(4, 6)))  + " " + (Number(date.toString().substring(6, 8))) + getOrdinal(Number(date.toString().substring(6, 8))) +  ", " + Number(date.toString().substring(0,4)   )	
+	}
+	
+}
+
+
+function yyyymmddFormat(date){
+	return Number(date.toString().substring(4, 6))  + "/" + Number(date.toString().substring(6, 8)) +  "/" + Number(date.toString().substring(0,4))
+}
+
+
+function formatPhoneNumberUS(phoneNumberString) {
+	var cleaned = ('' + phoneNumberString).replace(/\D/g, '')
+	console.log(cleaned)
+	var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/)
+	console.log(match)
+	if (match) {
+		return '(' + match[1] + ') ' + match[2] + '-' + match[3]
+	}
+	return null
+}
+
+
+function getDOWname() {
+	switch (getDOW()) {
+		case 1: return "Sunday";
+		case 2: return "Monday";
+		case 3: return "Tuesday";
+		case 4: return "Wednesday";
+		case 5: return "Thursday";
+		case 6: return "Friday";
+		case 7: return "Saturday";
+	}
+}
+function mmToName(input) {
+	switch (input) {
+		case 1: return "January";
+		case 2: return "Feburary";
+		case 3: return "March";
+		case 4: return "April";
+		case 5: return "May";
+		case 6: return "June";
+		case 7: return "July";
+		case 8: return "August";
+		case 9: return "September";
+		case 10: return "October";
+		case 11: return "Novemeber";
+		case 12: return "December";
+	}
+}
+
+
+
+function getMMname() {
+	return (mmToName(getMM()))
+}
+function getLongDate() {
+	return (getDOWname() + " " + getMMname() + " " + getDD() + getOrdinal(getDD()) + ", " + getYYYY() )
+}
+
+
+
+
+function getOrdinal(input){
+	if (!isNaN(input)) {
+		switch (input){
+			case 1: return "st";
+			case 2: return "nd";
+			case 3: return "rd";
+			default: return "th";
+		}
+	}else{
+		console.log("getOrdinal input not a number: " + input)
+		return ""
+	}
+}
+
+
+console.log(getLongDate() )
+
+
+
+function firstToCapital(input) {
+	if (( (input !== "") || (input !== undefined)) && (input.length > 0) ) {
+		temp = input.split(" ");
+		for (var i = 0, x = temp.length; i < x; i++) {
+			temp[i] = temp[i][0].toUpperCase() + temp[i].substr(1);
+		}
+		temp = temp.join(" ");
+	}else{
+		temp = ""
+	}
+	return temp
+}
+
+function dynamicSort(property,direction) {
+	if ((direction !== undefined) && (!isNaN(direction)) && ((direction == -1) || (direction == 1)) ){
+		var sortOrder = direction
+	}else{
+		var sortOrder = 1;
+	}
+//    console.log(sortOrder)
+var temp = ""
+if(property[0] === "-") {
+	sortOrder = -1;
+	property = property.substr(1);
+}	
+return function (a,b) {
+	if(sortOrder == -1){
+		return b[property].toString().localeCompare(a[property].toString(), undefined, {numeric: 'true'});
+	}else{
+		return a[property].toString().localeCompare(b[property].toString(), undefined, {numeric: 'true'});
+	}        
+}
+}
+
+
+
+
+function randomID() {
+	var tempRandom = Math.floor(Math.random() * 10000);
+	return ("id" + tempRandom);
+//	return("id=\"" + tempRandom + "\"");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+function addMediaListener() {
+	var allMedia = document.getElementsByClassName('videoMediaListener');
+	for (var i = 0; i < allMedia.length; i++ ){
+		allMedia[i].addEventListener("playing", function() {
+			alert("playing Event Triggered")
+		});
+		allMedia[i].addEventListener("pause", function() { 
+			alert("pause Event Triggered")
+		});
+		allMedia[i].addEventListener("seeking", function() { 
+			alert("seeking Event Triggered")
+		});
+		allMedia[i].addEventListener("volumechange", function(e) { 
+			alert("volume Event Triggered")
+		});
+	}
+
+
+}
+
+function reverseParseDate(input,slashes,long){
+	input = Number(input)
+	if (slashes != true) {slashes == false};
+	if (long != true) {long == false};
+	if (slashes){
+		return (Number((input.toString().substring(4, 6)) - 1)) + "/" + Number(input.toString().substring(6, 8)) +  "/" + ( long ? Number(input.toString().substring(2, 4)) : Number(input.toString().substring(0,4)) );
+	}else{
+		return (long ?  monthsLong[Number((input.toString().substring(4, 6)) - 1)] : monthsShort[Number((input.toString().substring(4, 6)) - 1)] ) + " " + Number(input.toString().substring(6, 8)) +  ", " + Number(input.toString().substring(0, 4));
+	}
+
+}
+
+function parseDate(input,real){
+	if (real != true){real == false}
+		var tempD = input.getDate();
+	var tempM = input.getMonth();
+	var tempY = input.getFullYear();
+
+	return (tempY * 10000) + ((tempM * 100) + (real ?  + 100 : + 0))  + tempD;
+
+
+}
+
+var daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+var monthsLong = ["Janurary", "Feburary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+var monthsShort = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+
+
+function displayAfter(date) {
+	if (!isNaN(date)) {
+		if (doDisplay(date)) {
+			return "<div class=\"\">"
+		}else{
+			return "<div class=\"hide\">"
+		}
+	}else{
+		return "</div>"
+	}
+}
+function displayLI(date) {
+	if (!isNaN(date)) {
+		if (!doDisplay(date)) {
+			return "<div class=\"\">"
+		}else{
+			return "<div class=\"highlight\">"
+		}
+	}else{
+		return "</div>"
+	}
+}
+
+function doDisplay(input){
+	var temp = true
+	if (!isNaN(input)) {
+		temp = (input) ? ((input <= currentDate) ? true : false) : true
+		temp = (temp) ? true : ( (clarityAccountType > 0) ? true : false );
+	}
+	return temp;
+}
+
+function caseChecker(input){
+
+	output = decodeURIComponent(input)
+	output = output.replace(/\brfx\b/gi, "RF<sup>x</sup>");
+	output = output.replace(/\bpc\b/gi, "PC");
+	output = output.replace(/\bpfc\b/gi, "PFC");
+	output = output.replace(/\bpc perks\b/gi, "PC Perks");
+	output = output.replace(/\brf\b/gi, "RF");
+	output = output.replace(/\busa\b/gi, "USA");
+	output = output.replace(/\besg\b/gi, "ESG");
+	output = output.replace(/\bui\b/gi, "UI");
+	output = output.replace(/\bux\b/gi, "UX");
+	output = output.replace(/\bi\b/gi, "I");
+	output = output.replace(/\bii\b/gi, "II");
+	output = output.replace(/\biii\b/gi, "III");
+	output = output.replace(/\biv\b/gi, "IV");
+	output = output.replace(/\bv\b/gi, "V");
+	output = output.replace(/\bvi\b/gi, "VII");
+	output = output.replace(/\bvii\b/gi, "VIII");
+	output = output.replace(/\bviii\b/gi, "VI");
+	output = output.replace(/\bix\b/gi, "IX");
+	output = output.replace(/\bx\b/gi, "X");
+	output.split("Rodan").join("aaa")
+	output = output.replace(/\brodan and fields\b/gi, "Rodan + Fields");
+	output = output.replace(/\brodan fields\b/gi, "Rodan + Fields");
+	return output;
+}
+
+
+function inputTextGen(input) {
+
+
+	
+	var temp = ""
+	if (input != undefined) {
+		var hasID = (input.id ? input.id : randomID())
+		if (input.type !== "hidden"){
+			temp += "<div class=\"inputContainer " + (input.full ? " btnFull " : "" ) + " \">"
+		}
+		temp += "<input"
+		temp += " type=\"" + (input.type == "password" ? "password" : (input.type == "email" ? "email" : (input.type == "hidden" ? "hidden" : "text"))) + "\" "
+		temp += " name=\"" + (input.name ? input.name : input.id) + "\""
+		temp += " id=\"" + hasID + "\" "
+		temp +=  (input.value ? (" value=\"" + input.value + "\" " ) : "" ) 
+		if (input.type !== "hidden"){
+			temp +=" class=\"inputTextField input " + (input.error ? " inputError" : "" ) + (input.value ? " inputTextFieldActive" : "") + " \" "
+			
+			temp += " placeholder=\"" + (input.placeholder ? input.placeholder : "") + "\" "
+			temp += " oninput=\"inputLabel(this.id) " + (input.validate ? " , " + input.validate : "") + (input.verify ? " , inputPasswordVerify(" + input.verify[0] + "," + input.verify[1] + ")" : "") + "\" " 
+			temp +=  (input.disabled ? " disabled" : "")
+			temp +=  (input.required ? " required" : "")
+		}
+		temp += ">"
+		if (input.type !== "hidden"){
+			temp += "<label for=\"" + hasID + "\" class=\" inputTextFieldLabel\">"
+			temp += (input.label ? input.label : "")
+			temp += "</label>"
+			temp += "<div class=\"inputTextFieldHelperContainer\">"
+			temp += "<div class=\"inputTextFieldError\" id=\"" + hasID + "Error\" >" + (input.error ? input.error : "") + "</div>"
+			temp += "<div class=\"inputTextFieldHelper \">"
+			temp += (input.helper ? input.helper : "")
+			temp += "</div>"
+			temp += "</div>"
+			temp += "<div class=\"inputTextFieldValidate\"></div>"
+			temp += "<div class=\"inputTextFieldInlineIcon\"></div>"
+			temp += "</div>"	
+		}
+		
+		
+//		temp += "<div class=\"br24 \"></div>"	
+}
+
+return temp
+
+}
+
+function inputPasswordGen(input){
+	var temp = ""
+	if (input != undefined) {
+		var hasID = (input.id ? input.id : randomID())
+		temp += "<div class=\"inputContainer \">"
+		temp += "<input required type=\"password\" name=\"" + (input.name ? input.name : "name") + "\" id=\"" + hasID + "\" class=\"inputTextField input " + input.verifyID + " \" placeholder=\"" + (input.placeholder ? input.placeholder : "") + "\" oninput=\"inputLabel(this.id) " + (input.validate ? " , " + input.validate : "") + (input.verify ? ", inputPasswordVerify(\'" + input.verify + "\',\'" + hasID + "\')" : "") + "\">"
+		temp += "<label for=\"" + hasID + "\" class=\" inputTextFieldLabel\">"
+		temp += (input.label ? input.label : "")
+		temp += "</label>"
+		temp += "<div class=\"inputTextFieldHelperContainer\">"
+		temp += "<div class=\"inputTextFieldError\">" + (input.error ? input.error : "") + "</div>"
+		temp += "<div class=\"inputTextFieldHelper \">"
+		temp += (input.helper ? input.helper : "")
+		temp += "</div>"
+		temp += "</div>"
+		temp += "<div class=\"inputTextFieldValidate\"></div>"
+		temp += "<div class=\"inputTextFieldPasswordIcon\" onclick=\"inputPasswordToggle('" + hasID + "')\"></div>"
+		temp += "<div class=\"inputTextFieldInlineIcon\"></div>"
+		temp += "</div>"	
+	}
+	return temp
+}
+
+
+
+function inputPasswordVerifyGen(input){
+	var temp = ""
+	if (input != undefined) {
+		var hasID = (input.id ? input.id : randomID())
+		temp += "<div class=\"inputContainer \">"
+		temp += "<input required type=\"password\" name=\"" + (input.name ? input.name : "name") + "\" id=\"" + hasID + "\" class=\"inputTextField input \" placeholder=\"" + (input.placeholder ? input.placeholder : "") + "\" oninput=\"inputLabel(this.id) " + (input.validate ? " , " + input.validate : "") + ", inputPasswordValidator(this.id)\" onblur=(inputPasswordValidator(this.id))>"
+		temp += "<label for=\"" + hasID + "\" class=\" inputTextFieldLabel\">"
+		temp += (input.label ? input.label : "")
+		temp += "</label>"
+		temp += "<div class=\"inputTextFieldHelperContainer\">"
+		temp += "<div class=\"inputTextFieldError\" id=\"" + hasID + "ErrorMessage\">" + (input.error ? input.error : "") + "</div>"
+		temp += "<div class=\"inputTextFieldHelper \">"
+		temp += "<span class=\"inputValidateSpan\" id=\"" + hasID + "Characters\"><span class=\"rf-icon inputValidateCircle\"></span>&nbsp;6-25 char</span>"
+		temp += "<span class=\"inputValidateSpan\" id=\"" + hasID + "Uppers\"><span class=\"rf-icon inputValidateCircle\"></span>&nbsp;ABC</span>"
+		temp += "<span class=\"inputValidateSpan\" id=\"" + hasID + "Lowers\"><span class=\"rf-icon inputValidateCircle\"></span>&nbsp;abc</span>"
+		temp += "<span class=\"inputValidateSpan\" id=\"" + hasID + "Numbers\"><span class=\"rf-icon inputValidateCircle\"></span>&nbsp;123</span>"
+		temp += "</div>"
+		temp += "</div>"
+		temp += "<div class=\"inputTextFieldValidate\"></div>"
+		temp += "<div class=\"inputTextFieldPasswordIcon\" onclick=\"inputPasswordToggle('" + hasID + "')\"></div>"
+		temp += "<div class=\"inputTextFieldInlineIcon\"></div>"
+		temp += "</div>"	
+
+		temp += inputPasswordGen({label:"Verify Password",id:(hasID + "Verify"),verify:[(hasID)],"required":true })
+	}
+	return temp
+}
+
+function inputDropDownGen(input){
+	var hasID = (input.id ? input.id : (input.name ? input.name : randomID()))
+	temp = ""
+	if (input){
+		temp += "<div class=\"inputContainer\">"
+		temp += "<input type=\"text\" name=\"" + hasID + "\" id=\"" + hasID + "\" data-option1=\'" + input.options + "\'  class=\"inputTextField input inputDropDown \" placeholder=\"\" onfocus=\"inputDropDown(this.id)\" oninput=\"inputLabel(this.id), inputDropDown(this.id)\" onclick=\"inputLabel(this.id), inputDropDown(this.id)\" "
+//		temp += " onblur=\"inputDropDownClear(this.id)\""
+temp += (input.required ? " required" : "")
+temp += ">"
+temp += "<label for=\"" + hasID + "\" class=\" inputTextFieldLabel\">"
+temp += input.label
+temp += "</label>"
+temp += "<div class=\"inputTextFieldHelperContainer\">"
+temp += "<div class=\"inputTextFieldError\" id=\"" + hasID + "Error\" >" + (input.error ? input.error : "") + "</div>"
+temp += "<div class=\"inputTextFieldHelper\">"
+temp += "</div>"
+temp += "</div>"
+temp += "<div class=\"inputTextFieldValidate\"></div>"
+temp += "<div class=\"inputTextFieldDropDownIcon\" onclick=\"inputLabel('" + hasID + "'), inputDropDown('" + hasID + "')\" ></div>"
+temp += "<div class=\"inputTextFieldInlineIcon\"></div>"
+temp += "<div class=\"inputTextDropDownContainer\" id=\"" + hasID + "Container\"><!--  Content goes here dynamically --></div>"
+temp += "</div>"
+
+}
+return temp;
+
+}
+
+function shuffle(arra1) {
+	var ctr = arra1.length, temp, index;
+	while (ctr > 0) {
+		index = Math.floor(Math.random() * ctr);
+		ctr--;
+		temp = arra1[ctr];
+		arra1[ctr] = arra1[index];
+		arra1[index] = temp;
+	}
+	return arra1;
+}
+
+function formRequiredValidate(input){
+	var inputs = (input.getElementsByTagName("input"))
+	var returnValue = true
+	var firstError = 999999 
+	for (var i = 0 ; i < inputs.length ; i ++){
+		if (inputs[i].type == "email") {
+			
+		}
+		if (inputs[i].required == true) {
+
+			if (inputs[i].value !== "") {
+				inputs[i].classList.remove("inputError")
+				inputs[i].parentNode.getElementsByClassName("inputTextFieldError")[0].innerHTML = ""
+			}else{
+				if (!inputs[i].classList.contains("inputError")) {
+					inputs[i].classList.add("inputError")
+					if (i < firstError){
+						firstError = i
+					}
+					
+					inputs[i].parentNode.getElementsByClassName("inputTextFieldError")[0].innerHTML = "Field is required"
+					returnValue = false
+				}
+			}
+		}		
+	}
+	if (firstError < i){
+		inputs[firstError].focus()
+	}
+	return returnValue
+}
+
+
+
+function inputTextFieldAddError(el){
+
+}
+
+
+
+function ajaxResponderGet(page,params) {
+	console.log(page)
+	console.log(params)
+	console.log((page + "?" + params))
+	var xhttp = new XMLHttpRequest();
+	xhttp.open("GET", (page + "?" + params), true);
+	xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	xhttp.send(params);
+	return xhttp
+}
+function ajaxResponderPost(page,params) {
+	console.log(page)
+	console.log(params)
+	var xhttp = new XMLHttpRequest();
+	xhttp.open("POST", page, true);
+	xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	xhttp.send(params);
+	console.log(xhttp)
+	return xhttp
+}
+
+function checkboxToggleFlyoutGen(input){
+	var temp = ""
+	temp += "<div class=\" checkboxToggleFlyoutContainer \">"
+	temp += "<div class=\" checkboxToggleContainer \">"
+	temp += "<input type=\"checkbox\" name=\"toggleContentLink\" id=\"\" class=\"checkboxToggleLink  \" onclick=\"toggleContentFlyout(this)\">"
+	temp += "<label class=\"checkboxToggleLabel manifesto \" for=\"toggleContentLink\" id=\"\"  onclick=\"toggleContentFlyout(this)\" style=\"float: none; top 4px;\">" + input.title + "<span  class=\"rf-icon rf-icon-expand-less checkboxToggleChevron \" style=\"float: none;\"></span></label>"
+	temp += "</div>"
+	temp += "<div class=\"toggleContent\" style=\"height: 0px;\">"
+	temp += "<div class=\"\">"
+	temp += input.content
+	temp += "</div>"
+	temp += "</div>"
+	temp += "</div>"
+	return temp;
+}
+
+
+function modalNewClose(close){
+	if (!document.getElementsByClassName("modalWrapper")[0]){
+		return false
+	}
+	var eventTry = false
+	try {
+		if ((event.target.id === "modalWrapper") || (event.target.id === "modalHeaderClose")){
+			eventTry = true			
+		}
+	}catch{
+		eventTry = false
+	}
+	if (eventTry || close){
+		document.getElementsByClassName("modalWrapper")[0].classList.remove("optionActive")
+		setTimeout (function() {
+			modalClearContent()
+			document.getElementById("modalWrapper").outerHTML = ""
+		}, 300)	
+
+	}
+}
+
+
+function modalNewOpen(input){									
+	if (document.getElementsByClassName("modalWrapper")[0] === undefined){
+		console.log("modalNew does NOT exist")
+		document.getElementsByTagName("body")[0].insertAdjacentHTML('beforeend',modalContainerGen())			
+	}
+	setTimeout (function() {
+		modalContentWrite(input)
+	}, 30)
+	if (input.autoClose)					{
+		setTimeout (function() {
+			modalNewClose(true)
+		}, 7000)
+	}
+}
+
+function modalClearContent(){
+	document.getElementById("modalContent").innerHTML = ""
+}
+function modalContainerGen(input){
+	var temp = ""				
+	temp += "<div class=\"modalWrapper \" id=\"modalWrapper\" onclick=\"modalNewClose()\">"
+	temp += "<div class=\"modalContainer\" id=\"modalContainer\" >"
+	temp += "<div class=\"modalHeader\" id=\"modalHeader\">"
+	temp += "<div class=\"modalTertiary\" id=\"modalTertiary\"></div>"
+	temp += "<div class=\"modalHeaderTitle\" id=\"modalHeaderTitle\"></div>"
+	temp += "<div class=\"modalHeaderClose\" ><span class=\"rf-icon-close pointer\" onclick=\"modalNewClose()\" id=\"modalHeaderClose\"></span></div>"
+	temp += "</div>"
+	temp += "<div class=\"modalContent \" id=\"modalContent\">"		
+
+	temp += "</div>"
+	temp += "<div class=\"modalFooter \" id=\"modalFooter\">"		
+	temp += ""
+	temp += "</div>"
+	temp += ""
+	temp += "</div>"
+	temp += "</div>"
+	return temp
+}
+function modalContentWrite(input){
+	if (input.header){
+		if (input.header){
+			document.getElementById("modalHeaderTitle").innerHTML = input.header
+		}
+	}
+	if (input.content){
+		document.getElementById("modalContent").innerHTML = input.content
+	}
+	if (input.tertiary){
+		if ((input.tertiary.title) && (input.tertiary.action)){
+			document.getElementById("modalTertiary").innerHTML = "<a class=\"RF_linkTertiary\" onclick=\"" + input.tertiary.action + "\">" + input.tertiary.title + "</a>"
+		}
+	}
+	if ((input.primary) || (input.secondary)){
+		var footerTemp = ""
+		if (input.secondary){
+			if ((input.secondary.title) && (input.secondary.action)){
+				if (input.secondary.href == true){
+					footerTemp += "<a class=\"btnSecondary btnSmall btnModal \" href=\"" + input.secondary.action + "\">" + input.secondary.title + "</a>"
+				}else{
+					footerTemp += "<a class=\"btnSecondary btnSmall btnModal \" onclick=\"" + input.secondary.action + "\">" + input.secondary.title + "</a>"
+				}
+			}
+		}
+		if ((input.primary) && (input.secondary)){
+			footerTemp += "&nbsp;"
+		}
+		if (input.primary){
+			if ((input.primary.title) && (input.primary.action)){
+				if (input.primary.href == true){
+					footerTemp += "<a class=\"btnPrimary btnSmall btnModal \" href=\"" + input.primary.action + "\">" + input.primary.title + "</a>"
+				}else{
+					footerTemp += "<a class=\"btnPrimary btnSmall btnModal \" onclick=\"" + input.primary.action + "\">" + input.primary.title + "</a>"
+				}
+			}
+		}
+		if (footerTemp !== ""){		
+			document.getElementById("modalFooter").innerHTML = footerTemp
+			document.getElementById("modalContainer").classList.add("modalWithSmallFooter")
+		}
+	}else{
+		document.getElementById("modalFooter").outerHTML = ""
+	}
+	document.getElementById("modalWrapper").classList.add("optionActive")
+}
+
+
+var miniCartTimer = ""
+
+
+
+
+
+
+for (var i = 0; i < 5; i++){
+	if (i === 0) {										
+		var tempSKU = shuffle(Object.keys(sku))	
+	}
+//	cart.push({sku:tempSKU[i],qty:(Math.floor(Math.random() * 4) + 1),itemNum:"itemNum" + i})
+}
+function cartWrite(){
+	var temp = ""
+	for (var i = (cart.length - 1) ; i >= 0 ; i--){
+		temp += cartItemGen(cart[i],(i == cart.length - 1))
+	}	
+	cartSubTotal()
+	return temp
+}
+
+
+
+
+
+//document.cookie = "userCart=" + JSON.stringify(cart)
+//console.log(document.cookie)
+
+
+function cartSubTotal(){
+	var sub = 0;
+	for (var i = 0; i < cart.length; i++){
+		var tempIndex = fI(cart[i].sku,skuParsed,"sku")
+		console.log(cart[i].sku)
+		console.log(skuParsed[tempIndex].price.r[countryShort()])
+		sub += (skuParsed[tempIndex].price.r[countryShort()] * cart[i].qty)
+	}
+	if (document.getElementById("miniCartSubTotal")){
+		fadeText("miniCartSubTotal",currencySymbol() + formatNumberHundreds(sub),true);
+	}
+	return sub
+}
+
+function miniCartClose(){
+	el = document.getElementsByClassName("miniCartWrapper")[0]
+	el.classList.remove("optionActive")
+}
+function miniCartOpen(){								
+	if (document.getElementsByClassName("miniCartWrapper")[0] === undefined){
+		console.log("miniCart does NOT exist")
+		document.getElementsByTagName("body")[0].insertAdjacentHTML('afterbegin',miniCartGen())
+		setTimeout (function() {cartSubTotal(); document.getElementsByClassName("miniCartWrapper")[0].classList.add("optionActive")}, 30)
+	}else{
+		console.log("miniCart DOES exist")
+		cartSubTotal()
+		document.getElementsByClassName("miniCartWrapper")[0].classList.add("optionActive")
+	}
+	if(document.getElementById("cartContainer")){	
+		document.getElementById("cartContainer").innerHTML = cartWrite()
+	}
+	if(document.getElementById("miniCartContent")){	
+		document.getElementById("miniCartContent").innerHTML = cartWrite()
+	}
+	miniCartTimer = setTimeout(function() {miniCartClose()},6000)
+}
+
+function cartIncreaseQty(input){
+	console.log(input)
+	//console.log(document.querySelectorAll("[data-cartitemnum='" + input + "']"))
+	var temp = fI(input,cart,"itemNum")
+	console.log(temp)
+	if (temp !== -1){
+		cart[temp].qty ++
+		fadeText(("cart_" + input), cart[temp].qty)
+		cartSubTotal()
+	}
+}
+function cartDeleteItem(input){
+	var temp = fI(input, cart,"itemNum")
+	if (temp !== -1){
+		if (confirm("Are you sure that you want to delete " + sku[cart[temp].sku].name + "?")){
+			cart.splice(temp,1);
+			if(document.getElementById("cartContainer")){	
+				document.getElementById("cartContainer").innerHTML = cartWrite()
+			}
+			if(document.getElementById("miniCartContent")){	
+				document.getElementById("miniCartContent").innerHTML = cartWrite()
+			}
+			cartSubTotal();
+		}
+	}
+}
+function cartDecreaseQty(input){
+	var temp = fI(input, cart,"itemNum")
+	if (temp !== -1){
+		if (cart[temp].qty > 1){
+			cart[temp].qty --
+			fadeText(("cart_" + input), cart[temp].qty)
+			cartSubTotal()
+		}else{
+			if (confirm("Are you sure that you want to delete " + skuParsed[fI(cart[temp].sku,skuParsed,"sku")].name + "?")){
+				cart.splice(temp,1);
+				if(document.getElementById("cartContainer")){	
+					document.getElementById("cartContainer").innerHTML = cartWrite()
+				}
+				if(document.getElementById("miniCartContent")){	
+					document.getElementById("miniCartContent").innerHTML = cartWrite()
+				}
+				cartSubTotal()
+			} 
+		}
+	}
+}
+
+function miniCartGen(){
+	var temp = ""
+	temp += "<div class=\"miniCartWrapper \">"
+	temp += "<div class=\"miniCartBackground \" onclick=\"miniCartClose()\"></div>"
+	temp += "<div class=\"miniCartContainer \" onmouseenter=\"clearTimeout(miniCartTimer)\">"
+
+	temp += "<div class=\"miniCartHeader\">"
+	temp += "My Bag<span class=\"rf-icon-close pointer\" onclick=\"miniCartClose()\"></span>"
+	temp += "</div>"
+	temp += "<div class=\"miniCartContent RFgothamExLight\" id=\"miniCartContent\">"
+	temp += cartWrite();
+	temp += "</div>"
+	temp += "<div class=\"miniCartFooter\">"
+	temp += "<div class=\"RF_table RFgothamBook uppercase\">"
+	temp += "<div class=\"RF_tableCell\">"
+	temp += "Subtotal:"
+	temp += "</div>	"
+	temp += "<div class=\"RF_tableCell textRight\" id=\"miniCartSubTotal\">"
+	
+	temp += "</div>	"
+	temp += "</div>"
+	temp += "<br />"
+	temp += "<a class=\"btnPrimary btnFull\">Checkout</a>"
+	temp += "</div>"
+	temp += "</div>"
+	temp += "</div>"
+	return temp
+}
+
+
+
+
+
+function cartItemGen(input,newest){
+	var temp = ""
+	var tempIndex = fI(input.sku,skuParsed,"sku")
+	console.log(input)
+	console.log(tempIndex)
+	temp += "<div class=\" cartItem " + (newest ? "cartItemNewestXXX" : "") + " \">" + (((newest == true) && (clarityOptions.miniCart.showNewestTag !== false)) ?  "<p class='RFgothamLight RFfontExSmallPad'><span class='success rf-icon-check-circle'>&nbsp;</span>1 Item Added to your bag</p>" : "") + "<div class=\"RF_table  \"><div class=\"RF_tableCell borderCollapse\" style=\"width: 25%; max-width: 100px!important; min-width: 80px!important; padding-right: 16px;\"><img src=\"" + isHTTPS(skuParsed[fI(input.sku,skuParsed,"sku")].image.mobile) +"\" width=\"100%\" /></div><div class=\"RF_tableCell vAlignTop\">" + cartDetails(input) +"</div></div></div>"
+	return temp;
+}
+
+
+function cartShadeGen(input){
+	return skuParsed[fI(input.sku,skuParsed,"sku")].variant ? "<div class=\"RF_tableRow\"><span class=\"" + skuParsed[fI(input.sku,skuParsed,"sku")].variant + " cartSelectedShade \"></span>&nbsp;<span class=\"capitalize\">" + skuParsed[fI(input.sku,skuParsed,"sku")].variant + "</span></div>" : "";
+}
+function cartSV(input){
+	return customerAccountType === "c" ? "<div class=\"RF_tableRow\"><p>SV: " + skuParsed[fI(input.sku,skuParsed,"sku")].SV + "</p></div>" : ""
+}
+function cartQV(input){
+	return customerAccountType === "pc" ? "<div class=\"RF_tableRow\"><p>QV: " + skuParsed[fI(input.sku,skuParsed,"sku")].QV + "</p></div>" : ""
+}
+function cartItemContains(input){
+
+	var temp = ""
+	var tempIndex = fI(input.sku,skuParsed,"sku")
+	if (tempIndex !== -1){
+		return getSkuContains(skuParsed[tempIndex])
+		if (Array.isArray(skuParsed[tempIndex].contains) ){
+			temp += "<ol class=\"RFfontExSmall RFgothamLight\" style=\"list-style: none; padding: 0px;\">"
+			for (var i = 0; i < skuParsed[fI(input.sku,skuParsed,"sku")].contains.length; i++){
+				temp += "<li>" + (sku[skuParsed[fI(input.sku,skuParsed,"sku")].contains[i]] ? sku[skuParsed[fI(input.sku,skuParsed,"sku")].contains[i]].name : skuParsed[fI(input.sku,skuParsed,"sku")].contains[i]) + "</li>"
+			}
+			temp += "</ol>"
+			temp = checkboxToggleFlyoutGen({content:temp,title:"Contains"})
+		}	
+	}
+	
+	return temp;
+}
+function cartItemTrash(input){
+	if ((clarityOptions.miniCart.showSKU == false) && (clarityOptions.miniCart.showTrash == false)) {return ""}
+	return "<div class=\"RF_table  RFfontExSmallPad\">" + (clarityOptions.miniCart.showSKU !== false ? "<div class=\"RF_tableCell \"><p class=\" RFgothamExLight \">ITEM: " + input.sku + "</p></div> " : "" ) + (clarityOptions.miniCart.showTrash !== false ? "<div class=\"RF_tableCell textRight \"><span class=\"rf-icon-trash manifesto\" onclick=\"cartDeleteItem(\'" + input.itemNum + "\')\"></span></div> " : "" ) + "</div>"
+}
+function countryShort(){
+	return "us"
+}
+function cartPrice(input){
+	var temp = ""
+	temp += "<div class=\"RF_tableCell  textRight vAlignMiddle\"><p>"
+	if (customerAccountType == "pc"){
+		temp += "<span class=\" strikethrough\">" + currencySymbol()  + skuParsed[fI(input.sku,skuParsed,"sku")].price.r[countryShort()] + "</span><br />"
+		temp += "<span class=\"\">" + currencySymbol()  + Math.floor(skuParsed[fI(input.sku,skuParsed,"sku")].price.r[countryShort()] * .9) + ".00</span>"
+	}
+	if (customerAccountType == "rc"){
+		temp += "<span class=\"\">" + currencySymbol()  + Math.floor(skuParsed[fI(input.sku,skuParsed,"sku")].price.r[countryShort()]) + ".00</span>"
+	}
+	if (customerAccountType == "c"){
+		temp += "<span class=\" strikethrough\">" + currencySymbol()  + skuParsed[fI(input.sku,skuParsed,"sku")].price.r[countryShort()] + ".00</span><br />"
+		temp += "<span class=\"\">" + currencySymbol()  + Math.floor(skuParsed[fI(input.sku,skuParsed,"sku")].price.r[countryShort()] * .9) + "</span>"
+	}
+
+	temp += "</p></div>"
+	return temp
+}
+function cartQtyPrice(input){
+
+	function qtyBox(){
+		return "<div class=\" cartQtyInnerContainer \"><div class=\"cartQtyInner\" onclick=\"cartDecreaseQty('" + input.itemNum + "')\"><span class=\"rf-icon-remove\"></span></div><div class=\"cartQtyInner\"><input type=\"text\" name=\"cart_" + input.itemNum + "\" id=\"cart_" + input.itemNum + "\" data-cartitemnum=\"" + input.itemNum + "\" class=\"input inputActive\" value=\"" + input.qty + "\" onblur=\"validateQuantity('" + input.itemNum + "')\" oninput=\"validateQuantity('" + input.itemNum + "')\"></div><div class=\"cartQtyInner pointer\" onclick=\"cartIncreaseQty('" + input.itemNum + "')\"><span class=\"rf-icon-add\"></span></div></div>"
+	}
+	return "<div class=\"RF_table\"><div class=\"RF_tableCell\">" + (clarityOptions.miniCart.showQtyCounter !== false ? qtyBox() : (clarityOptions.miniCart.showQty !== false ? ("<span class='RFgothamExLight RFfontExSmallPad '>QTY: " + input.qty) : "") ) + "</span></div>" + (clarityOptions.miniCart.showPrice !== false ? cartPrice(input) : "") +"</div>"
+}
+
+function cartItemName(input){
+	return "<div class=\"RF_tableRow \"><p class=\" RFgothamLight RFfontSmall\">" + skuParsed[fI(input.sku,skuParsed,"sku")].name + "</p></div>"
+}
+
+function cartDetails(input){
+	if (!clarityOptions.miniCart){
+		clarityOptions.miniCart = {}
+	}
+	return "<div class=\"RF_table\">" + cartItemName(input) + (clarityOptions.miniCart.showContents !== false ? cartItemContains(input) : "") + (clarityOptions.miniCart.showQV !== false ? cartQV(input) : "" ) + cartSV(input) + cartShadeGen(input) + "<div class=\"RF_tableRow\">" + cartItemTrash(input)  + "</div><div class=\"RF_tableRow \">" + cartQtyPrice(input) + "</div></div>"
+}
+
+
+function fI(term,array,index){
+	if (term == "") {
+		return -1
+	}
+	if (array.length > 0){
+		for (var i = 0; i < array.length; i++){
+			if (array[i][index].includes(term)){
+				return i;
+			}
+		}
+		return -1
+	}else{
+		return -1
+	}
+}
+
+
+
+function imagePostLoad(){
+	var els = document.getElementsByClassName("imageLoading");
+	for (var i = els.length - 1; i >= 0; i--){
+		if (els[i].getBoundingClientRect().bottom < (window.innerHeight - 100)) {
+			imagePostLoadArray[els[i]] = els[i].onload = function () {
+				this.classList.remove("imageLoading")
+			}
+			els[i].src = els[i].dataset.imagesrc
+
+		}
+	}
+}
+
+
+
+
+function graphGen(input){
+	var temp = ""
+	temp += "<div class=\"horizontalBarGraphContainer " + (input.right ? " optionRight " : "") + (input.size == "small" ? " optionSmall " : "") + (input.color ? input.color : " manifesto ") + "\">"
+	temp += "<div class=\"horizontalBarGraphTitle RFgothamMedium\">" + input.title + "</div>"
+	temp += "<div class=\"horizontalBarGraphValue\">" + input.value + "%&dagger;</div>"
+	temp += "<div class=\"horizontalBarGraphOuter\">"
+	temp += "<div class=\"horizontalBarGraphInner effect " + (input.color ? input.color + "BG" : " manifestoBG ") +"\" style=\"width: " + input.value + "%\"></div>"
+	temp += "</div>"
+	temp += "</div>"
+	return temp
+}
+function resultsGraphs(input){	
+	var temp = ""
+	if (input){
+		var tempKeys = Object.keys(input.results)
+		if (tempKeys.length > 0){
+			temp += "<div class=\"\">"
+			temp += "<p class=\"RFdisplayRegular RFfontLarge uppercase\">" + input.header + "</p>"
+			temp += "<p class=\"RFgothamLight RFfontExSmall italic\">" + input.title + "</p>"
+			temp += "<div class=\"resultsGraphContainer \">"
+			for (var i = 0; i < tempKeys.length ;i++){
+				var tempOptions = {right:true,size:null,color:(input.regimen ? input.regimen : "manifesto")}
+				tempOptions.title = tempKeys[i]
+				tempOptions.value = input.results[tempKeys[i]]
+				temp += "<div class=\"resultsGraphInner\">"
+				temp += graphGen(tempOptions)
+				temp += "</div>"
+			}
+			temp += "</div>"
+			temp += input.legal ? "<p class=\"RFfontLegal RFgothamLight\">&dagger;" + input.legal + "</p>" : ""
+			temp += input.disclaimer ? "<p class=\"RFfontExSmall italic RFgothamExLight\"><span class=\"RFgothamMedium\"><br />DISCLAIMER: </span>" + input.disclaimer + "</p>" : ""
+			temp += "</div>"
+		}
+		return temp
+
+	}
+}
+
+
+
+
+function addedToBagModalGen(sku){
+	var tempIndex = fI(sku,skuParsed,"sku")
+	var temp = ""
+	if (tempIndex !== 1){
+		temp += "<div class=\"RF_table \">"
+		temp += "<div class=\"RF_tableCell \">"
+		temp += "<img src=\"" + skuParsed[tempIndex].image.mobile.split("http://").join("https://") + "\" width=\"160px\"/>"
+		temp += "</div>"
+		temp += "<div class=\"RF_tableCell vAlignTop padLeft16\" style=\"padding-left: 16px!important;\">"
+		temp += "<p class=\"RFdisplayRegular RFfontExLarge\">" + skuParsed[tempIndex].name + "</p>"
+		temp += "<p class=\"RFgothamExLight RFfontSmall\">ITEM: " + skuParsed[tempIndex].sku + "<br />Quantity: 1"  + "</p>"
+		temp += "<p class=\"RFgothamLight RFfontSmall\">$" + skuParsed[tempIndex].price.r.us + "</p>"
+		temp += "</div>"
+		temp += "</div>"
+		modalNewOpen({content:temp,header:"Added to bag",primary:{title:"View Bag",action:"https://www.rodanandfields.com/cart/",href:true},secondary:{title:"Continue Shopping",action:"modalNewClose(true)"},autoClose:true})
+		blurSignIn()
+	}
+	setTimeout(function(){blurSignIn()}, 100);
+	setTimeout(function(){blurSignIn()}, 500);
+	setTimeout(function(){blurSignIn()}, 1000);
+}
+
+function addToBagEventListener(){
+	var tempButtons = document.getElementsByClassName("product__wrapper_addToCartBtnInStock_addtobagbutton");
+	for (var i = 0; i < tempButtons.length; i++){
+		tempButtons[i].addEventListener("click", categoryAddToBagClick, false)
+	};
+}
+
+var tempAnchorsArray = document.getElementsByTagName("a");
+
+
+function tempReturnProduct(input){
+	var temp = input;
+	for (var i = 0; i < tempAnchorsArray.length; i++){
+		if (tempAnchorsArray[i].href.toLowerCase().includes(input.toLowerCase())){
+			temp = tempAnchorsArray[i].href.split("/")[4].split("-").join(" ").toUpperCase()
+			break
+		}
+	}
+	return temp
+}
+
+
+function categoryAddToBagClick(){
+	console.log(this);
+	if (this.dataset.productCode) {
+		document.getElementsByClassName("page-messages-container")[0].style.opacity = 0
+		document.getElementsByClassName("header-secondarynav-component")[0].style.opacity = 0
+		document.getElementsByClassName("page-messages-container")[0].getElementsByClassName("message")[0].innerHTML = tempReturnProduct(this.dataset.productCode) + " has been added to your cart"
+		RF_addToCart(this.dataset.productCode)		
+	}
+}
+
+cart = []
+
+function RF_addToCart(sku){
+	var tempIndex = fI(sku,cart,"sku")
+	if (tempIndex !== -1){
+		cart[tempIndex].qty++
+	}else{
+		cart.push({sku:sku,qty:1,itemNum:cart.length.toString()})
+	}
+	console.log(cart)
+	if(document.getElementById("cartContainer")){	
+		document.getElementById("cartContainer").innerHTML = cartWrite()
+	}
+	if(document.getElementById("miniCartContent")){	
+		document.getElementById("miniCartContent").innerHTML = cartWrite()
+	}
+	if (clarityOptions.showMiniCart){
+		miniCartOpen()
+	}else{
+		if (clarityOptions.showAddToCartModal){
+			addedToBagModalGen(sku)
+		}
+	}
+}
+
+
+function clearDashes(input){
+	return input.split("-").join(" ")
+}
+
+
+
+function breadCrumbsWrite(sku){
+	var temp = "<div id=\"BreadcrumbList\" class=\"RFfontSmall RFgothamLight padSides16\"><br /><a class=\"RF_linkQuaternary\" href='https://www.rodanandfields.com/'>Home</a> &gt; "
+	if (sku.collection){
+		temp += "<span class=\"spanBreak\"><a class=\"RF_linkQuaternary capitalize\" href='https://www.rodanandfields.com/collection/c/" + sku.collection + "'>" + clearDashes(sku.collection) + "</a> &gt; </span>"
+	}else{
+		if (sku.category){
+			temp += "<span class=\"spanBreak\"><a class=\"RF_linkQuaternary uppercase\" href='https://www.rodanandfields.com/category/c/" + sku.category + "'>" + clearDashes(sku.category) + "</a> &gt; </span>"
+		}
+	}	
+	temp += "<span class=\"RFcoolGrey9\">" + sku.name + "</span>"
+	temp += "</div>"
+	if (document.getElementById("BreadcrumbList")){
+		document.getElementById("BreadcrumbList").outerHTML = temp
+	}else{
+		if (document.getElementsByClassName("pdp-main__top")[0]){
+			document.getElementsByClassName("pdp-main__top")[0].insertAdjacentHTML('beforebegin',(temp))		
+		}	
+	}
+}
+
+
+
+function tagsWrite(sku){
+	if (!sku){
+		return
+	}
+	var temp = null
+	if (!sku.tags){
+		return
+	}
+	if (sku.tags.length > 0){
+		temp = "<div id='tagsList' class='RFfontSmall RFgothamLight uppercase RFcoolGrey9'>"
+		for (var i = 0; i < sku.tags.length; i++){
+			if (i !== 0){
+				temp += " | "
+			}
+			temp += sku.tags[i]
+		}
+		temp += "</div>"
+	}
+
+	if (temp !== null){
+		if (document.getElementById("tagsList")){
+			document.getElementById("tagsList").outerHTML = temp
+		}else{
+			if (document.getElementsByClassName("pdp-add-to-bag__heading")[0]){
+				document.getElementsByClassName("pdp-add-to-bag__heading")[0].style.textAlign = "left"
+				document.getElementsByClassName("pdp-add-to-bag__heading")[0].insertAdjacentHTML('beforebegin',(temp))		
+			}	
+		}
+	}
+	return temp
+}
+
+
+
+function skinTypesGen(sku){
+	temp += "<div id='romanceSkinType' class='RFfontExSmall textLeft capitalize RFgothamLight RFcoolGrey9'><span class='rfBlack RFgothamMedium'>SKIN TYPE" + (sku.skinTypes.length > 1 ? "S" : "") + ":&nbsp;</span>"
+	for (var i = 0; i < sku.skinTypes.length; i++){
+		if (i !== 0){
+			temp += ", "
+		}
+		temp += sku.skinTypes[i]
+	}
+	temp += "</div>"
+	return temp
+}
+
+
+function allRomanceCopy(sku){
+	temp = ""
+	if (sku.romance){
+		temp += "<p class=' RFfontSmall RFgothamLight textLeft'>" + sku.romance  + "</p>"
+	}
+	if ((sku.volume) || (sku.supply)){
+		temp += "<div class='br16' /></div>"
+		temp += "<div id='romanceVolume' class='RFfontExSmall capitalize RFcoolGrey9'>"
+		temp += sku.volume ? sku.volume.metric + " mL / " + sku.volume.imperial + " Fl. Oz. U.S." : ""
+		temp += sku.supply ? "<span > Typical Use: " + sku.supply + " supply</span>" : ""
+		temp += "</div>"
+	}
+	if ((sku.keyConcerns) || (sku.keyBenefits) || (Array.isArray(sku.skinTypes)) || (Array.isArray(sku.skinCondition))){
+		temp += "<div class='br16' /></div>"
+	}
+	if (Array.isArray(sku.skinTypes)){
+		skinTypesGen(sku)
+	}
+	if (Array.isArray(sku.skinCondition)){
+		temp += "<div id='romanceSkinConditions' class='RFfontExSmall textLeft RFgothamLight RFcoolGrey9'><span class='rfBlack RFgothamMedium'>SKIN CONCERN" + (sku.skinCondition.length > 1 ? "S" : "") + ":&nbsp;</span>"
+		for (var i = 0; i < sku.skinCondition.length; i++){
+			if (i !== 0){
+				temp += ", "
+			}
+			temp += sku.skinCondition[i]
+		}
+		temp += "</div>"
+	}
+
+	if (sku.keyConcerns){
+		temp += "<div id='romanceKeyConcerns' class='RFfontExSmall  textLeft RFgothamLight RFcoolGrey9'><span class='rfBlack RFgothamMedium'>KEY CONCERNS: </span>" + sku.keyConcerns +"</div>"
+	}
+	if (sku.keyBenefits){
+		temp += "<div id='romanceKeyBenefits' class='RFfontExSmall textLeft RFgothamLight RFcoolGrey9'><span class='rfBlack RFgothamMedium'>KEY BENEFITS: </span>" + sku.keyBenefits +"</div>"
+	}
+	console.log(temp)
+	return "<div class=''>" + temp + "</div>"
+}
+
+
+
+
+
+
+function allRomanceWrite(sku){
+	pdpRomanceAlignment()
+	var temp = null
+	if (sku) {
+		tagsWrite(sku)
+		temp = allRomanceCopy(sku)
+	}
+	if (temp !== ""){
+		
+		temp = "<div id='romanceCopy' class='RFgothamLight textLeft' > " + temp + "<br /></div>"
+		if (document.getElementById("romanceCopy")){
+			document.getElementById("romanceCopy").outerHTML = temp
+		}else{
+			if (document.getElementsByClassName("pdp-add-to-bag__price").length > 0){
+				document.getElementsByClassName("pdp-add-to-bag__price")[0].style.textAlign = "left!important"
+				document.getElementsByClassName("pdp-add-to-bag__price")[0].insertAdjacentHTML('beforebegin',(temp))		
+			}
+
+		}
+	}
+	return temp
+}
+
+
+
+
+function pdpRomanceAlignment(){
+	if (document.getElementsByClassName("pdp-add-to-bag__heading").length > 0){
+	}
+	if (document.getElementsByClassName("pdp-add-to-bag__price").length > 0){
+		document.getElementsByClassName("pdp-add-to-bag__price")[0].style.textAlign = "left"
+	}
+	if (document.getElementsByClassName("pdp-add-to-bag__btn").length > 0){
+		document.getElementsByClassName("pdp-add-to-bag__btn")[0].style.width = "100%"
+	}
+	if (document.getElementsByClassName("pdp-add-to-bag__heading").length > 0){
+		document.getElementsByClassName("pdp-add-to-bag__heading")[0].style.textAlign = "left"
+	}
+}
+
+
+
+
+
+
+function getPDPpageSku(){
+	if ((window.location.href.includes("/shop/") && (window.location.href.includes("/p/"))) ){
+		return window.location.href.split("/p/")[1].split("?")[0]
+	}else{
+		return false
+	}
+}
+
+function get_pdp_BA_data(){
+	if (document.getElementsByClassName("before-after__container").length == 0){
+		return false
+	}
+	var afterSRC = false
+	var beforeSRC = false
+	var baName = false
+	var tempIndex = fI(getPDPpageSku(),skuParsed,"sku")
+	if (tempIndex == -1){
+		return false
+	}
+	afterSRC = document.getElementsByClassName("before-after__container")[0].getElementsByTagName("img")[0].src
+	beforeSRC = document.getElementsByClassName("before-after__container")[0].getElementsByTagName("img")[1].src
+	baName = document.getElementsByClassName('before-after__customer-name')[0].innerHTML
+	if (afterSRC && beforeSRC && baName){
+		return "<div class=\"containerDesktopWidth\" id=\"pdp_ba_container\"><div class\"RFcontainerSpacerResponsive\"></div><div class\"RFcontainerSpacerResponsive\"></div><div class=\"split5050\"> <div class=\"splitLeft\">" + baGenObject({"afterSRC":afterSRC,"beforeSRC":beforeSRC,"alignReverse":true,"name":baName}) + "</div><div class=\"splitRight\">" + resultsGraphs(skuParsed[tempIndex].clinicalResults) + "</div></div></div>"
+	}else{
+		return false
+	}  
+	return false
+}
+
+
+function pdpBA_reposition(){
+	var tempBA = get_pdp_BA_data()
+	var tempSKU = getPDPpageSku()
+	if(tempBA !== false){
+		if (pdp_tabsHide("results")){
+			var tabsContainer = document.getElementsByClassName("product-description-tab")
+			if (tabsContainer.length == 1){
+				if (!document.getElementById('pdp_ba_container')){
+					tabsContainer[0].insertAdjacentHTML('beforebegin',tempBA)				
+				}				
+			}else{
+				console.log("can't insertAdjacentHTML")
+			}
+		}else{
+			console.log("can't hide BA tabs")
+		}
+	}else{
+		console.log("Can't parse BA")
+	}
+}
+
+function pdp_results(){
+	if (skuParsed){
+		var tempIndex = fI(getPDPpageSku(),skuParsed,"sku")
+		if (tempIndex !== -1){
+			if (skuParsed[tempIndex].clinicalResults){
+				return resultsGraphs(skuParsed[tempIndex].clinicalResults)	
+			}else{
+				console.log("no clinical results in skuParsed")
+				return false
+			}			
+		}else{
+			console.log("can't find sku in skuParsed")
+			return false
+		}		
+	}else{
+		console.log("skuParsed not loaded")
+		return false
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function get_pdpHowToVideo(){
+	var temp = null
+	var tempPDPcarousel = document.getElementsByClassName("product-description-images__preview_item video-item")
+	if (tempPDPcarousel.length > 0){
+		var tempPDPiframe = tempPDPcarousel[tempPDPcarousel.length -  1].getElementsByTagName("iframe")
+		if (tempPDPiframe.length > 0){
+			var tempSrc = tempPDPiframe[tempPDPiframe.length - 1].src
+			temp = ""
+			temp += "<div class=\"container169\">"
+			temp += "<iframe height=\"360px\" class=\"container169video\"  width=\"640px\" src=\"" + tempSrc + "\"  frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen=\"\"  id=\"tealium_youtube0\">"
+			temp += "</iframe>"
+			temp += "</div>"
+			
+			return temp;
+		}else{
+			return false
+		}
+	}else{
+		return false
+	}
+	
+}
+
+
+function get_pdpHowToContent(){
+	var temp = null
+	var howToTabContent = document.getElementsByClassName("product-description-tab__usageNotes_text")
+	if (howToTabContent.length > 0){
+		temp = howToTabContent[0].innerHTML.split(": Use").join("<br />Use")
+		return temp
+	}else{
+		return ""
+	}
+}
+
+function pdpHowTo(){
+	var pdpVideo = get_pdpHowToVideo()
+	var pdpHowToContent = get_pdpHowToContent()
+	if ((pdpVideo) && (pdpHowToContent)){
+		var temp = ""
+		temp += "<div class=\"containerDesktopWidth\"><div class\"RFcontainerSpacerResponsive\"></div><div class\"RFcontainerSpacerResponsive\"></div><div class=\"split5050\">"
+		temp += "<div class=\"split5050 split5050padSmall\">"
+		temp += "<div class=\"splitLeft aBlueInner paraInner\">"
+		temp += pdpHowToContent
+		temp += "</div>"
+		temp += "<div class=\"splitRight\">"
+		temp += pdpVideo
+		temp += "</div>"
+		temp += "</div>"
+
+		temp += "</div>"
+		temp += "</div>"
+		return temp
+	}else{
+		return false
+	}
+
+}
+function pdpHTU_reposition(){
+	var tempHowTo = pdpHowTo()
+	if(tempHowTo !== false){
+		if (pdp_tabsHide("how to use")){
+			var tabsContainer = document.getElementsByClassName("product-description-tab")
+			if (tabsContainer.length == 1){
+				tabsContainer[0].insertAdjacentHTML('beforebegin',tempHowTo)			
+			}else{
+				console.log("can't insertAdjacentHTML")
+			}
+		}else{
+			console.log("can't hide HowTo tabs")
+		}
+	}else{
+		console.log("Can't parse HowTo")
+	}
+}
+
+
+function pdp_tabsHide(input){
+	var tabsArray = document.getElementsByClassName("product-description-tab__tablink")
+	var returnValue = false
+	for (var i = 0; i < tabsArray.length; i++){
+		if (tabsArray[i].innerHTML.toLowerCase().includes(input)){	
+			var tabsContentData = tabsArray[i].dataset.accordionOpen	
+			var tabsContentArray = document.getElementsByClassName("product-description-tab__content")	
+			for (var j = 0; j < tabsContentArray.length; j++){
+				if (tabsContentArray[j].dataset.accordionContent == tabsContentData){			
+					tabsContentArray[j].style.display = "none"
+					tabsArray[i].style.display = "none"			
+					returnValue = true
+					break
+				}
+			}	
+		}
+	}
+	if (!returnValue){ return false}
+		var tabsArray = document.getElementsByClassName("product-description-tab__title tab-accordion__title")
+	var returnValue = false
+	for (var i = 0; i < tabsArray.length; i++){
+		if (tabsArray[i].innerHTML.toLowerCase().includes(input)){	
+			var tabsContentData = tabsArray[i].dataset.accordionOpen	
+			var tabsContentArray = document.getElementsByClassName("product-description-tab__content tab-accordion__content")	
+			for (var j = 0; j < tabsContentArray.length; j++){
+				if (tabsContentArray[j].dataset.accordionContent == tabsContentData){			
+					tabsContentArray[j].style.display = "none"
+					tabsArray[i].style.display = "none"			
+					returnValue = true
+					break
+				}
+			}	
+		}
+	}
+	return returnValue
+}
+
+
+
+function genericEComFixes(){
+	if(document.getElementsByClassName("header")[0]){
+		document.getElementsByClassName("header")[0].style.zIndex = 2;
+	}
+	if(document.getElementsByClassName("header-secondarynav-component rf__header-secondarynav-component")[0]){
+		document.getElementsByClassName("header-secondarynav-component rf__header-secondarynav-component")[0].style.zIndex = 2;
+	}
+	if (document.getElementsByClassName("page-messages-container__products")[0]){
+		document.getElementsByClassName("page-messages-container__products")[0].style.zIndex = "2"
+	}
+	if (document.getElementsByClassName("page-messages-container__products")[0]){
+		document.getElementsByClassName("page-messages-container__products")[0].style.opacity = "0"
+	}
+
+	if (document.getElementsByClassName("product-description-images rf__product-description-images pdp-image-slider")[0]){
+		document.getElementsByClassName("product-description-images rf__product-description-images pdp-image-slider")[0].style.marginTop = "16px"
+	}
+	
+	if (document.getElementsByClassName("pdp-add-to-bag")[0]){
+		document.getElementsByClassName("pdp-add-to-bag")[0].style.marginTop = "16px"
+	}
+
+}
+
+
+function blurSignIn(){	
+	var tempInputFields = document.getElementsByTagName("input")
+	for (var i = 0; i < tempInputFields.length; i++){
+		tempInputFields[i].blur()
+	}
+	if (document.getElementsByClassName("rf-signin-email")[0]){
+		document.getElementsByClassName("rf-signin-email")[0].blur()
+		console.log("blur email")
+	}
+	if (document.getElementsByClassName("rf-signin-pwd")[0]){
+		document.getElementsByClassName("rf-signin-pwd")[0].blur()
+		console.log("blur pwd")
+	}
+}
+
+
+
+function pdpATBmodal_event(){
+	genericEComFixes()
+	addedToBagModalGen(getPDPpageSku())
+}
+
+function pdpATBmodal_addListener(){
+	var tempButtons = document.getElementsByClassName("rf-btn rf-btn-default-primary js-add-to-bag");
+	for (var i = 0; i < tempButtons.length; i++){
+		tempButtons[i].addEventListener("click", pdpATBmodal_event, false)
+	};
+}
+
+
+
+
+
+function pdpOptimization(){
+	var sku = getPDPpageSku()
+	console.log(sku)
+	if (sku){
+		var tempIndex = fI(sku,skuParsed,"sku")
+		console.log(tempIndex)
+		if (tempIndex !== -1){
+			pdp_tabsHide("results")
+			genericEComFixes()
+			allRomanceWrite(skuParsed[tempIndex])
+			breadCrumbsWrite(skuParsed[tempIndex])
+			pdpBA_reposition()
+			pdpHTU_reposition()
+			//pdpATBmodal_addListener()
+			pdpRomanceAlignment()
+		}
+	}
+}
+
+
+var isSkuParsedCounter = 0;
+var isSkuParsedTimeout = null;
+
+function isSkuParsedSet(){
+	if (!window.location.href.includes("rodanandfields.com") ){return false}
+	console.log(isSkuParsedCounter)
+	clearTimeout(isSkuParsedTimeout)
+	if (isSkuParsedCounter > 5){
+		return false
+	}
+	try {
+		skuParsed;
+		console.log("set")
+		pdpOptimization()
+	} catch(e) {
+		console.log("not set")
+		isSkuParsedCounter++;
+		isSkuParsedTimeout = setTimeout(function(){isSkuParsedSet()}, (300 + (isSkuParsedCounter * 300))); 
+		isSkuParsedTimeout
+	}
+}
+
+
+//isSkuParsedSet()
+
+
+
+
+function categoryOptimization(){
+
+}
+
+
+
+
+
+
+
+
+
+
+
+function overrideSearchDD(){
+	if (document.getElementsByClassName("search-mobile rf__search-mobile").length >0){
+		document.getElementsByClassName("search-mobile rf__search-mobile")[0].innerHTML = searchDDform()
+		document.getElementsByClassName("search-mobile rf__search-mobile")[0].style.padding = "0px"
+	}
+}
+
+
+
+
+function searchDDform(){
+	return "<style type=\"text/css\">.show-mobile-search > .search-mobile.rf__search-mobile {overflow: visible;}</style><form class=\" \" ><div class=\"pad16 RF_borderBottom\" style=\"position: relative;\"><input type=\"text\" class=\"input\" name=\"searchInput\" placeholder=\"search for product name, keyword, or sku...\" oninput=\"RF_searchDropDown(this)\" style=\"border: 1px solid rgba(34,34,34,.2); padding-left: 16px; width: calc(100% - 16px);\"></div><div style=\"position: absolute; max-height: calc(100vh - 300px); width: 100%; overflow: scroll; \" class=\"whiteBG RF_boxShadow\"><div class=\"js_searchResultsCounter textLeft\" id=\"js_searchResultsCounter\"></div><div class=\"js_searchReultsDropDown \" id=\"js_searchReultsDropDown\"></div></div></form>"
+}
+
+
+function smallItemCard(sku){
+	var tempIndex = fI(sku,skuParsed,"sku")
+	return "<div style=\"clear: both; \"><img src=\"" + skuParsed[tempIndex].image.mobile + "\" width=\"50px\" style=\"vertical-align:middle; float:left; margin-right: 8px;\"/>" + sku + "<br /><span class=\"RFfontSmall RFgothamExLight grey62\">" + skuParsed[tempIndex].name + "</div>"
+}
+
+function availableInParser(sku){
+	if (typeof(skuParse) === 'undefined'){
+		return false
+	}
+	var temp = []
+	for (var i = 0; i < skuParsed.length; i++){
+		if (skuParsed[i].contains.includes(sku)){
+			temp.push(skuParsed[i].sku)
+		}
+	}
+	var tempReturn = ""
+	if (temp.length > 0 ){
+		tempReturn = "Available in:<br /><div class=\" pad8\">"
+		for (var i = 0; i < temp.length; i++){
+			tempReturn += smallItemCard(temp[i])
+		} 
+		tempReturn += "</div>"
+	}
+	return tempReturn
+	console.log(temp)
+}
+
+availableInParser("UNSW125")
+
+
+function getSavings(sku,customerType){
+	var total = 0
+	for (var i = 0; i < sku.length; i++){
+		var tempIndex = (fI(sku[i],skuParsed,"sku"))
+		if (tempIndex !== -1){
+			total += skuParsed[tempIndex].price[customerType].us
+		}
+	}
+	return total
+}
+
+function getSkuContains(input){
+	temp = ""
+	if (input.contains.length > 0) {
+		temp +="<div onclick=\"searchContainsToggle(this)\">Contains " + input.contains.length + " items <span class=\"rf-icon-chevron-right\" ></span>"
+		temp += "<div class=\"searchContainsToggle\" style=\"height: 0px; overflow: hidden; transition: height .3s ease;\">"				
+		for (var i = 0; i < input.contains.length ; i++){
+			temp += smallItemCard(input.contains[i])
+		}
+		temp += "</div>"
+		temp += "</div>"
+	}
+	return temp
+}
+
+function RF_searchDropDown(input){
+	value = input.value
+	console.log(value.length)
+	if (value.length == 0){
+		document.getElementById("js_searchResultsCounter").innerHTML = ""
+		document.getElementById("js_searchReultsDropDown").innerHTML = ""
+		return
+	}
+	var tempResults = []
+	for (var i = 0; i < skuParsed.length; i++){
+		if (
+			(skuParsed[i].name.toLowerCase().includes(value.toLowerCase()))
+			|| (("sunscreen").includes(value.toLowerCase()) && (skuParsed[i].sunscreen == true))
+			|| (skuParsed[i].sku.toLowerCase().includes(value.toLowerCase()))
+			|| (skuParsed[i].keywords.includes(value.toLowerCase()))
+			){
+			tempResults.push(skuParsed[i])
+	}
+}
+if (tempResults.length > 0 ){
+	tempReturn = ""
+	for (var i = 0 ; i < tempResults.length ; i ++){
+		tempReturn += searchCard(tempResults[i])
+	}
+	document.getElementById("js_searchResultsCounter").innerHTML = "<div class=\"pad16\" >" + tempResults.length + " results for &quot;<span class=\"uppercase\">" + value + "</span>&quot;</div>"
+	document.getElementById("js_searchReultsDropDown").innerHTML = tempReturn 
+}else{
+	document.getElementById("js_searchResultsCounter").innerHTML = "<div class=\"pad16\" >No results</div>"
+	document.getElementById("js_searchReultsDropDown").innerHTML = searchSuggestions()
+}
+
+}
+
+function searchSuggestions(){
+	return ""
+}
+function searchPriceType(input){
+	if(document.getElementById("Consultant Only")){
+		return "$" + input.price.c.us +  "<br />" + "SV: " + input.sv +  "<br />"
+
+	}else{
+		return "$" + input.price.r.us + " | PC PERKS $" + input.price.pc.us + "<br />"
+	}
+}
+
+
+function isHTTPS(input){
+	if (window.location.href.includes("https")){
+		return input.split("http://").join("https://")
+	}else{
+		return input.split("https://").join("http://")
+	}
+	return input
+} 
+
+function searchCard(input){
+	var temp = ""
+
+	temp += "<div class=\"RF_table  RF_borderBottom  textLeft\">"
+	temp += "<div class=\"RF_tableCell pad16\" style=\"width: 120px!important\">"
+	temp += "<a class=\"\" href=\"" + input.pdp + "\" ><img src=\"" + isHTTPS(input.image.mobile) + "\" width=\"100px\" /></a>"
+	temp += "</div>"
+
+	temp += "<div class=\"RF_tableCell pad8 \" style=\"width: calc(100% - 150px)!important; vertical-align:top\">"
+	temp += "<a class=\"aBlue RFfontExSmallTight\" href=\"" + input.pdp + "\" >" + input.name + "</a><br />"
+	temp += "<span>" + searchPriceType(input) + "</span>"
+	temp += input.contains.length > 0 ? getSkuContains(input) : ""
+	temp += input.contains.length > 0 ? "<span>Save: $" + ( getSavings(input.contains,"r") - input.price["r"].us ) + " over buying individually</span>" : ""
+
+
+	temp += "</div>"
+
+
+	temp += "</div>"
+
+	return temp
+}
+
+function searchContainsToggle(input){
+	var toggle = input.getElementsByClassName("searchContainsToggle")[0]
+	if (toggle.style.height == "0px"){
+		toggle.style.height = toggle.scrollHeight + "px"
+	}else{
+		toggle.style.height = "0px"
+	}
+}
+
+
+
+function htmlDecode(input){
+	var e = document.createElement('div');
+	e.innerHTML = input;
+	return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+}
+function skuWrite(input){
+	temp = ""
+	temp += "<div class=\"RF_table pad16 RF_boxShadow \">"
+	temp += "<div class=\"RF_tableCell\" style=\"width: 200px!important\">"
+		//temp += "<img src=\"" + isHTTPS(input.image.mobile) + "\" width=\"250px\" /><br />"
+		temp += "<img src=\"downloadableContent/icons/rf-icon-settings.svg\" width=\"160px\"  class=\"imageLoading\" data-imagesrc=\"" + input.image.mobile + "\" /><br />"
+		temp += "</div>"
+		temp += "<div class=\"RF_tableCell\" style=\"vertical-align: top;\">"
+		temp += "<a name=\"" + input.sku + "\">" +  "item: " + input.sku + "</a><br />"
+		temp += input.name + "<br />"
+		temp += "<a href=\"" + input.pdp + "\">" + input.pdp + "</a><br />"
+		temp += "$" + input.price.r.us + " | PC PERKS $" + input.price.pc.us + " | Consultant $ " + input.price.c.us +  "<br />"
+		temp += input.contains.length > 0 ? "Bundle discount: $" + (getSavings(input.contains,"r") - input.price.r.us) + "<br />": ""
+		temp += "SV: " + input.sv + "<br />"
+		temp += input.contains.length > 0 ? "contains:<br />" : ""
+		for (var i = 0; i < input.contains.length ; i++){
+			temp += smallItemCard(input.contains[i])
+		}
+		temp += availableInParser(input.sku)
+		temp += input.contains.length > 0 ? "</ul>" : ""
+		
+		if (input.shades){
+			temp += "shades:<br /><ul>"
+			for (var i = 0; i < input.shades.length ; i++){
+				temp += "<li>" + input.shades[i].shadeName + " | " + input.shades[i].sku + "</li>"
+			}
+			temp += "</ul>"
+		}
+
+		temp += input.sunscreen ? "Has sunscreen <br />" : ""
+		temp += input.prop65 ? "<img src=\"images/icons/prop65.svg\" height=\"14px\" style=\"vertical-align: middle; margin-right: 4px;\"/>Known to the state of California to cause cancer<br />" : ""
+		temp += "<div class=\" RF_border\" style=\"max-height: 140px; padding:8px;  overflow: scroll;\"> " + htmlDecode(input.description) + "</div>"
+		temp += "</div>"
+		temp += "</div>"
+
+		temp += "<br /><br />"
+		return temp
+	}
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 1. String.prototype.trim polyfill
+if (!"".trim) String.prototype.trim = function(){ return this.replace(/^[\s﻿]+|[\s﻿]+$/g, ''); };
+(function(window){"use strict"; // prevent global namespace pollution
+	function checkIfValidClassListEntry(O, V){
+		if (V === "") throw new DOMException(
+			"Failed to execute '" + O + "' on 'DOMTokenList': The token provided must not be empty." );
+			if((wsI=V.search(wsRE))!==-1)throw new DOMException("Failed to execute '"+O+"' on 'DOMTokenList': "+
+				"The token provided ('"+V[wsI]+"') contains HTML space characters, which are not valid in tokens.");
+		}
+// 2. Implement the barebones DOMTokenList livelyness polyfill
+if (typeof DOMTokenList !== "function") (function(window){
+	var document = window.document, Object = window.Object, hasOwnProp = Object.prototype.hasOwnProperty;
+	var defineProperty = Object.defineProperty, allowTokenListConstruction = 0, skipPropChange = 0;
+    var Element = window.Element, wsI = 0, wsRE = /[\11\12\14\15\40]/; // WhiteSpace Regular Expression
+    function DOMTokenList(){
+        if (!allowTokenListConstruction) throw TypeError("Illegal constructor"); // internally let it through
+    }
+    DOMTokenList.prototype.toString = DOMTokenList.prototype.toLocaleString = function(){return this.value};
+    DOMTokenList.prototype.add = function(){
+    	a: for(var v=0, argLen=arguments.length,val="",ele=this["uCL"],proto=ele[" uCLp"]; v!==argLen; ++v) {
+    		val = arguments[v] + "", checkIfValidClassListEntry("add", val);
+    		for (var i=0, Len=proto.length, resStr=val; i !== Len; ++i)
+    			if (this[i] === val) continue a; else resStr += " " + this[i];
+    		this[Len] = val, proto.length += 1, proto.value = resStr;
+    	}
+    	skipPropChange = 1, ele.className = proto.value, skipPropChange = 0;
+    };
+    DOMTokenList.prototype.remove = function(){
+    	for (var v=0, argLen=arguments.length,val="",ele=this["uCL"],proto=ele[" uCLp"]; v !== argLen; ++v) {
+    		val = arguments[v] + "", checkIfValidClassListEntry("remove", val);
+    		for (var i=0, Len=proto.length, resStr="", is=0; i !== Len; ++i)
+    			if(is){ this[i-1]=this[i] }else{ if(this[i] !== val){ resStr+=this[i]+" "; }else{ is=1; } }
+    		if (!is) continue;
+    		delete this[Len], proto.length -= 1, proto.value = resStr;
+    	}
+    	skipPropChange = 1, ele.className = proto.value, skipPropChange = 0;
+    };
+    window.DOMTokenList = DOMTokenList;
+    function whenPropChanges(){
+    	var evt = window.event, prop = evt.propertyName;
+    	if ( !skipPropChange && (prop==="className" || (prop==="classList" && !defineProperty)) ) {
+    		var target = evt.srcElement, protoObjProto = target[" uCLp"], strval = "" + target[prop];
+    		var tokens=strval.trim().split(wsRE), resTokenList=target[prop==="classList"?" uCL":"classList"];
+    		var oldLen = protoObjProto.length;
+    		a: for(var cI = 0, cLen = protoObjProto.length = tokens.length, sub = 0; cI !== cLen; ++cI){
+    			for(var innerI=0; innerI!==cI; ++innerI) if(tokens[innerI]===tokens[cI]) {sub++; continue a;}
+    				resTokenList[cI-sub] = tokens[cI];
+    		}
+            for (var i=cLen-sub; i < oldLen; ++i) delete resTokenList[i]; //remove trailing indexs
+            	if(prop !== "classList") return;
+            skipPropChange = 1, target.classList = resTokenList, target.className = strval;
+            skipPropChange = 0, resTokenList.length = tokens.length - sub;
+        }
+    }
+    function polyfillClassList(ele){
+    	if (!ele || !("innerHTML" in ele)) throw TypeError("Illegal invocation");
+        srcEle.detachEvent( "onpropertychange", whenPropChanges ); // prevent duplicate handler infinite loop
+        allowTokenListConstruction = 1;
+        try{ function protoObj(){} protoObj.prototype = new DOMTokenList(); }
+        finally { allowTokenListConstruction = 0 }
+        var protoObjProto = protoObj.prototype, resTokenList = new protoObj();
+        a: for(var toks=ele.className.trim().split(wsRE), cI=0, cLen=toks.length, sub=0; cI !== cLen; ++cI){
+        	for (var innerI=0; innerI !== cI; ++innerI) if (toks[innerI] === toks[cI]) { sub++; continue a; }
+        		this[cI-sub] = toks[cI];
+        }
+        protoObjProto.length = Len-sub, protoObjProto.value = ele.className, protoObjProto[" uCL"] = ele;
+        if (defineProperty) { defineProperty(ele, "classList", { // IE8 & IE9 allow defineProperty on the DOM
+        	enumerable:   1, get: function(){return resTokenList},
+        	configurable: 0, set: function(newVal){
+        		skipPropChange = 1, ele.className = protoObjProto.value = (newVal += ""), skipPropChange = 0;
+        		var toks = newVal.trim().split(wsRE), oldLen = protoObjProto.length;
+        		a: for(var cI = 0, cLen = protoObjProto.length = toks.length, sub = 0; cI !== cLen; ++cI){
+        			for(var innerI=0; innerI!==cI; ++innerI) if(toks[innerI]===toks[cI]) {sub++; continue a;}
+        				resTokenList[cI-sub] = toks[cI];
+        		}
+                for (var i=cLen-sub; i < oldLen; ++i) delete resTokenList[i]; //remove trailing indexs
+            }
+        }); defineProperty(ele, " uCLp", { // for accessing the hidden prototype
+        	enumerable: 0, configurable: 0, writeable: 0, value: protoObj.prototype
+        }); defineProperty(protoObjProto, " uCL", {
+        	enumerable: 0, configurable: 0, writeable: 0, value: ele
+        }); } else { ele.classList=resTokenList, ele[" uCL"]=resTokenList, ele[" uCLp"]=protoObj.prototype; }
+        srcEle.attachEvent( "onpropertychange", whenPropChanges );
+    }
+    try { // Much faster & cleaner version for IE8 & IE9:
+        // Should work in IE8 because Element.prototype instanceof Node is true according to the specs
+        window.Object.defineProperty(window.Element.prototype, "classList", {
+        	enumerable: 1,   get: function(val){
+        		if (!hasOwnProp.call(ele, "classList")) polyfillClassList(this);
+        		return this.classList;
+        	},
+        	configurable: 0, set: function(val){this.className = val}
+        });
+    } catch(e) { // Less performant fallback for older browsers (IE 6-8):
+    	window[" uCL"] = polyfillClassList;
+        // the below code ensures polyfillClassList is applied to all current and future elements in the doc.
+        document.documentElement.firstChild.appendChild(document.createElement('style')).styleSheet.cssText=(
+            '_*{x-uCLp:expression(!this.hasOwnProperty("classList")&&window[" uCL"](this))}' + //  IE6
+            '[class]{x-uCLp/**/:expression(!this.hasOwnProperty("classList")&&window[" uCL"](this))}' //IE7-8
+            );
+    }
+})(window);
+// 3. Patch in unsupported methods in DOMTokenList
+(function(DOMTokenListProto, testClass){
+	if (!DOMTokenListProto.item) DOMTokenListProto.item = function(i){
+		function NullCheck(n) {return n===void 0 ? null : n} return NullCheck(this[i]);
+	};
+	if (!DOMTokenListProto.toggle || testClass.toggle("a",0)!==false) DOMTokenListProto.toggle=function(val){
+		if (arguments.length > 1) return (this[arguments[1] ? "add" : "remove"](val), !!arguments[1]);
+		var oldValue = this.value;
+		return (this.remove(oldValue), oldValue === this.value && (this.add(val), true) /*|| false*/);
+	};
+	if (!DOMTokenListProto.replace || typeof testClass.replace("a", "b") !== "boolean")
+		DOMTokenListProto.replace = function(oldToken, newToken){
+			checkIfValidClassListEntry("replace", oldToken), checkIfValidClassListEntry("replace", newToken);
+			var oldValue = this.value;
+			return (this.remove(oldToken), this.value !== oldValue && (this.add(newToken), true));
+		};
+		if (!DOMTokenListProto.contains) DOMTokenListProto.contains = function(value){
+			for (var i=0,Len=this.length; i !== Len; ++i) if (this[i] === value) return true;
+				return false;
+		};
+		if (!DOMTokenListProto.forEach) DOMTokenListProto.forEach = function(f){
+			if (arguments.length === 1) for (var i = 0, Len = this.length; i !== Len; ++i) f( this[i], i, this);
+			else for (var i=0,Len=this.length,tArg=arguments[1]; i !== Len; ++i) f.call(tArg, this[i], i, this);
+		};
+		if (!DOMTokenListProto.entries) DOMTokenListProto.entries = function(){
+			var nextIndex = 0, that = this;
+			return {next: function() {
+				return nextIndex<that.length ? {value: [nextIndex, that[nextIndex]], done: false} : {done: true};
+			}};
+		};
+		if (!DOMTokenListProto.values) DOMTokenListProto.values = function(){
+			var nextIndex = 0, that = this;
+			return {next: function() {
+				return nextIndex<that.length ? {value: that[nextIndex], done: false} : {done: true};
+			}};
+		};
+		if (!DOMTokenListProto.keys) DOMTokenListProto.keys = function(){
+			var nextIndex = 0, that = this;
+			return {next: function() {
+				return nextIndex<that.length ? {value: nextIndex, done: false} : {done: true};
+			}};
+		};
+	})(window.DOMTokenList.prototype, window.document.createElement("div").classList);
+})(window);
+
+
+
+
+
+
