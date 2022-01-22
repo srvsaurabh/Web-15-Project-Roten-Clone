@@ -14,3 +14,7 @@
  document.querySelector("button").addEventListener("click", function(){
      window.location.href = "cart.html";
     });
+document.querySelectorById("search").addEventListener("click", function(){
+        window.location.href = "cart.html";    
+       });
+   

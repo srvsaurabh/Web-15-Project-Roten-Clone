@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="homepage.css">
     <link rel="stylesheet" href="header.css">
     <link rel="stylesheet" href="footer.css">
+    <link rel="stylesheet" href="cart.css">
     
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
       rel="stylesheet">
@@ -55,8 +56,8 @@
         <hr>
             <div class="lower">
                 <div id="shp"> <a href="product.html">Shop</a></div>
-                <div><a href="product.html">Best Seller</a></div>
-                <div><a href="product.html">Featured</a></div>
+                <div><a href="cosmo.html">Best Seller</a></div>
+                <div><a href="cosmo.html">Featured</a></div>
                 <div><a href="help.html">Our Story</a></div>
                 <div><a href="help.html">Peeks Program</a></div>
                 <div><a href="help.html">Become A Consultant</a></div>
@@ -64,6 +65,11 @@
             </div>
         </div>
     </header>
+
+    <p><h1>Cart Items</h1></p>
+    <h2></h2>
+    <button id="b2" onclick="window.location.href='pay.html'">Check Out</button>
+    <div id="container"></div>
 
     <footer>
         <div class="up">
@@ -113,4 +119,50 @@
 </body>
 </html>
 
-<script src="main.js"></script>
+<script>
+
+
+    var cartarr = JSON.parse(localStorage.getItem("CartItems"));
+
+    console.log(cartarr);
+
+    cartarr.map(function(data){
+        var div = document.createElement("div");
+    //   create image
+    var image = document.createElement("img");
+    image.setAttribute("src",data.image_url);
+
+    // create name 
+    var name = document.createElement("p");
+    name.textContent = data.name;
+
+    // price create
+    var div2 = document.createElement("div");
+    div2.setAttribute("id","flex");
+
+    var p1 = document.createElement("p");
+    p1.textContent = data.price;
+
+    var p2 = document.createElement("p");
+    p2.textContent = data.strikeoffprice;
+    p2.style.textDecoration = "line-through";
+
+    div2.append(p1,p2);
+    
+    
+    // append
+    div.append(image,name,div2);
+    document.querySelector("#container").append(div)
+    });
+
+    var total = cartarr.reduce(function(ac,cv){
+        return ac+ Number(cv.price);
+        // here we use entair object then use ac.price
+    },0);
+
+    document.querySelector("h2").textContent = `total amount of cart is $ ${total}`
+    // here $ is object letral.
+
+console.log(total , "total price");
+
+</script>

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="homepage.css">
     <link rel="stylesheet" href="header.css">
     <link rel="stylesheet" href="footer.css">
+    <link rel="stylesheet" href="cart.css">
     
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
       rel="stylesheet">
@@ -27,7 +28,7 @@
                     search
                     </span></div>
     
-                <div id="Signin">
+                <div id="Signin1">
                     Sign In
                     <span class="material-icons-outlined">
                         person
@@ -45,7 +46,7 @@
                         language
                         </span></div>
                         
-                <div id="signup">
+                <div id="signup1">
                     Sign Up
                     <span class="material-icons-outlined">
                         person_add
@@ -53,15 +54,15 @@
             </div>
         </div>
         <hr>
-            <div class="lower">
-                <div> <a href="">Shop</a></div>
-                <div><a href="">Best Seller</a></div>
-                <div><a href="">Featured</a></div>
-                <div><a href="">Our Story</a></div>
-                <div><a href="">Peeks Program</a></div>
-                <div><a href="">Become A Consultant</a></div>
-                <div><a href="">Blog</a></div>
-            </div>
+        <div class="lower">
+            <div id="shp"> <a href="product.html">Shop</a></div>
+            <div><a href="product.html">Best Seller</a></div>
+            <div><a href="product.html">Featured</a></div>
+            <div><a href="help.html">Our Story</a></div>
+            <div><a href="help.html">Peeks Program</a></div>
+            <div><a href="help.html">Become A Consultant</a></div>
+            <div><a href="help.html">Blog</a></div>
+        </div>
         </div>
     </header>
 <hr>
@@ -79,8 +80,8 @@
               <input id="password"  type="Password" placeholder="Enter password"/>
               <h3>Mobile Number</h3>
             <input id="number"  type="number" placeholder="Enter Mobile Number"/>
-              <h3>Login</h3>
-              <input id="submit" type="submit" value="Login">
+              <h3>Sign Up</h3>
+              <input id="submit" type="submit" value="Sign Up">
           </form>
           </div>
         </div>
@@ -137,7 +138,27 @@
 </body>
 </html>
 
-<script src="main.js">
+<script>
+
+document.getElementById("Signin1").addEventListener("click", function(){
+     window.location.href = "signin.html";
+ });
+ document.getElementById("signup1").addEventListener("click", function(){
+     window.location.href = "signup.html";
+ });
+ document.getElementById("bag").addEventListener("click", function(){
+     window.location.href = "cart.html";
+ });
+ document.getElementById("language").addEventListener("click", function(){
+     window.location.href = "help.html";
+ });
+ document.querySelector("button").addEventListener("click", function(){
+     window.location.href = "cart.html";
+    });
+document.querySelectorById("search").addEventListener("click", function(){
+        window.location.href = "product.html";    
+       });
+   
     
     document.querySelector("form").addEventListener("submit", formSubmit)
         var userStack = JSON.parse(localStorage.getItem("userDataBase")) || [];
@@ -146,21 +167,21 @@
         event.preventDefault();
 
         var email = document.querySelector(".email").value;
-        var pass = document.querySelector(".pass").value;
-        var user = document.querySelector(".user").value;
-        var mob = document.querySelector(".mob").value;
+        var pass = document.querySelector(".password").value;
+        var user = document.querySelector(".username").value;
+        var mob = document.querySelector(".number").value;
 
         var userData = {
             emailAdd: email,
             psswd: pass,
             userName: user,
             mobNum: mob,
-        }
+        };
 
         userStack.push(userData);
 
         localStorage.setItem("userDataBase", JSON.stringify(userStack));
          alert("signup success");
-         window.location.href = "login.html";
+         window.location.href = "signin.html";
     }
 </script>

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="homepage.css">
     <link rel="stylesheet" href="header.css">
     <link rel="stylesheet" href="footer.css">
+    <link rel="stylesheet" href="cart.css">
     
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
       rel="stylesheet">
@@ -55,8 +56,8 @@
     <hr>
         <div class="lower">
             <div id="shp"> <a href="product.html">Shop</a></div>
-            <div><a href="product.html">Best Seller</a></div>
-            <div><a href="product.html">Featured</a></div>
+            <div><a href="cosmo.html">Best Seller</a></div>
+            <div><a href="cosmo.html">Featured</a></div>
             <div><a href="help.html">Our Story</a></div>
             <div><a href="help.html">Peeks Program</a></div>
             <div><a href="help.html">Become A Consultant</a></div>
@@ -129,7 +130,9 @@
     </body>
   </html>
   
-  <script src="main.js">
+  <script>
+      
+   
     document.querySelector("form").addEventListener("submit", signin);
   
     var regdUsers = JSON.parse(localStorage.getItem("userDataBase"));
@@ -142,9 +145,28 @@
       for (var i = 0; i < regdUsers.length; i++) {
         console.log(regdUsers[i].userName, regdUsers[i].passwd);
         if (regdUsers[i].userName == user && regdUsers[i].passwd == pass) {
-          window.location.href = "home.html";
+          window.location.href = "homepage.html";
         }
       }
     }
+
+    document.getElementById("Signin").addEventListener("click", function(){
+     window.location.href = "signin.html";
+ });
+ document.getElementById("signup").addEventListener("click", function(){
+     window.location.href = "signup.html";
+ });
+ document.getElementById("bag").addEventListener("click", function(){
+     window.location.href = "cart.html";
+ });
+ document.getElementById("language").addEventListener("click", function(){
+     window.location.href = "help.html";
+ });
+ document.querySelector("button").addEventListener("click", function(){
+     window.location.href = "cart.html";
+    });
+       document.getElementById("Signin").addEventListener("click", function(){
+     window.location.href = "signin.html";
+ });
   </script>
   

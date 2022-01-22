@@ -1,0 +1,33 @@
+#container {
+    background-color: whitesmoke;
+    width: 95%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    /* grid-template-rows: repeat(); */
+    gap: 20px;
+}
+#container > div {
+    
+    background-color: snow;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+#flex {
+    display: flex;
+    justify-content: space-around;
+}
+img {
+    width: 100%;
+}
+p {
+    font-size: 20px;
+    padding: 0px 0px 0px 20px;
+}
+#b2 {
+    cursor: pointer;
+    padding: 10px 20px;
+    margin-left: 80px;
+    background-color: grey;
+    color: white;
+}

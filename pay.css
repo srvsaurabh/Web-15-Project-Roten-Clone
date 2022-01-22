@@ -1,0 +1,66 @@
+body {
+    background-image: url('https://dev.rodpub.com/images/144/739_main.jpg');
+}
+
+#credit {
+    padding: 10px 20px;
+    width: 20%;
+    margin: auto;
+    margin-top: 20px;
+    background-color: sandybrown;
+}
+h1 {
+    color: black;
+}
+h3 {
+    color: brown;
+    margin-left: 30px;
+}
+#entername {
+    padding: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid lightgray;
+    border-radius: 20px;
+    margin-left: 30px;
+}
+
+#cardnumber {
+    padding: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid lightgray;
+    border-radius: 20px;
+    color: springgreen;
+    margin-left: 30px;
+}
+
+#cvv {
+    padding: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    color: springgreen;
+    margin-left: 30px;
+}
+
+#exdt {
+    padding: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    color: springgreen;
+    margin-left: 30px;
+}
+
+#otp {
+    padding: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    color: springgreen;
+    margin-left: 30px;
+}
